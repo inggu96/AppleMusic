@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './footer.module.scss';
 import { useLocation } from 'react-router-dom';
-import cx from 'classnames';
 
 const Footer = () => {
   const location = useLocation();
@@ -9,7 +8,7 @@ const Footer = () => {
     location.pathname === '/my' || location.pathname.includes('/user/');
 
   return (
-    <footer className={cx(styles.wrap, { [styles.fixed]: needFixed })}>
+    <footer className={styles.wrap}>
       <div className={styles.left}>
         <p className={styles.logo}>무비셀렉터</p>
         <p>1팀 : 이인국, 주양아, 신현중, 구성미</p>
