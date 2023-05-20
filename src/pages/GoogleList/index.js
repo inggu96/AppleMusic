@@ -42,7 +42,7 @@ const Youtube = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>검색</button>
+        <button onClick={handleSearch}>검색리덕스</button>
       </div>
       {videos.map((video) => (
         <ul key={video.snippet.title} className={styles.youtubeListWrap}>
