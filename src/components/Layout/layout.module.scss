@@ -2,10 +2,17 @@
 @use '../../styles/mixins' as m;
 
 .wrap {
-  height: 100vh;
+  @include m.flex();
   background-color: c.$C_BACKGROUND;
-  overflow-y: scroll;
+
   > section {
     padding: c.$S_LAYOUT_PADDING;
+  }
+  .sidebar {
+    flex: 0 0 280px;
+  }
+
+  .content {
+    flex: 1;
   }
 }

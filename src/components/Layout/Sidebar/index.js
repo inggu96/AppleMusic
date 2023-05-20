@@ -28,7 +28,7 @@ const Sidebar = () => {
   const Searchclasses = searchStyle();
   const Buttonclasses = buttonStyle();
   return (
-    <aside className={styles.wrap}>
+    <aside className={styles.sidebarWrap}>
       <Link to="/">
         <div className={styles.logo}>
           <AppleIcon />

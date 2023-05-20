@@ -4,12 +4,16 @@ import {
   Route,
 } from 'react-router-dom';
 import { Layout } from '../components';
-import { Home, Mypage } from '../pages';
+import { BaseLogin, Home, JsonUser, Youtube } from '../pages';
+import GoogleLogIn from '../pages/Login';
 
 const route = (
   <Route element={<Layout />}>
     <Route path="/" element={<Home />} />
-    <Route path="/my" element={<Mypage />} />
+    <Route path="/login" element={<GoogleLogIn />} />
+    <Route path="/fire" element={<BaseLogin />} />
+    <Route path="/gogle" element={<Youtube />} />
+    <Route path="/user" element={<JsonUser />} />
   </Route>
 );
 
