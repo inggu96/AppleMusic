@@ -17,7 +17,7 @@ const Home = () => {
       console.log(res.access_token);
       await axios({
         method: 'get',
-        url: 'http://localhost:54254/',
+        url: 'http://localhost:54748/',
         data: { access_token: res.access_token },
       })
         .then((res) => {

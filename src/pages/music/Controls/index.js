@@ -12,26 +12,24 @@ import { debounce } from 'lodash';
 
 const playStyle = makeStyles({
   root: {
-    width: '182px',
-    height: '32px',
+    width: '50px',
+    height: '50px',
     cursor: 'pointer',
-    color: '#000',
-    fontSize: '50px',
-    display: 'flex',
-    justifyItems: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    color: '#d60017',
+    background: 'none',
+    border: 'none',
   },
 });
 
 const fastStyle = makeStyles({
   root: {
-    width: '240px',
-    height: '40px',
+    width: '50px',
+    height: '50px',
     cursor: 'pointer',
     color: '#000',
-    border: '3px solid black',
-    fontSize: '180px',
+    fontSize: '30px',
+    background: 'none',
+    border: 'none',
   },
 });
 
@@ -44,6 +42,9 @@ const Controls = ({
   setProgress,
   currentTime,
   setCurrentTime,
+  selectedThumbnailId,
+  selectedTitle,
+  selectedChnnelTitle,
 }) => {
   const playclasses = playStyle();
   const fastclasses = fastStyle();
@@ -87,39 +88,31 @@ const Controls = ({
   }, []);
 
   return (
-    <div>
-      <div className={styles.controlsWrap}>
-        <Slider
-          marks={false}
-          max={duration}
-          min={0}
-          value={playedSeconds}
-          valueLabelDisplay="auto"
-          onChange={handleSeekChange}
-          valueLabelFormat={formatTime}
-        />
-        <div className={styles.controls}>
-          <FastRewindIcon
-            className={fastclasses.root}
-            onClick={() => {
-              revert();
-            }}
-          />
-          <button
-            className={playclasses.root}
-            onClick={() => setPlaying(!playing)}
-          >
-            {playing ? <PauseIcon /> : <PlayArrowIcon />}
-          </button>
+    <div className={styles.controlsWrap}>
+      <Slider
+        marks={false}
+        max={duration}
+        min={0}
+        value={playedSeconds}
+        valueLabelDisplay="auto"
+        onChange={handleSeekChange}
+        valueLabelFormat={formatTime}
+      />
 
-          <FastForwardIcon
-            className={fastclasses.root}
-            onClick={() => {
-              fastForward();
-            }}
-          />
+      <div className={styles.controls}>
+        <div className={styles.controlsImgWrap}>
+          <div className={styles.controlsItem}>
+            <img
+              className={styles.controlsImg}
+              src={selectedThumbnailId}
+              alt="Thumbnail"
+            />
+          </div>
+          <div className={styles.controlsTitle}>
+            <p>{selectedTitle}</p>
+            <p>{selectedChnnelTitle}</p>
+          </div>
         </div>
-
         <div className={styles.timecontrols}>
           {/* 전체시간 */}
           <p className={styles.controlsTime}>
@@ -127,6 +120,7 @@ const Controls = ({
               ':' +
               ('0' + Math.floor(duration % 60)).slice(-2)}
           </p>
+
           {/* 현재시간 */}
           <p className={styles.controlsTime}>
             {Math.floor(currentTime / 60) +
@@ -134,6 +128,28 @@ const Controls = ({
               ('0' + Math.floor(currentTime % 60)).slice(-2)}
           </p>
         </div>
+        <button
+          className={fastclasses.root}
+          onClick={() => {
+            revert();
+          }}
+        >
+          <FastRewindIcon />
+        </button>
+        <button
+          className={playclasses.root}
+          onClick={() => setPlaying(!playing)}
+        >
+          {playing ? <PauseIcon /> : <PlayArrowIcon />}
+        </button>
+        <button
+          className={fastclasses.root}
+          onClick={() => {
+            fastForward();
+          }}
+        >
+          <FastForwardIcon />
+        </button>
       </div>
     </div>
   );

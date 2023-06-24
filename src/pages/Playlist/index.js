@@ -45,7 +45,7 @@ const Youtube = () => {
                   url={`https://www.youtube.com/watch?v=${video.id.videoId}`}
                   width="100%"
                   height="100%"
-                  poster={video.snippet.thumbnails.default}
+                  poster={video.snippet.thumbnails.default.url}
                   controls={false} // 기본 컨트롤 비활성화
                 />
               </div>

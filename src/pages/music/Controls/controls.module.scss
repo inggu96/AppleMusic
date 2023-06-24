@@ -13,12 +13,10 @@
 
 .controlsWrap {
   @include m.flex(center, center, column);
-  border: 1px solid;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 80%;
   height: 100px;
-  border: 10px solid red;
 }
 .controls {
   @include m.flex(center, center, row);
@@ -27,7 +25,11 @@
 /* The time controls section */
 
 .timecontrols {
-  border: 1px soild black;
+  @include m.flex(center, center, row);
+  column-gap: 5px;
+  > p {
+    color: c.$C_GRAY;
+  }
 }
 
 .timeBarContainer {
@@ -46,4 +48,28 @@
 
 .controlsTime {
   color: black;
+  font-size: 12px;
+}
+.controlsImgWrap {
+  @include m.flex(center, center, row);
+  width: 600px;
+  > .controlsItem {
+    width: 100px;
+  }
+  > .controlsTitle {
+    width: 400px;
+    text-overflow: ellipsis;
+    > p {
+      text-overflow: ellipsis;
+    }
+  }
+  > div {
+    font-size: 13px;
+    width: 100px;
+  }
+}
+.controlsImg {
+  @include m.flex(center, center);
+  width: 60px;
+  height: 50px;
 }

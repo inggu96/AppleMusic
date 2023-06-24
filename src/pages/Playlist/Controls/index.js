@@ -44,11 +44,19 @@ const Controls = ({
   setProgress,
   currentTime,
   setCurrentTime,
+  selectedThumbnailId,
 }) => {
+  console.log(selectedThumbnailId);
   const playclasses = playStyle();
   const fastclasses = fastStyle();
   const fastForward = () => {
     playerRef.current.seekTo(playerRef.current.getCurrentTime() + 5);
+  };
+
+  const [getThumbnail, setGetThumbnail] = useState(null);
+
+  const handleThumbnailClick = () => {
+    console.log(selectedThumbnailId);
   };
 
   const revert = () => {
@@ -57,6 +65,7 @@ const Controls = ({
   const seek = (e) => {
     playerRef.current.seekTo(+e.target.value, 'seconds');
   };
+  console.log(selectedThumbnailId);
   /* 타임바 시간 */
   const formatTime = (value) => {
     const minutes = Math.floor(value / 60);
@@ -71,12 +80,13 @@ const Controls = ({
       setCurrentTime(playerRef.current.getCurrentTime());
       setProgress((playerRef.current.getCurrentTime() / duration) * 100);
     }, 1000);
-
+    console.log(selectedThumbnailId);
     return () => {
       clearInterval(interval);
     };
   }, []);
-
+  useEffect;
+  console.log(selectedThumbnailId);
   return (
     <div>
       <Slider
@@ -88,7 +98,9 @@ const Controls = ({
         onChange={seek}
         valueLabelFormat={formatTime}
       />
-
+      <div onClick={handleThumbnailClick}>
+        <img src={selectedThumbnailId} alt="Thumbnail" />
+      </div>
       <div className={styles.controls}>
         <FastRewindIcon
           className={fastclasses.root}
