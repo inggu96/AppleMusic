@@ -8,8 +8,6 @@ const GoogleButton = () => {
     <>
       <GoogleLogin
         onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-
           const decodeding = jwt_decode(credentialResponse.credential);
           console.log(decodeding);
         }}

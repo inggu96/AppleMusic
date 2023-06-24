@@ -1,0 +1,59 @@
+@use '../../styles/constants' as c;
+@use '../../styles/mixins' as m;
+
+.music {
+  display: flex;
+  flex-direction: column;
+  width: 110vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Video */
+
+.video {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Controls */
+
+.musicPlayerWrap {
+  @include m.flex(center, center, row);
+  column-gap: 40px;
+  width: 100vw;
+  height: 80px;
+  position: absolute;
+  bottom: 0;
+  border: 10px solid black;
+}
+
+.controls {
+  @include m.flex(center, center, row);
+  border: 1px solid;
+  position: relative;
+}
+
+/* The time controls section */
+
+.timecontrols {
+  border: 1px soild black;
+}
+
+.timeBarContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: gray;
+  width: 100vw;
+  height: 3px;
+}
+
+.timeBar {
+  background-color: c.$C_BUTTON;
+  height: 100%;
+}
+
+.controlsTime {
+  color: black;
+}

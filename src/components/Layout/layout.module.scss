@@ -3,6 +3,7 @@
 
 .wrap {
   @include m.flex();
+  width: 100vw;
   background-color: c.$C_BACKGROUND;
 
   > section {

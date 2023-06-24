@@ -3,13 +3,11 @@ import apiClient from '../apiClient';
 export const searchVideos = async (query) => {
   try {
     const response = await apiClient.get(
-      'https://www.googleapis.com/youtube/v3/search',
+      'https://www.googleapis.com/youtube/v3/playlists',
       {
         params: {
           part: 'snippet',
-          maxResult: 10,
-          q: query,
-          order: 'relevance',
+          maxResults: 10,
           key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
         },
       },

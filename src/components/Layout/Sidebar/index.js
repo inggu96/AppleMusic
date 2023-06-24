@@ -1,14 +1,15 @@
-import { symbol } from 'prop-types';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import SlideshowOutlinedIcon from '@mui/icons-material/SlideshowOutlined';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AppleIcon from '@mui/icons-material/Apple';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../state/VideoActions';
 
 const searchStyle = makeStyles({
   root: {
@@ -19,14 +20,40 @@ const searchStyle = makeStyles({
 });
 const buttonStyle = makeStyles({
   root: {
+    display: 'flex',
+    border: 'none!important',
     width: '220px',
     height: '35px',
+    fontSize: '16px !important',
+    color: '#1c1c1c !important',
+    textAlign: 'left !important',
+    '&:active': {
+      color: '#000000 !important',
+      backgroundColor: '#000000 !important',
+    },
+  },
+  startIcon: {
+    color: '#ff0000 !important',
   },
 });
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const Searchclasses = searchStyle();
   const Buttonclasses = buttonStyle();
+  const [isActive, setIsActive] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('ACCESS_TOKEN');
+    dispatch(logout());
+    navigate(`/`);
+  };
+
+  const handleClick = () => {
+    setIsActive(true);
+  };
+
   return (
     <aside className={styles.sidebarWrap}>
       <Link to="/">
@@ -48,15 +75,20 @@ const Sidebar = () => {
       <div className={styles.playWrap}>
         <div className={styles.playButton}>
           <Button
-            className={Buttonclasses.root}
+            backgroundColor={isActive ? '#000000' : '#ffffff'}
+            className={`${Buttonclasses.root} ${isActive ? 'active' : ''}`}
             variant="outlined"
-            startIcon={<SlideshowOutlinedIcon />}
+            startIcon={
+              <PlayCircleOutlineIcon className={Buttonclasses.startIcon} />
+            }
+            onClick={handleClick}
+            active={isActive}
           >
-            전체보기
+            지금 듣기
           </Button>
         </div>
-        <div></div>
       </div>
+      <div onClick={handleLogout}>로그아웃</div>
     </aside>
   );
 };
