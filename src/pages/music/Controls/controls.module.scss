@@ -15,11 +15,9 @@
   @include m.flex(center, center, column);
   position: fixed;
   bottom: 0;
-  width: 80%;
+  width: 83%;
   height: 100px;
-}
-.controls {
-  @include m.flex(center, center, row);
+  background-color: #fff;
 }
 
 /* The time controls section */
@@ -50,9 +48,17 @@
   color: black;
   font-size: 12px;
 }
+
+.controls {
+  @include m.flex(center, center, row);
+}
 .controlsImgWrap {
   @include m.flex(center, center, row);
   width: 600px;
+  > .controlsVolume {
+    width: 200px;
+    border: 1px solid black;
+  }
   > .controlsItem {
     width: 100px;
   }

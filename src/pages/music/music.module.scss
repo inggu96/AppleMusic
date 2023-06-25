@@ -1,31 +1,44 @@
 @use '../../styles/constants' as c;
 @use '../../styles/mixins' as m;
 
-.music {
-  display: flex;
-  flex-direction: column;
-  width: 110vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Video */
-
-.video {
-  width: 100vw;
-  height: 100vh;
-}
-
 /* Controls */
-.youtubeList {
-  @include m.flex(center, center, row);
-  width: 900px;
-  height: 300px;
+.youtubeWrap {
+  @include m.flex(center, center, column);
+  width: 100%;
+  height: 83vh;
   flex-wrap: nowrap;
+  overflow-y: scroll;
+}
+.youtubeContent {
+  height: 1000px;
+}
+.youtubeList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 5px;
+  overflow-y: scroll;
+  padding: 40px;
+  height: 1000px;
+  max-height: calc(100vh - 170px);
 }
 .thumbnailImage {
   @include m.flex(center, center, row);
-  width: 90px;
-  height: 90px;
+  width: 280px;
+  height: 180px;
   flex-wrap: nowrap;
+  object-fit: cover;
+  cursor: pointer;
+}
+.controlsTitle {
+  @include m.flex(space-between);
+}
+
+.controlsTitleItem {
+  @include m.flex(center, center, row);
+  line-height: 30px;
+  height: 30px;
+  width: 250px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
 }

@@ -4,6 +4,8 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
 import FastForwardIcon from '@mui/icons-material/FastForward';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 import styles from './controls.module.scss';
 import { makeStyles } from '@mui/styles';
@@ -45,6 +47,8 @@ const Controls = ({
   selectedThumbnailId,
   selectedTitle,
   selectedChnnelTitle,
+  volume,
+  setVolume,
 }) => {
   const playclasses = playStyle();
   const fastclasses = fastStyle();
@@ -64,9 +68,6 @@ const Controls = ({
     debouncedSeek(value);
   };
 
-  const seek = (e) => {
-    playerRef.current.seekTo(+e.target.value, 'seconds');
-  };
   /* 타임바 시간 */
   const formatTime = (value) => {
     const minutes = Math.floor(value / 60);
@@ -87,6 +88,12 @@ const Controls = ({
     };
   }, []);
 
+  const handleVolumeChange = (event) => {
+    const newVolume = parseFloat(event.target.value);
+    setVolume(newVolume);
+    playerRef.current.setVolume(newVolume); // 볼륨 변경
+  };
+
   return (
     <div className={styles.controlsWrap}>
       <Slider
@@ -101,6 +108,16 @@ const Controls = ({
 
       <div className={styles.controls}>
         <div className={styles.controlsImgWrap}>
+          <div className={styles.controlsVolume}>
+            <Slider
+              type="range"
+              min={0}
+              max={1}
+              step={0.1}
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+          </div>
           <div className={styles.controlsItem}>
             <img
               className={styles.controlsImg}

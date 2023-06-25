@@ -42,13 +42,13 @@ export const pause = () => ({
   type: PAUSE,
 });
 
-export const fetchVideos = () => {
+export const fetchVideos = (searchValue) => {
   return async (dispatch) => {
     try {
       dispatch(fetchVideosRequest());
 
       const response = await axios.get(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=music&order=relevance&key=AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchValue}&order=relevance&key=AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
       );
 
       dispatch(fetchVideosSuccess(response.data.items));
@@ -65,7 +65,7 @@ export const fetchList = () => {
       dispatch(fetchVideosRequest());
 
       const response = await axios.get(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=잔나비&order=relevance&key=AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=잔나비&order=relevance&key=AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
       );
 
       dispatch(fetchVideosSuccess(response.data.items));

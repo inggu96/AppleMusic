@@ -9,6 +9,8 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AppleIcon from '@mui/icons-material/Apple';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchVideos } from '../../../state/VideoActions';
+
 import { logout } from '../../../state/VideoActions';
 
 const searchStyle = makeStyles({
@@ -43,6 +45,7 @@ const Sidebar = () => {
   const Searchclasses = searchStyle();
   const Buttonclasses = buttonStyle();
   const [isActive, setIsActive] = useState(false);
+  const searchValue = useSelector((state) => state.searchValue);
 
   const handleLogout = () => {
     localStorage.removeItem('ACCESS_TOKEN');
@@ -52,6 +55,10 @@ const Sidebar = () => {
 
   const handleClick = () => {
     setIsActive(true);
+  };
+  const handleSearch = () => {
+    // fetchVideos 액션을 디스패치하여 searchValue를 전달
+    dispatch(fetchVideos(searchValue));
   };
 
   return (
@@ -69,6 +76,8 @@ const Sidebar = () => {
             id="outlined-basic"
             label="search"
             variant="outlined"
+            value={searchValue}
+            onChange={handleSearch}
           />
         </form>
       </div>
