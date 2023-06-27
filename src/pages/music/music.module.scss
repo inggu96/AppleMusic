@@ -30,15 +30,24 @@
   cursor: pointer;
 }
 .controlsTitle {
-  @include m.flex(space-between);
-}
-
-.controlsTitleItem {
   @include m.flex(center, center, row);
-  line-height: 30px;
-  height: 30px;
-  width: 250px;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
+  column-gap: 7px;
+  > .ranking {
+    font-size: 20px;
+    color: c.$C_GRAY;
+  }
+  > .rankingChange {
+    font-size: 20px;
+    color: c.$C_GRAY;
+  }
+  > .controlsTitleItem {
+    @include m.flex(center, center, row);
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    width: 220px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

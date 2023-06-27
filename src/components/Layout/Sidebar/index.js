@@ -29,10 +29,6 @@ const buttonStyle = makeStyles({
     fontSize: '16px !important',
     color: '#1c1c1c !important',
     textAlign: 'left !important',
-    '&:active': {
-      color: '#000000 !important',
-      backgroundColor: '#000000 !important',
-    },
   },
   startIcon: {
     color: '#ff0000 !important',
@@ -84,14 +80,11 @@ const Sidebar = () => {
       <div className={styles.playWrap}>
         <div className={styles.playButton}>
           <Button
-            backgroundColor={isActive ? '#000000' : '#ffffff'}
-            className={`${Buttonclasses.root} ${isActive ? 'active' : ''}`}
             variant="outlined"
             startIcon={
               <PlayCircleOutlineIcon className={Buttonclasses.startIcon} />
             }
             onClick={handleClick}
-            active={isActive}
           >
             지금 듣기
           </Button>

@@ -7,6 +7,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
+export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const setSelectedVideoUrl = (url) => ({
   type: 'SET_SELECTED_VIDEO_URL',
@@ -41,6 +42,13 @@ export const play = () => ({
 export const pause = () => ({
   type: PAUSE,
 });
+
+export const setUserData = (userData) => {
+  return {
+    type: SET_USER_DATA,
+    payload: userData,
+  };
+};
 
 export const fetchVideos = (searchValue) => {
   return async (dispatch) => {
