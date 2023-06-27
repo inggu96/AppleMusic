@@ -56,7 +56,7 @@ export const fetchVideos = (searchValue) => {
       dispatch(fetchVideosRequest());
 
       const response = await axios.get(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchValue}&order=relevance&key=AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=잔나비&order=relevance&key=AIzaSyDjW65U75KScD-nswCOF6gu8m_HklLQ6hw',
       );
 
       dispatch(fetchVideosSuccess(response.data.items));

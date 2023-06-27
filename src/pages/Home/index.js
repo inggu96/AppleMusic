@@ -60,18 +60,14 @@ const Home = () => {
         감상중인 아티스트와 장르를 기준으로 엄선된 플레이리스트 및 <br />
         앨범이 제공됩니다
       </div>
-      <div>
-        <div className={styles.homeButton2} onClick={handleGuest}>
+      <div className={styles.homeLoginWrap}>
+        <button className={styles.homeLogin} onClick={handleGuest}>
           게스트 로그인
-        </div>
-        <div className={styles.homeButton2} onClick={handleGoogleLogin}>
-          회원가입
-        </div>
+        </button>
+        <button className={styles.homeLogin} onClick={handleGoogleLogin}>
+          구글로 시작하기
+        </button>
       </div>
-      <div className={styles.homeButton2} onClick={handleGoogleLogin}>
-        구글로 시작하기
-      </div>
-      <div>{userData && userData.email}</div>
       <img src="https://music.apple.com/assets/cwc/upsells/listen-now/web/en-us/medium.png" />
     </main>
   );

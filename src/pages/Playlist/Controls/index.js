@@ -65,7 +65,6 @@ const Controls = ({
   const seek = (e) => {
     playerRef.current.seekTo(+e.target.value, 'seconds');
   };
-  console.log(selectedThumbnailId);
   /* 타임바 시간 */
   const formatTime = (value) => {
     const minutes = Math.floor(value / 60);
@@ -80,13 +79,13 @@ const Controls = ({
       setCurrentTime(playerRef.current.getCurrentTime());
       setProgress((playerRef.current.getCurrentTime() / duration) * 100);
     }, 1000);
-    console.log(selectedThumbnailId);
+
     return () => {
       clearInterval(interval);
     };
   }, []);
   useEffect;
-  console.log(selectedThumbnailId);
+
   return (
     <div>
       <Slider

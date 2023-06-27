@@ -1,16 +1,6 @@
 @use '../../../styles/constants' as c;
 @use '../../../styles/mixins' as m;
 
-.musicPlayerWrap {
-  @include m.flex(center, center, row);
-  column-gap: 40px;
-  width: 100vw;
-  height: 80px;
-  position: absolute;
-  bottom: 0;
-  border: 10px solid black;
-}
-
 .controlsWrap {
   @include m.flex(center, center, column);
   position: fixed;
@@ -20,21 +10,10 @@
   background-color: #fff;
 }
 
-/* The time controls section */
-
-.timecontrols {
-  @include m.flex(center, center, row);
-  column-gap: 5px;
-  > p {
-    color: c.$C_GRAY;
-  }
-}
-
 .timeBarContainer {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: gray;
   width: 100vw;
   height: 3px;
 }
@@ -42,11 +21,7 @@
 .timeBar {
   background-color: c.$C_BUTTON;
   height: 100%;
-}
-
-.controlsTime {
-  color: black;
-  font-size: 12px;
+  width: 83%;
 }
 
 .controls {
@@ -55,6 +30,7 @@
 .controlsImgWrap {
   @include m.flex(center, center, row);
   width: 600px;
+  border: 1px solid c.$C_BUTTON;
   > .controlsVolume {
     width: 200px;
   }
@@ -77,4 +53,16 @@
   @include m.flex(center, center);
   width: 60px;
   height: 50px;
+}
+
+.timecontrols {
+  @include m.flex(center, center, row);
+  column-gap: 5px;
+  > p {
+    color: c.$C_GRAY;
+  }
+}
+.controlsTime {
+  color: black;
+  font-size: 12px;
 }
