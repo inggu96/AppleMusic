@@ -5,12 +5,12 @@
   display: grid;
   grid-template-rows: 50px auto 1fr auto;
   height: 100vh;
-  max-width: 280px;
+  max-width: 260px;
   background-color: c.$C_SB_BACKGROUND;
   border: 1px solid c.$C_SB_BORDER;
 
   > div {
-    padding: 7px c.$S_LAYOUT_PADDING;
+    padding: 15px c.$S_LAYOUT_PADDING;
   }
   .logo {
     width: 100%;
@@ -18,9 +18,45 @@
     font-size: 26px;
     color: c.$C_BLACK;
     font-family: 'APPLE';
-    padding: 10px c.$S_LAYOUT_PADDING;
+    font-weight: 300;
+    padding: 15px c.$S_LAYOUT_PADDING;
   }
   .outlined {
     height: 200px;
+  }
+}
+.search {
+  width: 207px;
+  > form {
+    width: 307px;
+  }
+}
+input::placeholder {
+  padding: 25px;
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.searchBar {
+  width: 207px;
+  height: 32px;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+}
+.playButton {
+  @include m.flex(center, center);
+
+  > ul {
+    @include m.flex(center, flex-start, column);
+    row-gap: 16px;
+    width: 220px;
+    > li {
+      @include m.flex(flex-start, flex-start, row);
+      width: 207px;
+      column-gap: 5px;
+      font-size: 15px;
+      line-height: 16px;
+      font-weight: 300;
+    }
   }
 }
