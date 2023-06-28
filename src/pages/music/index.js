@@ -10,6 +10,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
+  CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -47,7 +48,7 @@ const Player = () => {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(null);
   const [selectedThumbnailId, setSelectedThumbnailId] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
-  const [selectedChnnelTitle, setSelectedChnnelTitle] = useState(null);
+  const [selectedChannelTitle, setSelectedChannelTitle] = useState(null);
   const [volume, setVolume] = useState(1);
   const [isPlayerVisible, setPlayerVisible] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -61,7 +62,7 @@ const Player = () => {
     setPlaying(true);
     setSelectedThumbnailId(thumbnailId);
     setSelectedTitle(title);
-    setSelectedChnnelTitle(channelTitle);
+    setSelectedChannelTitle(channelTitle);
   };
   const handleSearch = (searchValue) => {
     dispatch(fetchVideos(searchValue));
@@ -71,12 +72,26 @@ const Player = () => {
     alert('로그인을 해주세요');
   };
   useEffect(() => {
-    dispatch(fetchVideos()); // 컴포넌트 마운트 시 검색 수행
+    dispatch(fetchVideos());
   }, []);
+  if (loading) {
+    return (
+      <div className={styles.error}>
+        <CircularProgress color="secondary" />
+      </div>
+    );
+  }
+  if (error) {
+    return <div>error</div>;
+  }
   return (
     <div className={styles.youtubeWrap}>
-      <p>인기음악</p>
-      <Accordion expanded={isPlayerVisible} onChange={togglePlayer}>
+      <p>잔나비 플레이리스트</p>
+      <Accordion
+        expanded={isPlayerVisible}
+        onChange={togglePlayer}
+        sx={{ position: 'fixed', bottom: '0', right: '0' }}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="player-content"
@@ -155,7 +170,7 @@ const Player = () => {
         setCurrentTime={setCurrentTime}
         selectedThumbnailId={selectedThumbnailId}
         selectedTitle={selectedTitle}
-        selectedChnnelTitle={selectedChnnelTitle}
+        selectedChannelTitle={selectedChannelTitle}
         volume={volume}
         setVolume={setVolume}
         searchValue={searchValue}

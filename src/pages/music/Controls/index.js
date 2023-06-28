@@ -7,6 +7,7 @@ import styles from './controls.module.scss';
 import styled from 'styled-components';
 import { makeStyles } from '@mui/styles';
 import { VolumeOffRounded, VolumeUpRounded } from '@mui/icons-material';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
 
 const VolumeControl = styled.div`
   display: flex;
@@ -117,9 +118,12 @@ const Controls = ({
   };
 
   useEffect(() => {
-    setSeekValue(playedSeconds);
-  }, [playedSeconds]);
+    const updateSeekValue = () => {
+      setSeekValue(playedSeconds);
+    };
 
+    updateSeekValue();
+  }, [playedSeconds]);
   const formatTime = (value) => {
     const minutes = Math.floor(value / 60);
     const seconds = Math.floor(value % 60);
@@ -159,49 +163,51 @@ const Controls = ({
           }}
         />
       </div>
-      <div className={styles.controls}>
-        <div className={styles.controlsImgWrap}>
-          <div className={styles.controlsVolume}>
-            <VolumeControl volume={volume * 100}>
-              {volume === 0 ? (
-                <VolumeOffRounded
-                  sx={{
-                    color: '#D9D9D9',
-                    cursor: 'pointer',
-                    marginRight: '5px',
-                  }}
-                  onClick={handleVolumeToggle}
-                />
-              ) : (
-                <VolumeUpRounded
-                  sx={{
-                    color: '#777676',
-                    cursor: 'pointer',
-                    marginRight: '5px',
-                  }}
-                  onClick={handleVolumeToggle}
-                />
-              )}
-              <input
-                type="range"
-                min={0}
-                max={1}
-                color="gray"
-                step={0.02}
-                value={volume}
-                onChange={(event) => {
-                  setVolume(event.target.valueAsNumber);
+      <div className={styles.controlsContainer}>
+        <div className={styles.controlsVolume}>
+          <VolumeControl volume={volume * 100}>
+            {volume === 0 ? (
+              <VolumeOffRounded
+                sx={{
+                  color: '#D9D9D9',
+                  cursor: 'pointer',
+                  marginRight: '5px',
                 }}
+                onClick={handleVolumeToggle}
               />
-            </VolumeControl>
-          </div>
-          <div className={styles.controlsItem}>
-            <img
-              className={styles.controlsImg}
-              src={selectedThumbnailId}
-              alt="Thumbnail"
+            ) : (
+              <VolumeUpRounded
+                sx={{
+                  color: '#777676',
+                  cursor: 'pointer',
+                  marginRight: '5px',
+                }}
+                onClick={handleVolumeToggle}
+              />
+            )}
+            <input
+              type="range"
+              min={0}
+              max={1}
+              color="gray"
+              step={0.02}
+              value={volume}
+              onChange={(event) => {
+                setVolume(event.target.valueAsNumber);
+              }}
             />
-          </div>
+          </VolumeControl>
+        </div>
+
+        <div className={styles.controlsItem}>
+          <img
+            className={styles.controlsImg}
+            src={
+              selectedThumbnailId ||
+              'https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png?20200509031052'
+            }
+            alt={selectedThumbnailId ? 'Thumbnail' : 'No Thumbnail'}
+          />
           <div className={styles.controlsTitle}>
             <p>{selectedTitle}</p>
             <p>{selectedChannelTitle}</p>
@@ -211,7 +217,7 @@ const Controls = ({
           <p className={styles.controlsTime}>{formatTime(duration)}</p>
           <p className={styles.controlsTime}>{formatTime(currentTime)}</p>
         </div>
-        <button className={fastClasses.root} onClick={revert}>
+        <button className={fastClasses.root}>
           <FastRewindIcon />
         </button>
         <button
@@ -224,7 +230,7 @@ const Controls = ({
             <PlayArrowIcon sx={{ fontSize: 50 }} />
           )}
         </button>
-        <button className={fastClasses.root} onClick={fastForward}>
+        <button className={fastClasses.root}>
           <FastForwardIcon />
         </button>
       </div>

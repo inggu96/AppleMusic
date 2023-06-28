@@ -50,13 +50,13 @@ export const setUserData = (userData) => {
   };
 };
 
-export const fetchVideos = (searchValue) => {
+export const fetchVideos = () => {
   return async (dispatch) => {
     try {
       dispatch(fetchVideosRequest());
 
       const response = await axios.get(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=잔나비&order=relevance&key=AIzaSyDjW65U75KScD-nswCOF6gu8m_HklLQ6hw',
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=잔나비&order=relevance&key=AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
       );
 
       dispatch(fetchVideosSuccess(response.data.items));

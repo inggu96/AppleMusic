@@ -5,7 +5,7 @@
   @include m.flex(center, center, column);
   position: fixed;
   bottom: 0;
-  width: 83%;
+  width: 80%;
   height: 100px;
   background-color: #fff;
 }
@@ -21,40 +21,44 @@
 .timeBar {
   background-color: c.$C_BUTTON;
   height: 100%;
-  width: 83%;
+  width: 80%;
 }
 
-.controls {
+.controlsContainer {
   @include m.flex(center, center, row);
+  width: 1000px;
+  height: 50px;
+  margin-top: 10px;
+  column-gap: 30px;
 }
-.controlsImgWrap {
+.controlsVolume {
+  width: 200px;
+}
+.controlsItem {
   @include m.flex(center, center, row);
-  width: 600px;
-  border: 1px solid c.$C_BUTTON;
-  > .controlsVolume {
-    width: 200px;
-  }
-  > .controlsItem {
-    width: 100px;
-  }
-  > .controlsTitle {
-    width: 400px;
-    text-overflow: ellipsis;
-    > p {
-      text-overflow: ellipsis;
-    }
+  border: 1px solid c.$C_GRAY;
+
+  width: 450px;
+  .controlsImg {
+    @include m.flex(center, center);
+    border-right: 1px solid c.$C_GRAY;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: rgba(60, 60, 67, 0.1);
   }
   > div {
-    font-size: 13px;
-    width: 100px;
+    @include m.flex();
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 500px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
   }
 }
-.controlsImg {
-  @include m.flex(center, center);
-  width: 60px;
-  height: 50px;
-}
-
 .timecontrols {
   @include m.flex(center, center, row);
   column-gap: 5px;
