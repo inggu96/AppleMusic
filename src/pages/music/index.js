@@ -148,7 +148,7 @@ const Player = () => {
                     <PlaylistAddIcon
                       onClick={PleaseLogin}
                       className={PlayListAddclasses.root}
-                      sx={{ fontSize: 30 }}
+                      sx={{ fontSize: 27 }}
                     />
                   </p>
                 </div>

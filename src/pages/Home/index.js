@@ -12,6 +12,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const userData = useSelector((state) => state.userData);
+  const loading = useSelector((state) => state.videos.loading);
+  const error = useSelector((state) => state.videos.error);
   const auth = getAuth();
 
   const handleGoogleLogin = async (Data) => {
@@ -20,7 +22,6 @@ const Home = () => {
       .then(async (data) => {
         dispatch(setUserData(data.user));
         dispatch(userData);
-        console.log(data);
         dispatch(login());
         navigate('/music');
         const accessToken = await data.user.getIdToken();
@@ -46,6 +47,16 @@ const Home = () => {
   const handleGuest = () => {
     navigate('/music');
   };
+  if (loading) {
+    return (
+      <div className={styles.error}>
+        <CircularProgress color="secondary" />
+      </div>
+    );
+  }
+  if (error) {
+    return <div>error</div>;
+  }
 
   return (
     <main className={styles.homeWrap}>
