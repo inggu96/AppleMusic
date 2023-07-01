@@ -80,6 +80,12 @@ const Sidebar = () => {
               />
               둘러보기
             </li>
+            <li>
+              <PlayCircleOutlineIcon
+                sx={{ color: '#d60017', fontSize: 'large' }}
+              />
+              둘러보기
+            </li>
           </ul>
         </div>
       </div>

@@ -76,7 +76,7 @@ const Home = () => {
           게스트 로그인
         </button>
         <button className={styles.homeLogin} onClick={handleGoogleLogin}>
-          구글로 시작하기
+          구글로 로그인
         </button>
       </div>
       <img src="https://music.apple.com/assets/cwc/upsells/listen-now/web/en-us/medium.png" />
