@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 
@@ -9,15 +9,16 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import AppleIcon from '@mui/icons-material/Apple';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchVideos } from '../../../state/VideoActions';
-
-import { logout } from '../../../state/VideoActions';
+import { searchVideos, logout, findData } from '../../../state/VideoActions';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
-  const searchValue = useSelector((state) => state.searchValue);
+  const [searchValue, setSearchValue] = useState('');
+
+  const userData = useSelector((state) => state.userData);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   const handleLogout = () => {
     localStorage.removeItem('ACCESS_TOKEN');
@@ -25,14 +26,16 @@ const Sidebar = () => {
     navigate(`/`);
   };
 
-  const handleClick = () => {
-    setIsActive(true);
-  };
-  const handleSearch = () => {
-    // fetchVideos 액션을 디스패치하여 searchValue를 전달
-    dispatch(fetchVideos(searchValue));
+  const finding = (event) => {
+    const { value } = event.target;
+    setSearchValue(value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(searchVideos(searchValue));
+    setSearchValue('');
+  };
   return (
     <aside className={styles.sidebarWrap}>
       <Link to="/">
@@ -42,19 +45,23 @@ const Sidebar = () => {
         </div>
       </Link>
       <div className={styles.search}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <SearchOutlinedIcon
+            onClick={handleSubmit}
             sx={{
               position: 'absolute',
               color: '#919191',
               fontSize: 'medium',
               margin: '10px',
+              cursor: 'pointer',
             }}
           />
           <input
             type="text"
             id="search"
             placeholder="검색"
+            value={searchValue}
+            onChange={finding}
             className={styles.searchBar}
           />
         </form>
@@ -80,16 +87,13 @@ const Sidebar = () => {
               />
               둘러보기
             </li>
-            <li>
-              <PlayCircleOutlineIcon
-                sx={{ color: '#d60017', fontSize: 'large' }}
-              />
-              둘러보기
-            </li>
+            <li>{userData}</li>
           </ul>
         </div>
       </div>
-      <div onClick={handleLogout}>로그아웃</div>
+      <div onClick={isLoggedIn ? handleLogout : '로그인'}>
+        {isLoggedIn ? '로그아웃' : '로그인'}
+      </div>
     </aside>
   );
 };

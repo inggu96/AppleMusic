@@ -1,24 +1,18 @@
 import axios from 'axios';
-import config from '../config';
 
 const apiClient = axios.create({
-  baseURL: config.API_URL,
-  timeout: 5000,
-});
-
-apiClient.interceptors.request.use(async (config) => {
-  const accessToken = localStorage.getItem('ACCESS_TOKEN');
-
-  if (accessToken) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
-  }
-
-  return config;
+  baseURL: 'https://youtube.googleapis.com/youtube/v3',
+  params: {
+    key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+    client_secret: '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',
+  },
+  timeout: 50000,
 });
 
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
+    console.log(error);
     if (
       error?.response?.data?.statusCode === 401 &&
       error?.response?.data?.message === 'TOKEN_EXPIRED'
@@ -26,24 +20,28 @@ apiClient.interceptors.response.use(
       const refreshToken = localStorage.getItem('REFRESH_TOKEN');
       const accessToken = localStorage.getItem('ACCESS_TOKEN');
 
-      const response = await axios.post(`${config.API_URL}/auth/refresh`, {
-        refreshToken,
-        accessToken,
-      });
+      try {
+        const response = await axios.post(`${config.API_URL}/refreshToken`, {
+          refreshToken,
+          accessToken,
+        });
 
-      if (response.data) {
-        const { accessToken, refreshToken } = response.data;
+        if (response.data) {
+          const { accessToken, refreshToken } = response.data;
 
-        localStorage.setItem('ACCESS_TOKEN', accessToken);
-        localStorage.setItem('REFRESH_TOKEN', refreshToken);
-
-        return await apiClient(error, config);
-      } else {
+          localStorage.setItem('ACCESS_TOKEN', accessToken);
+          localStorage.setItem('REFRESH_TOKEN', refreshToken);
+          // 새로운 토큰으로 재시도
+          error.config.headers['Authorization'] = `Bearer ${accessToken}`;
+          return apiClient(error.config);
+        } else {
+          localStorage.clear();
+        }
+      } catch (error) {
         localStorage.clear();
       }
     }
     return Promise.reject(error);
   },
 );
-
 export default apiClient;

@@ -32,7 +32,6 @@
   }
 }
 input::placeholder {
-  padding: 25px;
   font-size: 12px;
   font-weight: 200;
 }
@@ -42,6 +41,7 @@ input::placeholder {
   height: 32px;
   border: 1px solid #d8d8d8;
   border-radius: 3px;
+  padding-left: 30px;
 }
 .playButton {
   @include m.flex(center, center);

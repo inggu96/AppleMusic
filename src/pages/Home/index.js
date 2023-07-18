@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './home.module.scss';
 import AppleIcon from '@mui/icons-material/Apple';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../state/VideoActions';
+import { login, setUserData, setIsLoggedIn } from '../../state/VideoActions';
 import { auth } from '../../firebase-config';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import axios from 'axios';
+
+import { CircularProgress } from '@mui/material';
+import { saveTokens } from '../../utils/jwt';
+
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,30 +18,24 @@ const Home = () => {
   const userData = useSelector((state) => state.userData);
   const loading = useSelector((state) => state.videos.loading);
   const error = useSelector((state) => state.videos.error);
-  const auth = getAuth();
 
-  const handleGoogleLogin = async (Data) => {
+  const handleGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then(async (data) => {
-        dispatch(setUserData(data.user));
-        dispatch(userData);
-        dispatch(login());
-        navigate('/music');
-        const accessToken = await data.user.getIdToken();
-        const refreshToken = await data.user.refreshToken;
-        const email = data.user.email;
+      .then((data) => {
+        const { accessToken, refreshToken } = data.user;
+        //NOTE: 토큰 저장
+        localStorage.setItem('ACCESS_TOKEN', accessToken);
+        localStorage.setItem('REFRESH_TOKEN', refreshToken);
+        if (accessToken) {
+          saveTokens(data);
+          getTokens(data);
+          dispatch(login());
+          navigate('/music');
+        }
 
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${accessToken}`;
-
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
-        localStorage.setItem('email', email);
-
-        const refreshExpiration = new Date().getTime() + 3 * 60 * 60 * 1000; // 3시간
-        localStorage.setItem('refreshExpiration', refreshExpiration);
+        console.log(data.user);
+        console.log(isLoggedIn);
       })
       .catch((err) => {
         console.log(err);
@@ -45,8 +43,9 @@ const Home = () => {
   };
 
   const handleGuest = () => {
-    navigate('/music');
+    dispatch(login()) ? navigate('/music') : alert('로그인을 해주세요');
   };
+
   if (loading) {
     return (
       <div className={styles.error}>

@@ -4,7 +4,7 @@ import Controls from './Controls';
 import styles from './music.module.scss';
 import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchVideos, setSelectedVideoUrl } from '../../state/VideoActions';
+import { searchVideos, setSelectedVideoUrl } from '../../state/VideoActions';
 import {
   Accordion,
   AccordionSummary,
@@ -14,6 +14,8 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const PlayListAddStyle = makeStyles({
   root: {
@@ -33,6 +35,7 @@ const PlayListStyle = makeStyles({
 });
 
 const Player = () => {
+  const navigate = useNavigate();
   const PlayListAddclasses = PlayListAddStyle();
   const PlayListclasses = PlayListStyle();
   const playerRef = useRef();
@@ -52,6 +55,7 @@ const Player = () => {
   const [volume, setVolume] = useState(1);
   const [isPlayerVisible, setPlayerVisible] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   const togglePlayer = () => {
     setPlayerVisible(!isPlayerVisible);
@@ -65,15 +69,18 @@ const Player = () => {
     setSelectedChannelTitle(channelTitle);
   };
   const handleSearch = (searchValue) => {
-    dispatch(fetchVideos(searchValue));
+    dispatch(searchVideos(searchValue));
+    console.log(searchVideos(searchValue));
   };
+
+  useEffect(() => {
+    dispatch(searchVideos());
+  }, []);
 
   const PleaseLogin = () => {
     alert('로그인을 해주세요');
   };
-  useEffect(() => {
-    dispatch(fetchVideos());
-  }, []);
+
   if (loading) {
     return (
       <div className={styles.error}>
@@ -82,8 +89,9 @@ const Player = () => {
     );
   }
   if (error) {
-    return <div>error</div>;
+    return <div onClick={handleSearch}>error</div>;
   }
+
   return (
     <div className={styles.youtubeWrap}>
       <p>잔나비 플레이리스트</p>
@@ -121,43 +129,43 @@ const Player = () => {
         <ul className={styles.youtubeList}>
           {videos.map((video, idx) => (
             <li className={styles.youtubeItem}>
-              <div>
-                <div className={styles.imgHover}>
-                  <img
-                    key={video.id.videoId}
-                    onClick={() =>
-                      handleThumbnailClick(
-                        video.id.videoId,
-                        video.snippet.thumbnails.high.url,
-                        video.snippet.title,
-                        video.snippet.channelTitle,
-                      )
-                    }
-                    className={styles.thumbnailImage}
-                    src={video.snippet.thumbnails.high.url}
-                    alt="썸네일"
+              <div className={styles.imgHover}>
+                <img
+                  key={video.id.videoId}
+                  onClick={() =>
+                    handleThumbnailClick(
+                      video.id.videoId,
+                      video.snippet.thumbnails.high.url,
+                      video.snippet.title,
+                      video.snippet.channelTitle,
+                    )
+                  }
+                  className={styles.thumbnailImage}
+                  src={video.snippet.thumbnails.high.url}
+                  alt="썸네일"
+                />
+                <div className={styles.hovernone}>
+                  <PlayCircleFilledWhiteIcon />
+                </div>
+              </div>
+              <div className={styles.controlsTitle}>
+                <p className={styles.ranking}> {idx + 1} </p>
+                <p className={styles.rankingChange}> - </p>
+                <p className={styles.controlsTitleItem}>
+                  {video.snippet.title}
+                </p>
+                <p>
+                  <PlaylistAddIcon
+                    onClick={PleaseLogin}
+                    className={PlayListAddclasses.root}
+                    sx={{ fontSize: 27 }}
                   />
-                </div>
-                <div className={styles.controlsTitle}>
-                  <p className={styles.ranking}> {idx + 1} </p>
-                  <p className={styles.rankingChange}> - </p>
-                  <p className={styles.controlsTitleItem}>
-                    {video.snippet.title}
-                  </p>
-                  <p>
-                    <PlaylistAddIcon
-                      onClick={PleaseLogin}
-                      className={PlayListAddclasses.root}
-                      sx={{ fontSize: 27 }}
-                    />
-                  </p>
-                </div>
+                </p>
               </div>
             </li>
           ))}
         </ul>
       </div>
-
       <Controls
         playerRef={playerRef}
         playing={playing}

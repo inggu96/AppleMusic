@@ -1,7 +1,6 @@
 import { GoogleLogin } from '@react-oauth/google';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
-import { useState } from 'react';
 
 const GoogleButton = () => {
   return (

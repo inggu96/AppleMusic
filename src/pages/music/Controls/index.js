@@ -90,6 +90,15 @@ const Controls = ({
   volume,
   setVolume,
 }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const handleNextVideo = () => {
+    if (currentIndex < videos.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      // 마지막 영상이면 처음으로 돌아가거나 다른 작업을 수행할 수 있습니다.
+      setCurrentIndex(0);
+    }
+  };
   const playClasses = playStyle();
   const fastClasses = fastStyle();
   const [previousVolume, setPreviousVolume] = useState(0.5);
@@ -230,7 +239,7 @@ const Controls = ({
             <PlayArrowIcon sx={{ fontSize: 50 }} />
           )}
         </button>
-        <button className={fastClasses.root}>
+        <button className={fastClasses.root} onClick={handleNextVideo}>
           <FastForwardIcon />
         </button>
       </div>

@@ -7,6 +7,8 @@ import {
   PLAY,
   PAUSE,
   SET_USER_DATA,
+  SET_IS_LOGGED_IN,
+  SET_FIND_DATA,
 } from '../VideoActions';
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   isLoggedIn: false,
   playing: false,
   userData: null,
+  findData: '',
 };
 
 const videoReducer = (state = initialState, action) => {
@@ -65,6 +68,16 @@ const videoReducer = (state = initialState, action) => {
         playing: false,
       };
     case SET_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload,
+      };
+    case SET_IS_LOGGED_IN:
+      return {
+        ...state,
+        userData: action.payload,
+      };
+    case SET_FIND_DATA:
       return {
         ...state,
         userData: action.payload,

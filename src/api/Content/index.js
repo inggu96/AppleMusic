@@ -7,6 +7,7 @@ export const searchVideos = async (query) => {
       {
         params: {
           part: 'snippet',
+          query: '아이유',
           maxResults: 10,
           key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
         },
