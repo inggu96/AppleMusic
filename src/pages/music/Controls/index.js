@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { makeStyles } from '@mui/styles';
 import { VolumeOffRounded, VolumeUpRounded } from '@mui/icons-material';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
+import { useSelector } from 'react-redux';
 
 const VolumeControl = styled.div`
   display: flex;
@@ -103,6 +104,9 @@ const Controls = ({
   const fastClasses = fastStyle();
   const [previousVolume, setPreviousVolume] = useState(0.5);
   const [seekValue, setSeekValue] = useState(playedSeconds);
+  const selectedVideoUrl = useSelector(
+    (state) => state.videos.selectedVideoUrl,
+  );
 
   const handleVolumeToggle = () => {
     if (volume === 0) {

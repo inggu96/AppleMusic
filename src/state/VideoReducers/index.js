@@ -9,17 +9,24 @@ import {
   SET_USER_DATA,
   SET_IS_LOGGED_IN,
   SET_FIND_DATA,
+  SET_SELECTED_VIDEO_URL,
+  SET_SELECTED_THUMBNAILID,
+  SET_SELECTED_TITLE,
+  SET_SELECTED_CHANNEL_TITLE,
 } from '../VideoActions';
 
 const initialState = {
   videos: [],
   loading: false,
   error: null,
-  selectedVideoUrl: '',
   isLoggedIn: false,
-  playing: false,
   userData: null,
   findData: '',
+  playing: false,
+  selectedVideoUrl: '',
+  selectedThumbnailId: null,
+  selectedTitle: null,
+  selectedChannelTitle: null,
 };
 
 const videoReducer = (state = initialState, action) => {
@@ -41,11 +48,6 @@ const videoReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
-      };
-    case 'SET_SELECTED_VIDEO_URL':
-      return {
-        ...state,
-        selectedVideoUrl: action.payload,
       };
     case LOGIN:
       return {
@@ -75,12 +77,34 @@ const videoReducer = (state = initialState, action) => {
     case SET_IS_LOGGED_IN:
       return {
         ...state,
-        userData: action.payload,
+        isLoggedIn: action.payload,
       };
     case SET_FIND_DATA:
       return {
         ...state,
-        userData: action.payload,
+        findData: action.payload,
+      };
+    case SET_SELECTED_VIDEO_URL:
+      console.log('action.payload:', action.payload);
+      return {
+        ...state,
+        selectedVideoUrl: action.payload,
+      };
+    case SET_SELECTED_THUMBNAILID:
+      console.log('action.payload:', action.payload);
+      return {
+        ...state,
+        selectedThumbnailId: action.payload,
+      };
+    case SET_SELECTED_TITLE:
+      return {
+        ...state,
+        selectedTitle: action.payload,
+      };
+    case SET_SELECTED_CHANNEL_TITLE:
+      return {
+        ...state,
+        selectedChannelTitle: action.payload,
       };
 
     default:

@@ -12,11 +12,10 @@ export const PAUSE = 'PAUSE';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
 export const SET_FIND_DATA = 'SET_FIND_DATA';
-
-export const setSelectedVideoUrl = (url) => ({
-  type: 'SET_SELECTED_VIDEO_URL',
-  payload: url,
-});
+export const SET_SELECTED_VIDEO_URL = 'SET_SELECTED_VIDEO_URL';
+export const SET_SELECTED_THUMBNAILID = 'SET_SELECTED_THUMBNAILID';
+export const SET_SELECTED_TITLE = 'SET_SELECTED_TITLE';
+export const SET_SELECTED_CHANNEL_TITLE = 'SET_SELECTED_CHANNEL_TITLE';
 
 export const fetchVideosRequest = () => ({
   type: FETCH_VIDEO_REQUEST,
@@ -71,6 +70,32 @@ export const findData = (data) => {
   };
 };
 
+export const setSelectedVideoUrl = (videoUrl) => ({
+  type: SET_SELECTED_VIDEO_URL,
+  payload: videoUrl,
+});
+
+export const setSelectedThumbnailId = (thumbnailId) => {
+  return {
+    type: SET_SELECTED_THUMBNAILID,
+    payload: thumbnailId,
+  };
+};
+
+export const setSelectedTitle = (title) => {
+  return {
+    type: SET_SELECTED_TITLE,
+    payload: title,
+  };
+};
+
+export const setSelectedChannelTitle = (channelTitle) => {
+  return {
+    type: SET_SELECTED_CHANNEL_TITLE,
+    payload: channelTitle,
+  };
+};
+
 export const fetchVideos = () => {
   return async (dispatch) => {
     try {
@@ -103,6 +128,27 @@ export const searchVideos = (data) => {
         params: {
           part: 'snippet',
           q: data,
+          maxResults: 10,
+          order: 'relevance',
+          key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+        },
+      });
+      dispatch(fetchVideosSuccess(response.data.items));
+      console.log(response.data.items);
+    } catch (error) {
+      dispatch(fetchVideosFailure(error));
+    }
+  };
+};
+
+export const searchList = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchVideosRequest());
+      const response = await apiClient.get('/playlists', {
+        params: {
+          part: 'snippet',
+          channelId: 'UCLkAepWjdylmXSltofFvsYQ',
           maxResults: 10,
           order: 'relevance',
           key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',

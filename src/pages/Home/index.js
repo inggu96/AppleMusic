@@ -29,7 +29,6 @@ const Home = () => {
         localStorage.setItem('REFRESH_TOKEN', refreshToken);
         if (accessToken) {
           saveTokens(data);
-          getTokens(data);
           dispatch(login());
           navigate('/music');
         }

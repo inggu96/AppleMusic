@@ -1,18 +1,33 @@
 import { auth } from '../../firebase-config';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
+import apiClient from '../../api/apiClient';
 
 const BaseLogin = () => {
   const [userData, setUserData] = useState();
+  const [playList, setPlayList] = useState([]);
 
   const handleGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then((data) => {
+      .then(async (data) => {
+        const accessToken = data.user.accessToken;
+        console.log(accessToken);
+        const response = await apiClient.get('/playlists', {
+          params: {
+            part: 'snippet',
+            channelId: 'UCLkAepWjdylmXSltofFvsYQ',
+            maxResults: 10,
+            order: 'relevance',
+            key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+            access_token: accessToken,
+            mine: true,
+          },
+        });
         setUserData(data.user);
+        setPlayList(response.data.items);
+        console.log(response.data.items);
         console.log(data);
-        console.log(data);
-        console.log(userData);
       })
       .catch((err) => {
         console.log(err);
@@ -28,6 +43,15 @@ const BaseLogin = () => {
         {userData
           ? '당신의 이름은 : ' + userData.displayName
           : '로그인 버튼을 눌러주세요 :)'}
+        <div>
+          {playList.map((video) => (
+            <ul>
+              <li>
+                <p>{video.snippet.title}</p>
+              </li>
+            </ul>
+          ))}
+        </div>
       </div>
     </div>
   );

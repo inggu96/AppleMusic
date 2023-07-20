@@ -4,7 +4,7 @@ import Controls from './Controls';
 import styles from './music.module.scss';
 import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchVideos, setSelectedVideoUrl } from '../../state/VideoActions';
+import { searchVideos } from '../../state/VideoActions';
 import {
   Accordion,
   AccordionSummary,
@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Thumbnails } from '../../components/Common/Thumbnails';
 
 const PlayListAddStyle = makeStyles({
   root: {
@@ -43,15 +44,15 @@ const Player = () => {
   const videos = useSelector((state) => state.videos.videos);
   const loading = useSelector((state) => state.videos.loading);
   const error = useSelector((state) => state.videos.error);
-  const [playing, setPlaying] = useState(false);
+  const selectedVideoUrl = useSelector(
+    (state) => state.videos.selectedVideoUrl,
+  );
+  const selectedVideoId = useSelector((state) => state.videos.selectedVideoId);
+
   const [progress, setProgress] = useState(0);
   const [durationSeconds, setDurationSeconds] = useState(0);
   const [playedSeconds, setPlayedSeconds] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [selectedVideoUrl, setSelectedVideoUrl] = useState(null);
-  const [selectedThumbnailId, setSelectedThumbnailId] = useState(null);
-  const [selectedTitle, setSelectedTitle] = useState(null);
-  const [selectedChannelTitle, setSelectedChannelTitle] = useState(null);
   const [volume, setVolume] = useState(1);
   const [isPlayerVisible, setPlayerVisible] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -61,18 +62,10 @@ const Player = () => {
     setPlayerVisible(!isPlayerVisible);
   };
 
-  const handleThumbnailClick = (videoUrl, thumbnailId, title, channelTitle) => {
-    setSelectedVideoUrl(videoUrl);
-    setPlaying(true);
-    setSelectedThumbnailId(thumbnailId);
-    setSelectedTitle(title);
-    setSelectedChannelTitle(channelTitle);
-  };
   const handleSearch = (searchValue) => {
     dispatch(searchVideos(searchValue));
     console.log(searchVideos(searchValue));
   };
-
   useEffect(() => {
     dispatch(searchVideos());
   }, []);
@@ -104,15 +97,12 @@ const Player = () => {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="player-content"
           id="player-header"
-        >
-          <Typography>플레이어</Typography>
-        </AccordionSummary>
+        ></AccordionSummary>
         <AccordionDetails>
           <ReactPlayer
             controls={false}
-            playing={playing}
-            url={`https://www.youtube.com/watch?v=${selectedVideoUrl}`}
             ref={playerRef}
+            url={`https://www.youtube.com/watch?v=${selectedVideoId}`}
             onProgress={(e) => {
               const { played, playedSeconds } = e;
               setProgress(played * 100);
@@ -128,26 +118,13 @@ const Player = () => {
       <div className={styles.youtubeContent}>
         <ul className={styles.youtubeList}>
           {videos.map((video, idx) => (
-            <li className={styles.youtubeItem}>
-              <div className={styles.imgHover}>
-                <img
-                  key={video.id.videoId}
-                  onClick={() =>
-                    handleThumbnailClick(
-                      video.id.videoId,
-                      video.snippet.thumbnails.high.url,
-                      video.snippet.title,
-                      video.snippet.channelTitle,
-                    )
-                  }
-                  className={styles.thumbnailImage}
-                  src={video.snippet.thumbnails.high.url}
-                  alt="썸네일"
-                />
-                <div className={styles.hovernone}>
-                  <PlayCircleFilledWhiteIcon />
-                </div>
-              </div>
+            <li key={video.id} className={styles.youtubeItem}>
+              <Thumbnails
+                id={video.id}
+                thumbnails={video.snippet.thumbnails.high.url}
+                title={video.snippet.title}
+                channelTitle={video.snippet.channelTitle}
+              />
               <div className={styles.controlsTitle}>
                 <p className={styles.ranking}> {idx + 1} </p>
                 <p className={styles.rankingChange}> - </p>
@@ -168,17 +145,12 @@ const Player = () => {
       </div>
       <Controls
         playerRef={playerRef}
-        playing={playing}
-        setPlaying={setPlaying}
         playedSeconds={playedSeconds}
         duration={durationSeconds}
         progress={progress}
         setProgress={setProgress}
         currentTime={currentTime}
         setCurrentTime={setCurrentTime}
-        selectedThumbnailId={selectedThumbnailId}
-        selectedTitle={selectedTitle}
-        selectedChannelTitle={selectedChannelTitle}
         volume={volume}
         setVolume={setVolume}
         searchValue={searchValue}

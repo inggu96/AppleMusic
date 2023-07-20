@@ -4,7 +4,6 @@ const apiClient = axios.create({
   baseURL: 'https://youtube.googleapis.com/youtube/v3',
   params: {
     key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
-    client_secret: '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',
   },
   timeout: 50000,
 });
