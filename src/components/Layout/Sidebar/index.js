@@ -1,21 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
-import SidebarMui from './SidebarMui';
+import SidebarToggle from './SidebarToggle';
 import { SIDEBAR_DATA } from './Data';
-import styles from './sidemui.module.scss';
+import styles from './sidebar.module.scss';
 
-const SideMui = () => {
+const Sidebar = () => {
   return (
     <div className={styles.mainContainer}>
-      <SidebarMui>
+      <SidebarToggle>
         <Routes>
           {SIDEBAR_DATA &&
             SIDEBAR_DATA.map((item, index) => (
               <Route key={index} path={item.path} />
             ))}
         </Routes>
-      </SidebarMui>
+      </SidebarToggle>
     </div>
   );
 };
 
-export default SideMui;
+export default Sidebar;

@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { Layout } from '../components';
-import { BaseLogin, Home, InsertData, Player, Search, SideMui } from '../pages';
+import { BaseLogin, Home, InsertData, Player, Search } from '../pages';
 import GoogleLogIn from '../pages/Login';
 
 const route = (

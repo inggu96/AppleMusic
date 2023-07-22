@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import styles from './layout.module.scss';
-import SideMui from './SideMui';
+import Sidebar from './Sidebar';
 
 const Layout = () => {
   return (
     <div className={styles.wrap}>
       <div className={styles.sidebar}>
-        <SideMui />
+        <Sidebar />
       </div>
       <div className={styles.content}>
         <Outlet />

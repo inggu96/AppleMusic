@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SidebarItems from '../Items';
-import styles from './sidebarmui.module.scss';
+import styles from './sidebarToggle.module.scss';
 
 import {
   Children,
@@ -15,7 +15,7 @@ import {
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
-const SidebarMui = ({ children }) => {
+const SidebarToggle = ({ children }) => {
   const [displaySidebar, setDisplaySidebar] = useState(MOBILE_VIEW);
 
   const handleSidebarDisplay = (e) => {
@@ -63,4 +63,4 @@ const SidebarMui = ({ children }) => {
   );
 };
 
-export default SidebarMui;
+export default SidebarToggle;

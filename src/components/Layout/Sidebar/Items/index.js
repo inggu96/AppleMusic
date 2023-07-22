@@ -7,7 +7,7 @@ import {
   ItemName,
   Search,
   SearchBar,
-} from '../SidebarMui/SidebarStyles';
+} from '../SidebarToggle/SidebarStyles';
 
 import { SIDEBAR_DATA } from '../Data';
 import { SearchIcon } from '../Icons';
