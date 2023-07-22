@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SidebarItems from './SidebarItems';
+import SidebarItems from '../Items';
 import styles from './sidebarmui.module.scss';
 
 import {
@@ -10,12 +10,13 @@ import {
   SidebarLogo,
   SidebarBrand,
   SidebarToggler,
+  LogoImage,
 } from './SidebarStyles';
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
 const SidebarMui = ({ children }) => {
-  const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
+  const [displaySidebar, setDisplaySidebar] = useState(MOBILE_VIEW);
 
   const handleSidebarDisplay = (e) => {
     e.preventDefault();
@@ -31,12 +32,11 @@ const SidebarMui = ({ children }) => {
       <SidebarContainer displaySidebar={displaySidebar}>
         <SidebarWrapper>
           <SidebarLogoWrapper displaySidebar={displaySidebar}>
-            <SidebarLogo href="#">
+            <SidebarLogo href="/">
               <span className="logo">
-                <img
+                <LogoImage
+                  displaySidebar={displaySidebar}
                   src="https://user-images.githubusercontent.com/122377401/255331619-9c2fd0ec-b2ef-4e89-b408-9e52c402f580.png"
-                  width="70px"
-                  className={styles.logo}
                 />
                 <SidebarBrand
                   displaySidebar={displaySidebar}

@@ -107,7 +107,7 @@ export const fetchVideos = () => {
           chart: 'mostPopular',
           maxResults: 20,
           order: 'relevance',
-          key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+          key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
         },
       });
 
@@ -130,7 +130,7 @@ export const searchVideos = (data) => {
           q: data,
           maxResults: 10,
           order: 'relevance',
-          key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+          key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
         },
       });
       dispatch(fetchVideosSuccess(response.data.items));
@@ -151,7 +151,7 @@ export const searchList = () => {
           channelId: 'UCLkAepWjdylmXSltofFvsYQ',
           maxResults: 10,
           order: 'relevance',
-          key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+          key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
         },
       });
       dispatch(fetchVideosSuccess(response.data.items));

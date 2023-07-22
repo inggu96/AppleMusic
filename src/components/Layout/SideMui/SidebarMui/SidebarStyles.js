@@ -8,7 +8,6 @@ export const Children = styled.div`
     margin-left: 5rem;
   }
 `;
-
 export const SidebarWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -27,6 +26,10 @@ export const SidebarLogoWrapper = styled.div`
   @media (max-width: 468px) {
     justify-content: center;
   }
+`;
+
+export const LogoImage = styled.img`
+  ${({ displaySidebar }) => (displaySidebar ? ' width: 100px' : ' width: 70px')}
 `;
 
 export const SidebarLogo = styled.a`
@@ -53,6 +56,38 @@ export const SidebarToggler = styled.button`
 
 export const ItemsList = styled.ul`
   list-style: none;
+`;
+
+export const Search = styled.div`
+  display: ${({ displaySidebar }) => (displaySidebar ? 'block' : 'none')};
+  width: 207px;
+  position: relative;
+  ::before {
+    content: '';
+    position: absolute;
+    left: 10;
+    bottom: 0px;
+    width: 100%;
+    height: 4px;
+    background-color: #6528f6;
+    scale: 0;
+    transform-origin: left;
+    transition: scale 250ms;
+  }
+  :focus-within::before {
+    scale: 1;
+  }
+`;
+export const SearchBar = styled.input`
+  width: 207px;
+  height: 32px;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+  padding-left: 30px;
+  ::placeholder {
+    font-size: 12px;
+    font-weight: 200;
+  }
 `;
 
 export const ItemContainer = styled.li`
@@ -130,6 +165,13 @@ export const SidebarContainer = styled.div`
       ${ItemName} {
         display: ${({ displaySidebar }) => !displaySidebar && 'block'};
         margin-left: ${({ displaySidebar }) => !displaySidebar && '0.5rem'};
+      }
+      ${LogoImage} {
+        width: ${({ displaySidebar }) => !displaySidebar && '100px'};
+      }
+      ${Search} {
+        display: ${({ displaySidebar }) =>
+          displaySidebar ? 'block' : 'block'};
       }
     }
   }
