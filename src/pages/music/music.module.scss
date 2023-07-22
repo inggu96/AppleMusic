@@ -27,13 +27,6 @@
   max-height: calc(100vh - 170px);
 }
 
-.thumbnailImage {
-  width: 250px;
-  height: 180px;
-  flex-wrap: nowrap;
-  object-fit: cover;
-  cursor: pointer;
-}
 .hovernone {
   transform: translate(120%, -150%);
   z-index: -5;

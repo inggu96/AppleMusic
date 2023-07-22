@@ -9,14 +9,12 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Typography,
   CircularProgress,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Thumbnails } from '../../components/Common/Thumbnails';
+import { useNavigate } from 'react-router-dom';
+import { Thumbnails } from '../../components/Common';
 
 const PlayListAddStyle = makeStyles({
   root: {
@@ -38,16 +36,14 @@ const PlayListStyle = makeStyles({
 const Player = () => {
   const navigate = useNavigate();
   const PlayListAddclasses = PlayListAddStyle();
-  const PlayListclasses = PlayListStyle();
   const playerRef = useRef();
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.videos.videos);
   const loading = useSelector((state) => state.videos.loading);
   const error = useSelector((state) => state.videos.error);
-  const selectedVideoUrl = useSelector(
-    (state) => state.videos.selectedVideoUrl,
+  const selectedThumbnailId = useSelector(
+    (state) => state.videos.selectedThumbnailId,
   );
-  const selectedVideoId = useSelector((state) => state.videos.selectedVideoId);
 
   const [progress, setProgress] = useState(0);
   const [durationSeconds, setDurationSeconds] = useState(0);
@@ -55,23 +51,19 @@ const Player = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isPlayerVisible, setPlayerVisible] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const playing = useSelector((state) => state.videos.playing);
 
   const togglePlayer = () => {
     setPlayerVisible(!isPlayerVisible);
   };
 
-  const handleSearch = (searchValue) => {
-    dispatch(searchVideos(searchValue));
-    console.log(searchVideos(searchValue));
-  };
   useEffect(() => {
     dispatch(searchVideos());
   }, []);
 
   const PleaseLogin = () => {
     alert('로그인을 해주세요');
+    console.log(selectedThumbnailId);
   };
 
   if (loading) {
@@ -82,7 +74,7 @@ const Player = () => {
     );
   }
   if (error) {
-    return <div onClick={handleSearch}>error</div>;
+    return <div>error</div>;
   }
 
   return (
@@ -91,7 +83,7 @@ const Player = () => {
       <Accordion
         expanded={isPlayerVisible}
         onChange={togglePlayer}
-        sx={{ position: 'fixed', bottom: '0', right: '0' }}
+        sx={{ position: 'fixed', bottom: '50', right: '0' }}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -102,7 +94,7 @@ const Player = () => {
           <ReactPlayer
             controls={false}
             ref={playerRef}
-            url={`https://www.youtube.com/watch?v=${selectedVideoId}`}
+            url={`https://www.youtube.com/watch?v=${selectedThumbnailId}`}
             onProgress={(e) => {
               const { played, playedSeconds } = e;
               setProgress(played * 100);
@@ -112,6 +104,7 @@ const Player = () => {
             onDuration={setDurationSeconds}
             progressInterval={1000}
             volume={volume}
+            playing={playing}
           />
         </AccordionDetails>
       </Accordion>
@@ -120,10 +113,11 @@ const Player = () => {
           {videos.map((video, idx) => (
             <li key={video.id} className={styles.youtubeItem}>
               <Thumbnails
-                id={video.id}
+                id={video.id.videoId}
                 thumbnails={video.snippet.thumbnails.high.url}
                 title={video.snippet.title}
                 channelTitle={video.snippet.channelTitle}
+                idx={idx}
               />
               <div className={styles.controlsTitle}>
                 <p className={styles.ranking}> {idx + 1} </p>
@@ -153,8 +147,6 @@ const Player = () => {
         setCurrentTime={setCurrentTime}
         volume={volume}
         setVolume={setVolume}
-        searchValue={searchValue}
-        onSearch={handleSearch}
       />
     </div>
   );

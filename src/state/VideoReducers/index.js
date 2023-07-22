@@ -85,13 +85,11 @@ const videoReducer = (state = initialState, action) => {
         findData: action.payload,
       };
     case SET_SELECTED_VIDEO_URL:
-      console.log('action.payload:', action.payload);
       return {
         ...state,
         selectedVideoUrl: action.payload,
       };
     case SET_SELECTED_THUMBNAILID:
-      console.log('action.payload:', action.payload);
       return {
         ...state,
         selectedThumbnailId: action.payload,

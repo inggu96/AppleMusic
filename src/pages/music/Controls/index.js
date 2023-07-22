@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
@@ -7,8 +7,8 @@ import styles from './controls.module.scss';
 import styled from 'styled-components';
 import { makeStyles } from '@mui/styles';
 import { VolumeOffRounded, VolumeUpRounded } from '@mui/icons-material';
-import EqualizerIcon from '@mui/icons-material/Equalizer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { pause, play } from '../../../state/VideoActions';
 
 const VolumeControl = styled.div`
   display: flex;
@@ -78,34 +78,27 @@ const fastStyle = makeStyles({
 
 const Controls = ({
   playerRef,
-  playing,
-  setPlaying,
   playedSeconds,
   duration,
   setProgress,
   currentTime,
   setCurrentTime,
-  selectedThumbnailId,
-  selectedTitle,
-  selectedChannelTitle,
   volume,
   setVolume,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const handleNextVideo = () => {
-    if (currentIndex < videos.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      // 마지막 영상이면 처음으로 돌아가거나 다른 작업을 수행할 수 있습니다.
-      setCurrentIndex(0);
-    }
-  };
   const playClasses = playStyle();
   const fastClasses = fastStyle();
+  const dispatch = useDispatch();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [previousVolume, setPreviousVolume] = useState(0.5);
   const [seekValue, setSeekValue] = useState(playedSeconds);
+  const playing = useSelector((state) => state.videos.playing);
   const selectedVideoUrl = useSelector(
     (state) => state.videos.selectedVideoUrl,
+  );
+  const selectedTitle = useSelector((state) => state.videos.selectedTitle);
+  const selectedChannelTitle = useSelector(
+    (state) => state.videos.selectedChannelTitle,
   );
 
   const handleVolumeToggle = () => {
@@ -116,7 +109,23 @@ const Controls = ({
       setVolume(0);
     }
   };
-
+  const handlePlayPauseClick = () => {
+    if (playing) {
+      dispatch(pause());
+      playerRef.current?.pause();
+    } else {
+      dispatch(play());
+      playerRef.current?.play();
+    }
+  };
+  const handleNextVideo = () => {
+    if (currentIndex < videos.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      // 마지막 영상이면 처음으로 돌아가거나 다른 작업을 수행할 수 있습니다.
+      setCurrentIndex(0);
+    }
+  };
   const fastForward = () => {
     playerRef.current.seekTo(playerRef.current.getCurrentTime() + 5);
   };
@@ -216,10 +225,10 @@ const Controls = ({
           <img
             className={styles.controlsImg}
             src={
-              selectedThumbnailId ||
+              selectedVideoUrl ||
               'https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png?20200509031052'
             }
-            alt={selectedThumbnailId ? 'Thumbnail' : 'No Thumbnail'}
+            alt={selectedVideoUrl ? 'Thumbnail' : 'No Thumbnail'}
           />
           <div className={styles.controlsTitle}>
             <p>{selectedTitle}</p>
@@ -233,10 +242,7 @@ const Controls = ({
         <button className={fastClasses.root}>
           <FastRewindIcon />
         </button>
-        <button
-          className={playClasses.root}
-          onClick={() => setPlaying(!playing)}
-        >
+        <button className={playClasses.root} onClick={handlePlayPauseClick}>
           {playing ? (
             <PauseIcon sx={{ fontSize: 50 }} />
           ) : (

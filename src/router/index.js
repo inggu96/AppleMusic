@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { Layout } from '../components';
-import { BaseLogin, Home, InsertData, Player } from '../pages';
+import { BaseLogin, Home, InsertData, Player, Search, SideMui } from '../pages';
 import GoogleLogIn from '../pages/Login';
 
 const route = (
@@ -13,6 +13,7 @@ const route = (
     <Route path="/login" element={<GoogleLogIn />} />
     <Route path="/fire" element={<BaseLogin />} />
     <Route path="/music" element={<Player />} />
+    <Route path="/search" element={<Search />} />
   </Route>
 );
 

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   setSelectedVideoUrl,
   setSelectedThumbnailId,
@@ -11,9 +11,8 @@ import styles from './thumbnails.module.scss';
 
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 
-export const Thumbnails = ({ thumbnails, id, title, channelTitle }) => {
+const Thumbnails = ({ thumbnails, id, title, channelTitle }) => {
   const dispatch = useDispatch();
-
   const handleThumbnailClick = (thumbnails, id, title, channelTitle) => {
     dispatch(play());
     dispatch(setSelectedVideoUrl(thumbnails));
@@ -37,3 +36,4 @@ export const Thumbnails = ({ thumbnails, id, title, channelTitle }) => {
     </article>
   );
 };
+export default Thumbnails;

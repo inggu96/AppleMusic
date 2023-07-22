@@ -91,8 +91,8 @@ const Sidebar = () => {
           </ul>
         </div>
       </div>
-      <div onClick={isLoggedIn ? handleLogout : '로그인'}>
-        {isLoggedIn ? '로그아웃' : '로그인'}
+      <div onClick={isLoggedIn ? handleLogout : null}>
+        {isLoggedIn ? '로그아웃' : null}
       </div>
     </aside>
   );

@@ -3,10 +3,6 @@ import AudioPlayer from 'react-audio-player';
 import { useSelector } from 'react-redux';
 
 const AudioPlayerComponent = () => {
-  const selectedVideoUrl = useSelector(
-    (state) => state.videos.selectedVideoUrl,
-  );
-
   return (
     <AudioPlayer
       src={'https://www.youtube.com/watch?v=6WZ67f9M3RE'}

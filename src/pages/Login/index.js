@@ -8,9 +8,7 @@ const GoogleButton = () => {
   const [playList, setPlayList] = useState([]);
   const googleSocialLogin = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      const decodeding = jwt_decode(codeResponse.code);
-      console.log(decodeding);
-      console.log(codeResponse.code);
+      console.log(codeResponse);
     },
     flow: 'auth-code',
   });
