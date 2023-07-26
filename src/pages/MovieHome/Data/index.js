@@ -9,7 +9,7 @@ import {
 export const SidebarData = [
   {
     id: 1,
-    name: '홈',
+    name: '',
     path: '/',
     icon: <HomeIcon />,
   },
@@ -22,7 +22,7 @@ export const SidebarData = [
   {
     id: 3,
     name: '플레이리스트',
-    path: 'search',
+    path: 'calendar',
     icon: <PageviewIcon />,
   },
   {
@@ -36,5 +36,12 @@ export const SidebarData = [
     name: 'users',
     path: 'users',
     icon: <UserIcon />,
+  },
+  {
+    id: 'doughnut',
+    category: 'Doughnut',
+    title: '今日のおやつはみんな大好きドーナツ',
+    pointOfInterest: 80,
+    backgroundColor: '#814A0E',
   },
 ];

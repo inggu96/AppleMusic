@@ -11,10 +11,10 @@ import {
   AccordionDetails,
   CircularProgress,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+
 import { useNavigate } from 'react-router-dom';
 import { Thumbnails } from '../../components/Common';
+import { ExpandMoreIcon, PlaylistAddIcon } from '../../components/Common/Icons';
 
 const PlayListAddStyle = makeStyles({
   root: {
@@ -25,15 +25,7 @@ const PlayListAddStyle = makeStyles({
   },
 });
 
-const PlayListStyle = makeStyles({
-  root: {
-    width: '220px',
-    height: '52px',
-    padding: '40px',
-  },
-});
-
-const Player = () => {
+const Music = () => {
   const navigate = useNavigate();
   const PlayListAddclasses = PlayListAddStyle();
   const playerRef = useRef();
@@ -79,35 +71,8 @@ const Player = () => {
 
   return (
     <div className={styles.youtubeWrap}>
-      <p>잔나비 플레이리스트</p>
-      <Accordion
-        expanded={isPlayerVisible}
-        onChange={togglePlayer}
-        sx={{ position: 'fixed', bottom: '50', right: '0' }}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="player-content"
-          id="player-header"
-        ></AccordionSummary>
-        <AccordionDetails>
-          <ReactPlayer
-            controls={false}
-            ref={playerRef}
-            url={`https://www.youtube.com/watch?v=${selectedThumbnailId}`}
-            onProgress={(e) => {
-              const { played, playedSeconds } = e;
-              setProgress(played * 100);
-              setPlayedSeconds(playedSeconds);
-            }}
-            onSeek={setPlayedSeconds}
-            onDuration={setDurationSeconds}
-            progressInterval={1000}
-            volume={volume}
-            playing={playing}
-          />
-        </AccordionDetails>
-      </Accordion>
+      <p>플레이리스트</p>
+
       <div className={styles.youtubeContent}>
         <ul className={styles.youtubeList}>
           {videos.map((video, idx) => (
@@ -152,4 +117,4 @@ const Player = () => {
   );
 };
 
-export default Player;
+export default Music;

@@ -9,8 +9,8 @@ import {
   SearchBar,
 } from '../SidebarToggle/SidebarStyles';
 
-import { SIDEBAR_DATA } from '../Data';
-import { SearchIcon } from '../Icons';
+import { SidebarData } from '../Data';
+import { SearchIcon } from '../../../Common/Icons';
 import { useDispatch } from 'react-redux';
 import { searchVideos } from '../../../../state/VideoActions';
 
@@ -55,7 +55,7 @@ const SidebarItems = ({ displaySidebar }) => {
           />
         </form>
       </Search>
-      {SIDEBAR_DATA.map((itemData, index) => (
+      {SidebarData.map((itemData, index) => (
         <ItemContainer
           key={index}
           onClick={() => setActiveItem(itemData.id)}

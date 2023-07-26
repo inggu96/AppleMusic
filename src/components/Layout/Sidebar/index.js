@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import SidebarToggle from './SidebarToggle';
-import { SIDEBAR_DATA } from './Data';
+import { SidebarData } from './Data';
 import styles from './sidebar.module.scss';
 
 const Sidebar = () => {
@@ -8,8 +8,8 @@ const Sidebar = () => {
     <div className={styles.mainContainer}>
       <SidebarToggle>
         <Routes>
-          {SIDEBAR_DATA &&
-            SIDEBAR_DATA.map((item, index) => (
+          {SidebarData &&
+            SidebarData.map((item, index) => (
               <Route key={index} path={item.path} />
             ))}
         </Routes>

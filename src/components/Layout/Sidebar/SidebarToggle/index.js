@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SidebarItems from '../Items';
-import styles from './sidebarToggle.module.scss';
 
 import {
   Children,
@@ -12,11 +11,12 @@ import {
   SidebarToggler,
   LogoImage,
 } from './SidebarStyles';
+import { ArrowBackIcon, ArrowIcon } from '../../../../components/Common/Icons';
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
 const SidebarToggle = ({ children }) => {
-  const [displaySidebar, setDisplaySidebar] = useState(MOBILE_VIEW);
+  const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
 
   const handleSidebarDisplay = (e) => {
     e.preventDefault();
@@ -38,10 +38,7 @@ const SidebarToggle = ({ children }) => {
                   displaySidebar={displaySidebar}
                   src="https://user-images.githubusercontent.com/122377401/255331619-9c2fd0ec-b2ef-4e89-b408-9e52c402f580.png"
                 />
-                <SidebarBrand
-                  displaySidebar={displaySidebar}
-                  className={styles.appBrandText}
-                >
+                <SidebarBrand displaySidebar={displaySidebar}>
                   위플리
                 </SidebarBrand>
               </span>
@@ -50,9 +47,11 @@ const SidebarToggle = ({ children }) => {
               displaySidebar={displaySidebar}
               onClick={handleSidebarDisplay}
             >
-              <div className={styles.outerCircle}>
-                <div className={styles.innerCircle} />
-              </div>
+              {displaySidebar ? (
+                <ArrowBackIcon displaySidebar={displaySidebar} />
+              ) : (
+                <ArrowIcon displaySidebar={displaySidebar} />
+              )}
             </SidebarToggler>
           </SidebarLogoWrapper>
           <SidebarItems displaySidebar={displaySidebar} />

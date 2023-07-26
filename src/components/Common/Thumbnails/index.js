@@ -7,9 +7,8 @@ import {
   setSelectedChannelTitle,
   play,
 } from '../../../state/VideoActions';
+import { PlayCircleFilledWhiteIcon } from '../Icons';
 import styles from './thumbnails.module.scss';
-
-import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 
 const Thumbnails = ({ thumbnails, id, title, channelTitle }) => {
   const dispatch = useDispatch();

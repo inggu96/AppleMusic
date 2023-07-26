@@ -130,7 +130,7 @@ export const searchVideos = (data) => {
           q: data,
           maxResults: 10,
           order: 'relevance',
-          key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+          key: 'AIzaSyDjW65U75KScD-nswCOF6gu8m_HklLQ6hw',
         },
       });
       dispatch(fetchVideosSuccess(response.data.items));
@@ -151,7 +151,7 @@ export const searchList = () => {
           channelId: 'UCLkAepWjdylmXSltofFvsYQ',
           maxResults: 10,
           order: 'relevance',
-          key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+          key: 'AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
         },
       });
       dispatch(fetchVideosSuccess(response.data.items));

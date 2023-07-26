@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import styles from './layout.module.scss';
+import Music from './Music';
 import Sidebar from './Sidebar';
 
 const Layout = () => {
@@ -11,6 +12,7 @@ const Layout = () => {
       <div className={styles.content}>
         <Outlet />
       </div>
+      <Music />
     </div>
   );
 };

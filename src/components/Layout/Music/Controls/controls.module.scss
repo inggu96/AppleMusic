@@ -1,0 +1,72 @@
+@use '../../../../styles/constants' as c;
+@use '../../../../styles/mixins' as m;
+
+.controlsWrap {
+  @include m.flex(center, center, column);
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  background-color: #fff;
+}
+
+.timeBarContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3px;
+}
+
+.timeBar {
+  background-color: c.$C_BUTTON;
+  height: 100%;
+  width: 84%;
+}
+
+.controlsContainer {
+  @include m.flex(center, center, column);
+  width: 1000px;
+  height: 50px;
+  margin-top: 10px;
+  column-gap: 30px;
+}
+.controlsVolume {
+  width: 200px;
+}
+.controlsItem {
+  @include m.flex(center, center, column);
+  border: 1px solid c.$C_GRAY;
+
+  width: 450px;
+  .controlsImg {
+    @include m.flex(center, center);
+    border-right: 1px solid c.$C_GRAY;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    background-color: rgba(60, 60, 67, 0.1);
+  }
+  > div {
+    @include m.flex();
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 500px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    > p:first-child {
+    }
+  }
+}
+.timecontrols {
+  @include m.flex(center, center, row);
+  column-gap: 5px;
+  > p {
+    color: c.$C_GRAY;
+  }
+}
+.controlsTime {
+  color: black;
+  font-size: 12px;
+}

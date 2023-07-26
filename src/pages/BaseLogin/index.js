@@ -7,6 +7,27 @@ const BaseLogin = () => {
   const [userData, setUserData] = useState();
   const [playList, setPlayList] = useState([]);
 
+  const handleGoogleLoginHome = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        const { accessToken, refreshToken } = data.user;
+        //NOTE: 토큰 저장
+        localStorage.setItem('ACCESS_TOKEN', accessToken);
+        localStorage.setItem('REFRESH_TOKEN', refreshToken);
+        if (accessToken) {
+          saveTokens(data);
+          dispatch(login());
+          navigate('/music');
+        }
+
+        console.log(data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)

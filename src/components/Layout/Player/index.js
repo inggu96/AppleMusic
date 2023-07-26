@@ -35,7 +35,7 @@ const fastStyle = makeStyles({
   },
 });
 
-const Controls = ({
+const Player = ({
   playerRef,
   playedSeconds,
   duration,
@@ -216,4 +216,4 @@ const Controls = ({
   );
 };
 
-export default Controls;
+export default Player;
