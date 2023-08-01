@@ -1,21 +1,38 @@
 @use '../../../styles/constants/' as c;
 @use '../../../styles/mixins' as m;
+.container {
+  @include m.flex(center, center, column);
+  width: 250px;
+  height: 250px;
+  background-color: c.$C_WHITE_10;
+}
+.card {
+  width: 220px;
+  height: 220px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-radius: c.$S_RADIUS;
+}
 .wrap {
+  width: 220px;
   height: 180px;
   position: relative;
   color: white;
-  background-color: c.$C_WHITE_10; // 포스터 없는 영화
+  background-color: c.$C_WHITE_10;
   border-radius: c.$S_RADIUS;
   overflow: hidden;
   transition: 0.2s transform ease-in;
   cursor: pointer;
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   &:hover {
-    transform: scale(1.1) translateY(-10px);
+    transform: scale(1.02) translateY(-10px);
 
     > .overlay {
-      background-color: c.$C_BLACK_50;
+      background-color: c.$C_BLACK_10;
       visibility: visible;
+      .overlay {
+        /* 기존 스타일 유지 */
+        background-color: rgba(255, 255, 255, 0.8);
+      }
     }
   }
 
@@ -25,6 +42,8 @@
     object-position: center;
     object-fit: cover;
     position: absolute;
+    transform-origin: center;
+    transform: scale(1.4);
     top: 0;
     left: 0;
   }
@@ -46,7 +65,7 @@
   > .score {
     @include m.flex(flex-start);
     padding: 8px;
-    font-size: 18px;
+    font-size: 22px;
     color: white;
     font-weight: 600;
 
@@ -54,6 +73,7 @@
       fill: c.$C_PRIMARY_COLOR;
       width: 24px;
       margin-right: 2px;
+      color: #fff;
     }
   }
   > .title {

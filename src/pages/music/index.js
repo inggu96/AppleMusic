@@ -72,7 +72,34 @@ const Music = () => {
   return (
     <div className={styles.youtubeWrap}>
       <p>플레이리스트</p>
-
+      <Accordion
+        expanded={isPlayerVisible}
+        onChange={togglePlayer}
+        sx={{ position: 'fixed', bottom: '0', right: '0' }}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="player-content"
+          id="player-header"
+        ></AccordionSummary>
+        <AccordionDetails>
+          <ReactPlayer
+            controls={false}
+            ref={playerRef}
+            url={`https://www.youtube.com/watch?v=${selectedThumbnailId}`}
+            onProgress={(e) => {
+              const { played, playedSeconds } = e;
+              setProgress(played * 100);
+              setPlayedSeconds(playedSeconds);
+            }}
+            onSeek={setPlayedSeconds}
+            onDuration={setDurationSeconds}
+            progressInterval={1000}
+            volume={volume}
+            playing={playing}
+          />
+        </AccordionDetails>
+      </Accordion>
       <div className={styles.youtubeContent}>
         <ul className={styles.youtubeList}>
           {videos.map((video, idx) => (
@@ -89,13 +116,6 @@ const Music = () => {
                 <p className={styles.rankingChange}> - </p>
                 <p className={styles.controlsTitleItem}>
                   {video.snippet.title}
-                </p>
-                <p>
-                  <PlaylistAddIcon
-                    onClick={PleaseLogin}
-                    className={PlayListAddclasses.root}
-                    sx={{ fontSize: 27 }}
-                  />
                 </p>
               </div>
             </li>

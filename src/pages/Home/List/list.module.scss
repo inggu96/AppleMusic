@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Segoe UI', 'Malgun Gothic', '맑은 고딕', sans-serif;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 25vmin;
+  background-color: rgb(255, 255, 255);
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 3vmin;
+  row-gap: 3vmin;
+  width: 100vw;
+}

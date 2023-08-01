@@ -12,6 +12,7 @@ import {
   LogoImage,
 } from './SidebarStyles';
 import { ArrowBackIcon, ArrowIcon } from '../../../../components/Common/Icons';
+import { Link } from 'react-router-dom';
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
@@ -32,17 +33,19 @@ const SidebarToggle = ({ children }) => {
       <SidebarContainer displaySidebar={displaySidebar}>
         <SidebarWrapper>
           <SidebarLogoWrapper displaySidebar={displaySidebar}>
-            <SidebarLogo href="/">
-              <span className="logo">
-                <LogoImage
-                  displaySidebar={displaySidebar}
-                  src="https://user-images.githubusercontent.com/122377401/255331619-9c2fd0ec-b2ef-4e89-b408-9e52c402f580.png"
-                />
-                <SidebarBrand displaySidebar={displaySidebar}>
-                  위플리
-                </SidebarBrand>
-              </span>
-            </SidebarLogo>
+            <Link to="/">
+              <SidebarLogo>
+                <span className="logo">
+                  <LogoImage
+                    displaySidebar={displaySidebar}
+                    src="https://user-images.githubusercontent.com/122377401/255331619-9c2fd0ec-b2ef-4e89-b408-9e52c402f580.png"
+                  />
+                  <SidebarBrand displaySidebar={displaySidebar}>
+                    위플리
+                  </SidebarBrand>
+                </span>
+              </SidebarLogo>
+            </Link>
             <SidebarToggler
               displaySidebar={displaySidebar}
               onClick={handleSidebarDisplay}

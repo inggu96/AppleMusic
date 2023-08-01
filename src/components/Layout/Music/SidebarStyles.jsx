@@ -40,7 +40,6 @@ export const SidebarContainer = styled.div`
   right: 0;
   width: ${({ displaySidebar }) => (displaySidebar ? '30rem' : '0rem')};
   height: 100vh;
-  background: #f3f4f4;
   transition: width 350ms ease;
   border-right: 1px solid #d4d8dd;
   overflow-x: hidden;

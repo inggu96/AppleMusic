@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { VolumeOffRounded, VolumeUpRounded } from '@mui/icons-material';
-import styles from './controls.module.scss';
 import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { pause, play } from '../../../../state/VideoActions';
@@ -12,6 +11,7 @@ import {
 } from '../../../../components/Common/Icons';
 
 import {
+  ButtonWrap,
   ContainerImg,
   ControlBar,
   ControlContainer,
@@ -20,7 +20,9 @@ import {
   ControlWrap,
   FastButton,
   ImageWrap,
+  Overlay,
   PlayButton,
+  PlayWrap,
   RevertButton,
   TimeBar,
   TimeBarWrap,
@@ -31,6 +33,7 @@ import {
   Volume,
   VolumeControl,
 } from './ControlsStyles';
+import zIndex from '@mui/material/styles/zIndex';
 
 const playStyle = makeStyles({
   root: {
@@ -78,7 +81,6 @@ const Controls = ({
   const selectedChannelTitle = useSelector(
     (state) => state.videos.selectedChannelTitle,
   );
-
   const handleVolumeToggle = () => {
     if (volume === 0) {
       setVolume(previousVolume);
@@ -145,16 +147,18 @@ const Controls = ({
 
   return (
     <React.Fragment>
-      <ControlContainer>
+      <ControlContainer
+        style={{
+          background: `url(${selectedVideoUrl}) no-repeat center / cover `,
+        }}
+      >
+        <Overlay />
         <ControlWrap>
           <ImageWrap>
             <TitleImage
               playing={playing}
-              src={
-                selectedVideoUrl ||
-                'https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png?20200509031052'
-              }
-              alt={selectedVideoUrl ? 'Thumbnail' : 'No Thumbnail'}
+              src={selectedVideoUrl || null}
+              alt={selectedVideoUrl ? 'Thumbnail' : null}
             />
           </ImageWrap>
           <TitleWrap>
@@ -181,82 +185,30 @@ const Controls = ({
             />
             <ControlFullTime>{formatTime(duration)}</ControlFullTime>
           </TimeBarWrap>
-          <Volume />
-          <ControlBar>
+          <ButtonWrap>
             <RevertButton className={fastClasses.root}>
               <FastRewindIcon />
             </RevertButton>
-            <PlayButton
-              className={playClasses.root}
-              onClick={handlePlayPauseClick}
-            >
-              {playing ? (
-                <PauseIcon sx={{ fontSize: 50 }} />
-              ) : (
-                <PlayArrowIcon sx={{ fontSize: 50 }} />
-              )}
-            </PlayButton>
+            <PlayWrap>
+              <PlayButton
+                className={playClasses.root}
+                onClick={handlePlayPauseClick}
+              >
+                {playing ? (
+                  <PauseIcon sx={{ fontSize: 40 }} />
+                ) : (
+                  <PlayArrowIcon sx={{ fontSize: 40 }} />
+                )}
+              </PlayButton>
+            </PlayWrap>
             <FastButton className={fastClasses.root}>
               <FastForwardIcon />
             </FastButton>
-          </ControlBar>
+          </ButtonWrap>
           <ControlPrevTime />
           <ControlFullTime />
         </ControlWrap>
       </ControlContainer>
-      <div className={styles.controlsWrap}>
-        <div className={styles.controlsTitle}></div>
-        <div className={styles.controlsContainer}>
-          <div className={styles.VolumeBar}>
-            <VolumeControl volume={volume * 100}>
-              {volume === 0 ? (
-                <VolumeOffRounded
-                  sx={{
-                    color: '#D9D9D9',
-                    cursor: 'pointer',
-                    marginRight: '5px',
-                  }}
-                  onClick={handleVolumeToggle}
-                />
-              ) : (
-                <VolumeUpRounded
-                  sx={{
-                    color: '#777676',
-                    cursor: 'pointer',
-                    marginRight: '5px',
-                  }}
-                  onClick={handleVolumeToggle}
-                />
-              )}
-              <input
-                type="range"
-                min={0}
-                max={1}
-                color="gray"
-                step={0.02}
-                value={volume}
-                onChange={(event) => {
-                  setVolume(event.target.valueAsNumber);
-                }}
-              />
-            </VolumeControl>
-          </div>
-
-          <button className={fastClasses.root}>
-            <FastRewindIcon />
-          </button>
-          <button className={playClasses.root} onClick={handlePlayPauseClick}>
-            {playing ? (
-              <PauseIcon sx={{ fontSize: 50 }} />
-            ) : (
-              <PlayArrowIcon sx={{ fontSize: 50 }} />
-            )}
-          </button>
-          <button className={fastClasses.root} onClick={handleNextVideo}>
-            <FastForwardIcon onClick={revert} />
-          </button>
-        </div>
-      </div>
     </React.Fragment>
   );
 };

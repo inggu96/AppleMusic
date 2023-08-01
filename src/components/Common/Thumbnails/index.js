@@ -21,16 +21,23 @@ const Thumbnails = ({ thumbnails, id, title, channelTitle }) => {
   };
 
   return (
-    <article
-      className={styles.wrap}
-      onClick={() => handleThumbnailClick(thumbnails, id, title, channelTitle)}
-    >
-      <img className={styles.postImage} src={thumbnails} alt={title} />
-      <div className={styles.overlay}>
-        <span className={styles.score}>
-          <PlayCircleFilledWhiteIcon />
-        </span>
-        <h2 className={styles.title}>{title}</h2>
+    <article className={styles.container}>
+      <div className={styles.card}>
+        <div
+          className={styles.wrap}
+          onClick={() =>
+            handleThumbnailClick(thumbnails, id, title, channelTitle)
+          }
+        >
+          <img className={styles.postImage} src={thumbnails} alt={title} />
+
+          <div className={styles.overlay}>
+            <span className={styles.score}>
+              <PlayCircleFilledWhiteIcon />
+            </span>
+          </div>
+          <p>{title}</p>
+        </div>
       </div>
     </article>
   );

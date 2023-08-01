@@ -1,0 +1,91 @@
+.item {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  position: relative;
+  width: 300px;
+  height: 40vmin;
+  overflow: hidden;
+  font-size: 3vmin;
+  text-align: left;
+  background-color: #fff;
+  border-radius: 3vmin;
+
+  & > div {
+    width: 100%;
+    height: 100%;
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 5vmin;
+  }
+
+  .imageMotion {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+  }
+
+  .titleMotion {
+    z-index: 1;
+    position: relative;
+    color: #fff;
+  }
+
+  .category {
+    font-size: 80%;
+  }
+
+  .content .title {
+    margin: 1.4vmin 0;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Segoe UI', 'Malgun Gothic', '맑은 고딕', sans-serif;
+}
+
+body {
+  padding: 5vmin;
+  background-color: rgb(255, 255, 255);
+}

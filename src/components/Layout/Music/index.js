@@ -56,7 +56,7 @@ const Music = () => {
 
   const MOBILE_VIEW = window.innerWidth < 468;
 
-  const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
+  const [displaySidebar, setDisplaySidebar] = useState(MOBILE_VIEW);
 
   const handleSidebarDisplay = (e) => {
     e.preventDefault();
@@ -104,11 +104,12 @@ const Music = () => {
             setCurrentTime={setCurrentTime}
             volume={volume}
             setVolume={setVolume}
+            displaySidebar={displaySidebar}
           />
           <Accordion
             expanded={isPlayerVisible}
             onChange={togglePlayer}
-            sx={{ position: 'fixed', bottom: '40px', right: '120px' }}
+            sx={{ position: 'fixed', bottom: '990px', right: '120px' }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
