@@ -9,32 +9,20 @@ import {
 export const SidebarData = [
   {
     id: 1,
-    name: '홈',
+    name: '둘러보기',
     path: '/',
     icon: <HomeIcon />,
   },
   {
     id: 2,
-    name: '바로듣기',
+    name: '인기검색어',
     path: 'music',
     icon: <HeadphonesIcon />,
   },
   {
     id: 3,
-    name: '플레이리스트',
+    name: '검색하기',
     path: 'search',
     icon: <PageviewIcon />,
-  },
-  {
-    id: 4,
-    name: 'invoice',
-    path: 'invoice',
-    icon: <InvoiceIcon />,
-  },
-  {
-    id: 5,
-    name: 'users',
-    path: 'users',
-    icon: <UserIcon />,
   },
 ];

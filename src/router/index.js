@@ -16,8 +16,6 @@ const route = (
     <Route path="/fire" element={<BaseLogin />} />
     <Route path="/music" element={<Music />} />
     <Route path="/search" element={<Search />} />
-    <Route path="/movies" element={<MovieHome />} />
-    <Route path="/movies/:movieId" element={<MovieHome />} />
   </Route>
 );
 

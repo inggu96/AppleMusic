@@ -19,6 +19,7 @@ export const SidebarToggler = styled.button`
   border-bottom-left-radius: 10px;
   border: none;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  z-index: 51;
   outline: none;
   right: ${({ displaySidebar }) => (displaySidebar ? '480px' : '0px')};
   @media (max-width: 468px) {

@@ -2,13 +2,13 @@
 @use '../../../styles/mixins' as m;
 .container {
   @include m.flex(center, center, column);
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   background-color: c.$C_WHITE_10;
 }
 .card {
   width: 220px;
-  height: 220px;
+  height: 180px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: c.$S_RADIUS;
 }

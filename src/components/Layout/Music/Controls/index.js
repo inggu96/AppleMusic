@@ -33,7 +33,6 @@ import {
   Volume,
   VolumeControl,
 } from './ControlsStyles';
-import zIndex from '@mui/material/styles/zIndex';
 
 const playStyle = makeStyles({
   root: {

@@ -59,7 +59,7 @@ export const ControlContainer = styled.div`
   box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)
   display: grid;
   position: absolute;
-  z-index: 5;
+  z-index: 51;
   &.playing-enter {
     opacity: 0;
   }
@@ -105,6 +105,9 @@ export const TitleImage = styled.img`
   width: 15rem;
   border: 0.5rem solid #fff;
   border-radius: 100%;
+
+  box-shadow: rgba(101, 40, 246, 0.12) 0px 2px 4px 0px,
+    rgba(101, 40, 246, 0.32) 0px 2px 16px 0px;
   overflow: hidden;
   ${({ playing }) =>
     playing &&

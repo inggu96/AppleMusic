@@ -141,14 +141,14 @@ export const searchVideos = (data) => {
   };
 };
 
-export const searchList = () => {
+export const searchList = (data) => {
   return async (dispatch) => {
     try {
       dispatch(fetchVideosRequest());
-      const response = await apiClient.get('/playlists', {
+      const response = await apiClient.get('/search', {
         params: {
           part: 'snippet',
-          channelId: 'UCLkAepWjdylmXSltofFvsYQ',
+          q: data,
           maxResults: 10,
           order: 'relevance',
           key: 'AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',

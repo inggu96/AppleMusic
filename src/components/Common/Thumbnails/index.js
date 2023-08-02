@@ -6,6 +6,7 @@ import {
   setSelectedTitle,
   setSelectedChannelTitle,
   play,
+  setDisplaySidebar,
 } from '../../../state/VideoActions';
 import { PlayCircleFilledWhiteIcon } from '../Icons';
 import styles from './thumbnails.module.scss';

@@ -29,7 +29,7 @@ const SidebarItems = ({ displaySidebar }) => {
     event.preventDefault();
     dispatch(searchVideos(searchValue));
     setSearchValue('');
-    navigate('/music');
+    navigate('/search');
   };
 
   return (

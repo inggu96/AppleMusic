@@ -4,7 +4,7 @@ import Controls from './Controls';
 import styles from './music.module.scss';
 import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchVideos } from '../../state/VideoActions';
+import { fetchVideos } from '../../state/VideoActions';
 import {
   Accordion,
   AccordionSummary,
@@ -50,7 +50,7 @@ const Music = () => {
   };
 
   useEffect(() => {
-    dispatch(searchVideos());
+    dispatch(fetchVideos());
   }, []);
 
   const PleaseLogin = () => {
@@ -105,7 +105,7 @@ const Music = () => {
           {videos.map((video, idx) => (
             <li key={video.id} className={styles.youtubeItem}>
               <Thumbnails
-                id={video.id.videoId}
+                id={video.idx}
                 thumbnails={video.snippet.thumbnails.high.url}
                 title={video.snippet.title}
                 channelTitle={video.snippet.channelTitle}

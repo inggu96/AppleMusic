@@ -14669,6 +14669,7 @@ __metadata:
     firebase: ^9.22.0
     framer-motion: ^10.12.17
     googleapis: ^118.0.0
+    he: ^1.2.0
     jwt-decode: ^3.1.2
     lodash: ^4.17.21
     lodash-es: ^4.17.21
