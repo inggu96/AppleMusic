@@ -29,19 +29,7 @@ const Article = ({ id }) => {
         exit={{ opacity: 0, transition: { duration: 0.15 } }}
       >
         <motion.div layoutId={`item-motion-${id}`}>
-          <Link to="/">Back</Link>
-
-          <motion.div
-            className={styles.imageMotion}
-            layoutId={`image-motion-${id}`}
-          >
-            <img
-              className={styles.image}
-              src={`https://source.unsplash.com/random/${id}`}
-              style={{ width: '300px', height: '300px' }}
-              alt={id}
-            />
-          </motion.div>
+          <Link to="/">닫기</Link>
 
           <div className={styles.content}>
             <motion.div
