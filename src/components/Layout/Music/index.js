@@ -2,11 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import Controls from './Controls';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  searchVideos,
-  setDisplayMusic,
-  SET_DISPLAY_MUSIC,
-} from '../../../state/VideoActions';
+import { searchVideos, setDisplayMusic } from '../../../state/VideoActions';
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 
 import {

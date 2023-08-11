@@ -1,3 +1,4 @@
+import { Category } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -36,11 +37,7 @@ const Item = ({ id, title, category, image, isSelected }) => {
               aria-hidden="true"
               layoutId={`image-motion-${id}`}
             >
-              <img
-                className={styles.image}
-                src={`https://source.unsplash.com/random/${id}`}
-                alt=""
-              />
+              <img className={styles.image} src={`images/${id}.jpg`} alt="" />
             </motion.div>
           </div>
         </Link>

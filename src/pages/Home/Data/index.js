@@ -1,7 +1,7 @@
 export const data = [
   // Photo by Heather Ford on Unsplash
   {
-    id: 'jazz',
+    id: 'Jazz',
     category: 'Jazz',
     title: '재즈 playlist',
     pointOfInterest: 120,
