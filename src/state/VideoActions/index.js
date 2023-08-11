@@ -84,7 +84,7 @@ export const fetchVideos = () => {
             chart: 'mostPopular',
             maxResults: 20,
             order: 'relevance',
-            key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+            key: 'AIzaSyDjW65U75KScD-nswCOF6gu8m_HklLQ6hw',
           },
         },
       );
@@ -110,7 +110,7 @@ export const searchVideos = (data) => {
             q: data,
             maxResults: 10,
             order: 'relevance',
-            key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+            key: 'AIzaSyDjW65U75KScD-nswCOF6gu8m_HklLQ6hw',
           },
         },
       );
@@ -135,7 +135,7 @@ export const searchList = (data) => {
             q: data,
             maxResults: 10,
             order: 'relevance',
-            key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+            key: 'AIzaSyDjW65U75KScD-nswCOF6gu8m_HklLQ6hw',
           },
         },
       );

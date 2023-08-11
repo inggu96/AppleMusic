@@ -14641,9 +14641,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"select_movie@workspace:.":
+"weply@workspace:.":
   version: 0.0.0-use.local
-  resolution: "select_movie@workspace:."
+  resolution: "weply@workspace:."
   dependencies:
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
