@@ -14641,69 +14641,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"weply@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "weply@workspace:."
-  dependencies:
-    "@emotion/react": ^11.11.0
-    "@emotion/styled": ^11.11.0
-    "@mui/icons-material": ^5.11.16
-    "@mui/material": ^5.13.0
-    "@mui/styles": ^5.12.3
-    "@react-oauth/google": ^0.11.0
-    "@tanstack/react-query": ^4.32.0
-    "@testing-library/jest-dom": ^5.16.5
-    "@testing-library/react": ^13.4.0
-    "@testing-library/user-event": ^13.5.0
-    animate.css: ^4.1.1
-    axios: ^1.3.4
-    chart.js: ^4.2.1
-    classnames: ^2.3.2
-    dayjs: ^1.11.7
-    eslint: ^8.35.0
-    eslint-config-prettier: ^8.7.0
-    eslint-plugin-import: ^2.27.5
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-react: ^7.32.2
-    eslint-plugin-react-hooks: ^4.6.0
-    firebase: ^9.22.0
-    framer-motion: ^10.12.17
-    googleapis: ^118.0.0
-    he: ^1.2.0
-    jwt-decode: ^3.1.2
-    lodash: ^4.17.21
-    lodash-es: ^4.17.21
-    node-sass: ^8.0.0
-    prettier: ^2.8.4
-    prop-types: ^15.8.1
-    query-string: ^8.1.0
-    react: ^18.2.0
-    react-app: ^1.1.2
-    react-audio-player: ^0.17.0
-    react-chartjs-2: ^5.2.0
-    react-dom: ^18.2.0
-    react-google-font-loader: ^1.1.0
-    react-paginate: ^8.1.4
-    react-player: ^2.12.0
-    react-redux: ^8.0.5
-    react-router-dom: ^6.10.0
-    react-scripts: 5.0.1
-    react-slick: 0.29.0
-    react-spinners: ^0.13.8
-    react-use: ^17.4.0
-    recharts: ^2.5.0
-    recoil: ^0.7.7
-    redux: ^4.2.1
-    redux-devtools-extension: ^2.13.9
-    redux-thunk: ^2.4.2
-    sass: ^1.62.1
-    scss: ^0.2.4
-    styled-components: ^6.0.0-rc.2
-    web-vitals: ^2.1.4
-    yarn: ^1.22.19
-  languageName: unknown
-  linkType: soft
-
 "selfsigned@npm:^2.1.1":
   version: 2.1.1
   resolution: "selfsigned@npm:2.1.1"
@@ -16500,6 +16437,69 @@ __metadata:
   checksum: 5976835e68a86afcd64c7a9762ed85f2f27d48c488c707e67ba85e717b90fa066b98ab33c744d64255c9622d349eedecf728e65a5f921da71b58d0e9591b9038
   languageName: node
   linkType: hard
+
+"weply@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "weply@workspace:."
+  dependencies:
+    "@emotion/react": ^11.11.0
+    "@emotion/styled": ^11.11.0
+    "@mui/icons-material": ^5.11.16
+    "@mui/material": ^5.13.0
+    "@mui/styles": ^5.12.3
+    "@react-oauth/google": ^0.11.0
+    "@tanstack/react-query": ^4.32.0
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^13.4.0
+    "@testing-library/user-event": ^13.5.0
+    animate.css: ^4.1.1
+    axios: ^1.3.4
+    chart.js: ^4.2.1
+    classnames: ^2.3.2
+    dayjs: ^1.11.7
+    eslint: ^8.35.0
+    eslint-config-prettier: ^8.7.0
+    eslint-plugin-import: ^2.27.5
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react: ^7.32.2
+    eslint-plugin-react-hooks: ^4.6.0
+    firebase: ^9.22.0
+    framer-motion: ^10.12.17
+    googleapis: ^118.0.0
+    he: ^1.2.0
+    jwt-decode: ^3.1.2
+    lodash: ^4.17.21
+    lodash-es: ^4.17.21
+    node-sass: ^8.0.0
+    prettier: ^2.8.4
+    prop-types: ^15.8.1
+    query-string: ^8.1.0
+    react: ^18.2.0
+    react-app: ^1.1.2
+    react-audio-player: ^0.17.0
+    react-chartjs-2: ^5.2.0
+    react-dom: ^18.2.0
+    react-google-font-loader: ^1.1.0
+    react-paginate: ^8.1.4
+    react-player: ^2.12.0
+    react-redux: ^8.0.5
+    react-router-dom: ^6.10.0
+    react-scripts: 5.0.1
+    react-slick: 0.29.0
+    react-spinners: ^0.13.8
+    react-use: ^17.4.0
+    recharts: ^2.5.0
+    recoil: ^0.7.7
+    redux: ^4.2.1
+    redux-devtools-extension: ^2.13.9
+    redux-thunk: ^2.4.2
+    sass: ^1.62.1
+    scss: ^0.2.4
+    styled-components: ^6.0.0-rc.2
+    web-vitals: ^2.1.4
+    yarn: ^1.22.19
+  languageName: unknown
+  linkType: soft
 
 "whatwg-encoding@npm:^1.0.5":
   version: 1.0.5
