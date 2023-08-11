@@ -7,6 +7,7 @@ import {
   setSelectedChannelTitle,
   play,
   setDisplaySidebar,
+  displayOn,
 } from '../../../state/VideoActions';
 import { PlayCircleFilledWhiteIcon } from '../Icons';
 import styles from './thumbnails.module.scss';
@@ -15,6 +16,7 @@ const Thumbnails = ({ thumbnails, id, title, channelTitle }) => {
   const dispatch = useDispatch();
   const handleThumbnailClick = (thumbnails, id, title, channelTitle) => {
     dispatch(play());
+    dispatch(displayOn());
     dispatch(setSelectedVideoUrl(thumbnails));
     dispatch(setSelectedThumbnailId(id));
     dispatch(setSelectedTitle(title));

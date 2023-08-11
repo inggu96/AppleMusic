@@ -1,15 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import Controls from './Controls';
-import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchVideos } from '../../../state/VideoActions';
 import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  CircularProgress,
-} from '@mui/material';
+  searchVideos,
+  setDisplayMusic,
+  SET_DISPLAY_MUSIC,
+} from '../../../state/VideoActions';
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 
 import {
   SidebarContainer,
@@ -17,30 +15,11 @@ import {
   SidebarToggler,
 } from './SidebarStyles';
 import { ArrowBackIcon, ArrowIcon } from '../../../components/Common/Icons';
-import { useNavigate } from 'react-router-dom';
-import { Thumbnails } from '../../../components/Common';
-import {
-  ExpandMoreIcon,
-  PlaylistAddIcon,
-} from '../../../components/Common/Icons';
-
-const PlayListAddStyle = makeStyles({
-  root: {
-    width: '50px',
-    height: '52px',
-    fontSize: '30px',
-    cursor: 'pointer',
-  },
-});
+import { ExpandMoreIcon } from '../../../components/Common/Icons';
 
 const Music = () => {
-  const navigate = useNavigate();
-  const PlayListAddclasses = PlayListAddStyle();
   const playerRef = useRef();
   const dispatch = useDispatch();
-  const videos = useSelector((state) => state.videos.videos);
-  const loading = useSelector((state) => state.videos.loading);
-  const error = useSelector((state) => state.videos.error);
   const selectedThumbnailId = useSelector(
     (state) => state.videos.selectedThumbnailId,
   );
@@ -52,13 +31,11 @@ const Music = () => {
   const [volume, setVolume] = useState(1);
   const [isPlayerVisible, setPlayerVisible] = useState(false);
   const playing = useSelector((state) => state.videos.playing);
-
-  const [displaySidebar, setDisplaySidebar] = useState(false);
+  const displayMusic = useSelector((state) => state.videos.displayMusic);
 
   const handleSidebarDisplay = () => {
-    setDisplaySidebar((prevState) => !prevState);
+    dispatch(setDisplayMusic(!displayMusic));
   };
-
   const togglePlayer = () => {
     setPlayerVisible(!isPlayerVisible);
   };
@@ -68,16 +45,16 @@ const Music = () => {
   }, []);
 
   return (
-    <SidebarContainer displaySidebar={displaySidebar}>
+    <SidebarContainer displayMusic={displayMusic}>
       <SidebarWrapper>
         <SidebarToggler
-          displaySidebar={displaySidebar}
+          displayMusic={displayMusic}
           onClick={handleSidebarDisplay}
         >
-          {displaySidebar ? (
-            <ArrowIcon displaySidebar={displaySidebar} />
+          {displayMusic ? (
+            <ArrowIcon displayMusic={displayMusic} />
           ) : (
-            <ArrowBackIcon displaySidebar={displaySidebar} />
+            <ArrowBackIcon displayMusic={displayMusic} />
           )}
         </SidebarToggler>
         <Controls
@@ -90,7 +67,7 @@ const Music = () => {
           setCurrentTime={setCurrentTime}
           volume={volume}
           setVolume={setVolume}
-          displaySidebar={displaySidebar}
+          displayMusic={displayMusic}
         />
         <Accordion
           expanded={isPlayerVisible}

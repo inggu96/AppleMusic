@@ -33,7 +33,7 @@ const GoogleButton = () => {
               channelId: 'UCLkAepWjdylmXSltofFvsYQ',
               maxResults: 10,
               order: 'relevance',
-              key: 'AIzaSyDHlg5D1rVtRcj2fasxXw91Y4JM2S_SiI8',
+              key: '',
               access_token: accessToken,
             },
           });

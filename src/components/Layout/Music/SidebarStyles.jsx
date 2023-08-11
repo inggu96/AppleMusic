@@ -21,10 +21,10 @@ export const SidebarToggler = styled.button`
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   z-index: 51;
   outline: none;
-  right: ${({ displaySidebar }) => (displaySidebar ? '480px' : '0px')};
+  right: ${({ displayMusic }) => (displayMusic ? '480px' : '0px')};
   @media (max-width: 468px) {
     display: block;
-    right: ${({ displaySidebar }) => (displaySidebar ? '480px' : '0px')};
+    right: ${({ displayMusic }) => (displayMusic ? '480px' : '0px')};
     transition: 350ms ease;
   }
   &:hover {
@@ -39,13 +39,13 @@ export const SidebarContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: ${({ displaySidebar }) => (displaySidebar ? '30rem' : '0rem')};
+  width: ${({ displayMusic }) => (displayMusic ? '30rem' : '0rem')};
   height: 100vh;
   transition: width 350ms ease;
   border-right: 1px solid #d4d8dd;
   overflow-x: hidden;
-  ${({ displaySidebar }) =>
-    displaySidebar && 'box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)'};
+  ${({ displayMusic }) =>
+    displayMusic && 'box-shadow: 8px 0px 12px 0px rgba(0,0,0,0.1)'};
   ::-webkit-scrollbar {
     width: 4px;
     height: 3px;

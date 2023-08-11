@@ -1,17 +1,13 @@
 import axios from 'axios';
 
-import apiClient from '../../api/apiClient';
-
 export const FETCH_VIDEO_REQUEST = 'FETCH_VIDEO_REQUEST';
 export const FETCH_VIDEO_SUCCESS = 'FETCH_VIDEO_SUCCESS';
 export const FETCH_VIDEO_FAILURE = 'FETCH_VIDEO_FAILURE';
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
 export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
-export const SET_USER_DATA = 'SET_USER_DATA';
-export const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
-export const SET_FIND_DATA = 'SET_FIND_DATA';
+export const DISPLAYON = 'DISPLAYON';
+export const DISPLAYOFF = 'DISPLAYOFF';
+export const SET_DISPLAY_MUSIC = 'SET_DISPLAY_MUSIC';
 export const SET_SELECTED_VIDEO_URL = 'SET_SELECTED_VIDEO_URL';
 export const SET_SELECTED_THUMBNAILID = 'SET_SELECTED_THUMBNAILID';
 export const SET_SELECTED_TITLE = 'SET_SELECTED_TITLE';
@@ -30,18 +26,6 @@ export const fetchVideosFailure = (error) => ({
   type: FETCH_VIDEO_FAILURE,
   payload: error,
 });
-
-export const login = (userData) => {
-  return {
-    type: LOGIN,
-    userData,
-  };
-};
-
-export const logout = () => ({
-  type: LOGOUT,
-});
-
 export const play = () => ({
   type: PLAY,
 });
@@ -49,26 +33,17 @@ export const pause = () => ({
   type: PAUSE,
 });
 
-export const setIsLoggedIn = (isLoggedIn) => {
-  return {
-    type: SET_IS_LOGGED_IN,
-    payload: isLoggedIn,
-  };
-};
+export const setDisplayMusic = (value) => ({
+  type: SET_DISPLAY_MUSIC,
+  payload: value,
+});
 
-export const setUserData = (userData) => {
-  return {
-    type: SET_USER_DATA,
-    payload: userData,
-  };
-};
-
-export const findData = (data) => {
-  return {
-    type: SET_FIND_DATA,
-    payload: data,
-  };
-};
+export const displayOn = () => ({
+  type: DISPLAYON,
+});
+export const displayOff = () => ({
+  type: DISPLAYOFF,
+});
 
 export const setSelectedVideoUrl = (videoUrl) => ({
   type: SET_SELECTED_VIDEO_URL,
@@ -101,15 +76,18 @@ export const fetchVideos = () => {
     try {
       dispatch(fetchVideosRequest());
 
-      const response = await apiClient.get('/videos', {
-        params: {
-          part: 'snippet',
-          chart: 'mostPopular',
-          maxResults: 20,
-          order: 'relevance',
-          key: 'AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
+      const response = await axios.get(
+        'https://youtube.googleapis.com/youtube/v3/videos?',
+        {
+          params: {
+            part: 'snippet',
+            chart: 'mostPopular',
+            maxResults: 20,
+            order: 'relevance',
+            key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+          },
         },
-      });
+      );
 
       dispatch(fetchVideosSuccess(response.data.items));
       console.log(response.data.items);
@@ -124,15 +102,18 @@ export const searchVideos = (data) => {
     try {
       dispatch(fetchVideosRequest());
 
-      const response = await apiClient.get('/search', {
-        params: {
-          part: 'snippet',
-          q: data,
-          maxResults: 10,
-          order: 'relevance',
-          key: 'AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
+      const response = await axios.get(
+        'https://youtube.googleapis.com/youtube/v3/search?',
+        {
+          params: {
+            part: 'snippet',
+            q: data,
+            maxResults: 10,
+            order: 'relevance',
+            key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+          },
         },
-      });
+      );
       dispatch(fetchVideosSuccess(response.data.items));
       console.log(response.data.items);
     } catch (error) {
@@ -145,31 +126,19 @@ export const searchList = (data) => {
   return async (dispatch) => {
     try {
       dispatch(fetchVideosRequest());
-      const response = await apiClient.get('/search', {
-        params: {
-          part: 'snippet',
-          q: data,
-          maxResults: 10,
-          order: 'relevance',
-          key: 'AIzaSyDPm1djuUOZKFIad32z0rfR8EVwCXn0pCA',
+      const response = await axios.get(
+        'https://youtube.googleapis.com/youtube/v3/search?',
+
+        {
+          params: {
+            part: 'snippet',
+            q: data,
+            maxResults: 10,
+            order: 'relevance',
+            key: 'AIzaSyB4dGTE7TllfIFr6p_hh6L2ix1NOub_Bo4',
+          },
         },
-      });
-      dispatch(fetchVideosSuccess(response.data.items));
-      console.log(response.data.items);
-    } catch (error) {
-      dispatch(fetchVideosFailure(error));
-    }
-  };
-};
-export const fetchList = () => {
-  return async (dispatch) => {
-    try {
-      dispatch(fetchVideosRequest());
-
-      const response = await apiClient.get(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=잔나비&order=relevance',
       );
-
       dispatch(fetchVideosSuccess(response.data.items));
       console.log(response.data.items);
     } catch (error) {

@@ -1,7 +1,7 @@
 import { auth } from '../../firebase-config';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
-import apiClient from '../../api/apiClient';
+import axios from 'axios';
 
 const BaseLogin = () => {
   const [userData, setUserData] = useState();
@@ -34,7 +34,7 @@ const BaseLogin = () => {
       .then(async (data) => {
         const accessToken = data.user.accessToken;
         console.log(accessToken);
-        const response = await apiClient.get('/playlists', {
+        const response = await axios.get('/playlists', {
           params: {
             part: 'snippet',
             channelId: 'UCLkAepWjdylmXSltofFvsYQ',

@@ -2,31 +2,27 @@ import {
   FETCH_VIDEO_FAILURE,
   FETCH_VIDEO_REQUEST,
   FETCH_VIDEO_SUCCESS,
-  LOGIN,
-  LOGOUT,
   PLAY,
   PAUSE,
-  SET_USER_DATA,
-  SET_IS_LOGGED_IN,
-  SET_FIND_DATA,
   SET_SELECTED_VIDEO_URL,
   SET_SELECTED_THUMBNAILID,
   SET_SELECTED_TITLE,
   SET_SELECTED_CHANNEL_TITLE,
+  DISPLAYON,
+  DISPLAYOFF,
+  SET_DISPLAY_MUSIC,
 } from '../VideoActions';
 
 const initialState = {
   videos: [],
   loading: false,
   error: null,
-  isLoggedIn: false,
-  userData: null,
-  findData: '',
   playing: false,
   selectedVideoUrl: '',
   selectedThumbnailId: null,
   selectedTitle: null,
   selectedChannelTitle: null,
+  displayMusic: false,
 };
 
 const videoReducer = (state = initialState, action) => {
@@ -49,16 +45,6 @@ const videoReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-    case LOGIN:
-      return {
-        ...state,
-        isLoggedIn: true,
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false,
-      };
     case PLAY:
       return {
         ...state,
@@ -69,21 +55,22 @@ const videoReducer = (state = initialState, action) => {
         ...state,
         playing: false,
       };
-    case SET_USER_DATA:
+    case SET_DISPLAY_MUSIC:
       return {
         ...state,
-        userData: action.payload,
+        displayMusic: action.payload,
       };
-    case SET_IS_LOGGED_IN:
+    case DISPLAYON:
       return {
         ...state,
-        isLoggedIn: action.payload,
+        displayMusic: true,
       };
-    case SET_FIND_DATA:
+    case DISPLAYOFF:
       return {
         ...state,
-        findData: action.payload,
+        displayMusic: false,
       };
+
     case SET_SELECTED_VIDEO_URL:
       return {
         ...state,

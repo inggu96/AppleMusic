@@ -12,8 +12,6 @@ import {
 
 import {
   ButtonWrap,
-  ContainerImg,
-  ControlBar,
   ControlContainer,
   ControlFullTime,
   ControlPrevTime,
@@ -30,8 +28,6 @@ import {
   TitleChannel,
   TitleImage,
   TitleWrap,
-  Volume,
-  VolumeControl,
 } from './ControlsStyles';
 
 const playStyle = makeStyles({
@@ -101,7 +97,6 @@ const Controls = ({
     if (currentIndex < videos.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // 마지막 영상이면 처음으로 돌아가거나 다른 작업을 수행할 수 있습니다.
       setCurrentIndex(0);
     }
   };
