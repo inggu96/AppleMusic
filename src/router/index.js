@@ -1,11 +1,10 @@
-import { AnimatePresence } from 'framer-motion';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
 import { Layout } from '../components';
-import { BaseLogin, Home, MovieHome, Music, Search } from '../pages';
+import { BaseLogin, Home, Music, Search } from '../pages';
 import GoogleLogIn from '../pages/Login';
 
 const route = (
@@ -16,6 +15,7 @@ const route = (
     <Route path="/fire" element={<BaseLogin />} />
     <Route path="/music" element={<Music />} />
     <Route path="/search" element={<Search />} />
+    <Route path="/table" element={<Table />} />
   </Route>
 );
 
