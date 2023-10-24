@@ -30,6 +30,13 @@
 <br/>
 
 
+
+
+|           |                                                페이지/기능 배치 구조                                                 |
+| :-------: | :------------------------------------------------------------------------------------------------------------------: |
+| Main Page | ![Main Page](https://user-images.githubusercontent.com/122377401/277596418-9d064b50-c99f-41fb-99a3-db6d671b7c5b.png) |
+| Play Page | ![Play Page](https://user-images.githubusercontent.com/122377401/277596436-c367f3ee-ca9d-4e95-80ca-593106ea965d.png) |
+
 ## Git Branch
 
 `main` : 서비스 운영 브랜치 
