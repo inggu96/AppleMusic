@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './wallpaper.module.scss';
-import WallpaperImg from '../../../asset/Images/Wallpaper.jpg';
 
 const Wallpaper = () => {
   return (
@@ -10,7 +9,7 @@ const Wallpaper = () => {
         <p className={styles.text}>
           유튜브에서 듣고싶은 노래를 <br /> 위플리에서 감상하세요.
         </p>
-        <img src={WallpaperImg} />
+        <img src="/Images/WallpaperImg.jpg" />
       </div>
     </article>
   );

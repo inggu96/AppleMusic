@@ -12,7 +12,6 @@ import styles from './music.module.scss';
 
 import { useNavigate } from 'react-router-dom';
 import { Thumbnails } from '../../components/Common';
-import { ExpandMoreIcon } from '../../components/Common/Icons';
 
 const Music = () => {
   const navigate = useNavigate();
@@ -66,7 +65,6 @@ const Music = () => {
         sx={{ position: 'fixed', bottom: '0', right: '0' }}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="player-content"
           id="player-header"
         ></AccordionSummary>

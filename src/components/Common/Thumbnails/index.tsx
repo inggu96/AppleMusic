@@ -1,3 +1,4 @@
+import { styled } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -8,40 +9,97 @@ import {
   play,
   displayOn,
 } from '../../../state/VideoActions';
-import { PlayCircleFilledWhiteIcon } from '../Icons';
 
 const Thumbnails = ({ thumbnails, id, title, channelTitle }: any) => {
-  // const dispatch = useDispatch();
-  // const handleThumbnailClick = (thumbnails, id, title, channelTitle) => {
-  //   dispatch(play());
-  //   dispatch(displayOn());
-  //   dispatch(setSelectedVideoUrl(thumbnails));
-  //   dispatch(setSelectedThumbnailId(id));
-  //   dispatch(setSelectedTitle(title));
-  //   dispatch(setSelectedChannelTitle(channelTitle));
-  // };
+  const dispatch = useDispatch();
+  const handleThumbnailClick = (
+    thumbnails: any,
+    id: any,
+    title: any,
+    channelTitle: any,
+  ) => {
+    dispatch(play());
+    dispatch(displayOn());
+    dispatch(setSelectedVideoUrl(thumbnails));
+    dispatch(setSelectedThumbnailId(id));
+    dispatch(setSelectedTitle(title));
+    dispatch(setSelectedChannelTitle(channelTitle));
+  };
 
   return (
-    <div></div>
-    // <article className={styles.container}>
-    //   <div className={styles.card}>
-    //     <div
-    //       className={styles.wrap}
-    //       onClick={() =>
-    //         handleThumbnailClick(thumbnails, id, title, channelTitle)
-    //       }
-    //     >
-    //       <img className={styles.postImage} src={thumbnails} alt={title} />
+    <Container>
+      <Card>
+        <Wrap
+          onClick={() =>
+            handleThumbnailClick(thumbnails, id, title, channelTitle)
+          }
+        >
+          <img src={thumbnails} alt={title} />
 
-    //       <div className={styles.overlay}>
-    //         <span className={styles.score}>
-    //           <PlayCircleFilledWhiteIcon />
-    //         </span>
-    //       </div>
-    //       <p>{title}</p>
-    //     </div>
-    //   </div>
-    // </article>
+          <p>{title}</p>
+        </Wrap>
+      </Card>
+    </Container>
   );
 };
 export default Thumbnails;
+
+const colors = {
+  white10: '#FFFFFF1A',
+  black10: '#0000001A',
+  primaryColor: '#FF5722',
+};
+const borderRadius = '8px';
+
+const Container = styled('article')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  width: '220px',
+  height: '220px',
+  backgroundColor: colors.white10,
+});
+
+const Card = styled('div')({
+  width: '220px',
+  height: '180px',
+  backgroundColor: '#111827',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.4)',
+  borderRadius: borderRadius,
+});
+
+const Wrap = styled('div')({
+  width: '220px',
+  height: '180px',
+  position: 'relative',
+  color: 'white',
+  backgroundColor: colors.white10,
+  borderRadius: borderRadius,
+  overflow: 'hidden',
+  transition: '0.2s transform ease-in',
+  cursor: 'pointer',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+  '&:hover': {
+    transform: 'scale(1.02) translateY(-10px)',
+    '& > .overlay': {
+      backgroundColor: colors.black10,
+      visibility: 'visible',
+    },
+  },
+});
+
+const Overlay = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  visibility: 'hidden',
+  transition: '0.2s background-color ease-in-out, 0.2s visibility ease-in-out',
+  backgroundColor: 'rgba(255, 255, 255, 0.8)', // 기존 .overlay 스타일
+});
