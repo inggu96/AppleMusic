@@ -14,7 +14,7 @@ interface Video {
   thumbnails: string;
 }
 
-const Article = ({ id }: any) => {
+const ListModal = ({ id }: any) => {
   const {
     data: searchResults,
     isLoading,
@@ -61,51 +61,27 @@ const Article = ({ id }: any) => {
   );
 };
 
-export default Article;
+export default ListModal;
 
 const MotionModal = motion(Modal);
 ({
   zIndex: 9999,
   position: 'fixed',
-  padding: '5vmin',
-  backgroundColor: '#fff',
-  willChange: 'opacity',
-  width: '50%',
-  height: '50%',
   overflowY: 'scroll',
   boxShadow: '20px 12px 20px 14px rgba(0, 0, 0, 0.1)',
   borderRadius: '15px',
   margin: 'auto',
-  '.coco': {
-    margin: 'auto',
-    width: '50%', // 너비 50%
-    height: '50%', // 높이 50%
-    overflowY: 'scroll', // 내용이 넘칠 경우 스크롤
-    backgroundColor: '#fff', // 배경색 흰색
-    boxShadow: '20px 12px 20px 14px rgba(0, 0, 0, 0.1)', // 그림자 효과
-    borderRadius: '15px', // 모서리 둥글게
-    '& .MuiBackdrop-root': {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', // 모달 배경의 불투명도 조절
-    },
-    '& .MuiPaper-root': {
-      width: '50%', // 너비 50%
-      height: '50%', // 높이 50%
-      overflowY: 'scroll', // 내용이 넘칠 경우 스크롤
-      backgroundColor: '#fff', // 배경색 흰색
-      boxShadow: '20px 12px 20px 14px rgba(0, 0, 0, 0.1)', // 그림자 효과
-      borderRadius: '15px', // 모서리 둥글게
-    },
-  },
 });
 
 const Content = styled('div')({
   backgroundColor: '#fff',
-  width: '50%',
+  width: '70%',
   height: '50%',
   maxWidth: '900px',
   margin: 'auto',
   overflowY: 'auto',
   maxHeight: 'calc(100vh - 96px)',
+  transform: 'translate(0%, 5%)',
 });
 
 const YoutubeList = styled('div')(({ theme }) => ({

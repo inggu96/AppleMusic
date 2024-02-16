@@ -9,6 +9,7 @@ import {
   TablePagination,
   Checkbox,
   Paper,
+  styled,
 } from '@mui/material';
 
 interface Video {
@@ -20,15 +21,8 @@ interface Video {
 
 interface VideoProps {
   videos: Video[];
-  video?: {
-    videoId: string;
-    title: string;
-    channelTitle: string;
-    thumbnails: string;
-  };
 }
 
-// 가정: 비디오 데이터 배열을 props로 전달받음
 const ListTable = ({ videos }: VideoProps) => {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
@@ -75,6 +69,7 @@ const ListTable = ({ videos }: VideoProps) => {
   };
 
   const isSelected = (videoId: string) => selected.indexOf(videoId) !== -1;
+  const rowSelected = (videoId: string) => selected.includes(videoId);
 
   useEffect(() => {
     console.log('videos', videos);
@@ -108,6 +103,7 @@ const ListTable = ({ videos }: VideoProps) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((video) => {
                 const isItemSelected = isSelected(video.videoId);
+                const isRowSelected = rowSelected(video.videoId);
                 return (
                   <TableRow
                     key={video.videoId}
@@ -127,7 +123,10 @@ const ListTable = ({ videos }: VideoProps) => {
                         style={{ width: 50 }}
                       />
                     </TableCell>
-                    <TableCell>{video.title}</TableCell>
+                    <ActionTableCell>
+                      {' '}
+                      <span>{video.title}</span>
+                    </ActionTableCell>
                     <TableCell>{video.channelTitle}</TableCell>
                   </TableRow>
                 );
@@ -149,3 +148,26 @@ const ListTable = ({ videos }: VideoProps) => {
 };
 
 export default ListTable;
+
+const ActionTableCell = styled(TableCell)(({ theme }) => ({
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  maxWidth: 150,
+  position: 'relative',
+  '& span': {
+    display: 'inline-block',
+    whiteSpace: 'nowrap',
+  },
+  '&:hover span': {
+    animation: 'slideIn 25s linear infinite',
+  },
+  '@keyframes slideIn': {
+    '0%': {
+      transform: 'translateX(0)',
+    },
+    '100%': {
+      transform: 'translateX(-100%)',
+    },
+  },
+}));

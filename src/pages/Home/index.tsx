@@ -3,9 +3,8 @@ import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Wallpaper } from '../../components/Common';
-import Article from './Article';
+import ListModal from './ListModal';
 import List from './List';
-
 
 const Home = () => {
   const loading = useSelector((state: any) => state.videos.loading);
@@ -27,7 +26,7 @@ const Home = () => {
         <Typography>추천 노래리스트</Typography>
         <Divider />
       </Box>
-      <AnimatePresence>{id && <Article id={id} />}</AnimatePresence>
+      <AnimatePresence>{id && <ListModal id={id} />}</AnimatePresence>
       <List selectedId={id !== undefined ? id : ''} />
     </HomeRoot>
   );
