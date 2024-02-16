@@ -14,7 +14,7 @@ const Article = ({ id }) => {
   const videos = useSelector((state) => state.videos.videos);
 
   useEffect(() => {
-    if (!videos.length) {
+    if (!videos?.length) {
       // 비디오가 로드되지 않았을 때만 dispatch(searchVideo()) 실행
       dispatch(searchList(title));
     }
@@ -40,7 +40,7 @@ const Article = ({ id }) => {
               <h2 className={styles.title}>{title}</h2>
             </motion.div>
             <ul className={styles.youtubeList}>
-              {videos.map((video) => (
+              {videos?.map((video) => (
                 <li key={video.id} className={styles.youtubeItem}>
                   <Thumbnails
                     id={video.id.videoId}

@@ -1,28 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
-import ReactPlayer from 'react-player';
-import styles from './music.module.scss';
-import { makeStyles } from '@mui/styles';
+import { CircularProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchVideos } from '../../state/VideoActions';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  CircularProgress,
-} from '@mui/material';
+import styles from './music.module.scss';
 
-import { useNavigate } from 'react-router-dom';
 import { Thumbnails } from '../../components/Common';
-import { ExpandMoreIcon, PlaylistAddIcon } from '../../components/Common/Icons';
-
-const PlayListAddStyle = makeStyles({
-  root: {
-    width: '50px',
-    height: '52px',
-    fontSize: '30px',
-    cursor: 'pointer',
-  },
-});
 
 const Search = () => {
   const dispatch = useDispatch();

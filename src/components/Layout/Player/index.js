@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { VolumeOffRounded, VolumeUpRounded } from '@mui/icons-material';
 import styles from './controls.module.scss';
-import { makeStyles } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { pause, play } from '../../../state/VideoActions';
 import {
@@ -13,28 +12,6 @@ import {
 
 import { VolumeControl } from './ControlsStyles';
 
-const playStyle = makeStyles({
-  root: {
-    width: '50px',
-    height: '50px',
-    cursor: 'pointer',
-    background: 'none',
-    border: 'none',
-  },
-});
-
-const fastStyle = makeStyles({
-  root: {
-    width: '50px',
-    height: '50px',
-    cursor: 'pointer',
-    color: '#000',
-    fontSize: '30px',
-    background: 'none',
-    border: 'none',
-  },
-});
-
 const Player = ({
   playerRef,
   playedSeconds,
@@ -45,8 +22,6 @@ const Player = ({
   volume,
   setVolume,
 }) => {
-  const playClasses = playStyle();
-  const fastClasses = fastStyle();
   const dispatch = useDispatch();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [previousVolume, setPreviousVolume] = useState(0.5);
@@ -198,17 +173,17 @@ const Player = ({
           <p className={styles.controlsTime}>{formatTime(duration)}</p>
           <p className={styles.controlsTime}>{formatTime(currentTime)}</p>
         </div>
-        <button className={fastClasses.root}>
+        <button>
           <FastRewindIcon />
         </button>
-        <button className={playClasses.root} onClick={handlePlayPauseClick}>
+        <button onClick={handlePlayPauseClick}>
           {playing ? (
             <PauseIcon sx={{ fontSize: 50 }} />
           ) : (
             <PlayArrowIcon sx={{ fontSize: 50 }} />
           )}
         </button>
-        <button className={fastClasses.root} onClick={handleNextVideo}>
+        <button onClick={handleNextVideo}>
           <FastForwardIcon />
         </button>
       </div>

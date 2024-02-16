@@ -1,33 +1,21 @@
-import { useState, useRef, useEffect } from 'react';
-import ReactPlayer from 'react-player';
-import Controls from './Controls';
-import styles from './music.module.scss';
-import { makeStyles } from '@mui/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchVideos } from '../../state/VideoActions';
 import {
   Accordion,
-  AccordionSummary,
   AccordionDetails,
+  AccordionSummary,
   CircularProgress,
 } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchVideos } from '../../state/VideoActions';
+import styles from './music.module.scss';
 
 import { useNavigate } from 'react-router-dom';
 import { Thumbnails } from '../../components/Common';
-import { ExpandMoreIcon, PlaylistAddIcon } from '../../components/Common/Icons';
-
-const PlayListAddStyle = makeStyles({
-  root: {
-    width: '50px',
-    height: '52px',
-    fontSize: '30px',
-    cursor: 'pointer',
-  },
-});
+import { ExpandMoreIcon } from '../../components/Common/Icons';
 
 const Music = () => {
   const navigate = useNavigate();
-  const PlayListAddclasses = PlayListAddStyle();
   const playerRef = useRef();
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.videos.videos);
@@ -122,17 +110,6 @@ const Music = () => {
           ))}
         </ul>
       </div>
-      <Controls
-        playerRef={playerRef}
-        playedSeconds={playedSeconds}
-        duration={durationSeconds}
-        progress={progress}
-        setProgress={setProgress}
-        currentTime={currentTime}
-        setCurrentTime={setCurrentTime}
-        volume={volume}
-        setVolume={setVolume}
-      />
     </div>
   );
 };

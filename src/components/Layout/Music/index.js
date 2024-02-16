@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
-import Controls from './Controls';
+// import Controls from './Controls';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchVideos, setDisplayMusic } from '../../../state/VideoActions';
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
@@ -53,7 +53,7 @@ const Music = () => {
             <ArrowBackIcon displayMusic={displayMusic} />
           )}
         </SidebarToggler>
-        <Controls
+        {/* <Controls
           playerRef={playerRef}
           playedSeconds={playedSeconds}
           duration={durationSeconds}
@@ -64,7 +64,7 @@ const Music = () => {
           volume={volume}
           setVolume={setVolume}
           displayMusic={displayMusic}
-        />
+        /> */}
         <Accordion
           expanded={isPlayerVisible}
           onChange={togglePlayer}
