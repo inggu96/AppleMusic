@@ -17,14 +17,18 @@ const Home = () => {
   }
 
   return (
-    <HomeRoot>
+    <HomeRoot id="page">
       <Box className="title">
-        <Typography>둘러보기</Typography>
+        <Typography color="white" sx={{ fontSize: '1.6rem' }}>
+          둘러보기
+        </Typography>
         <Divider />
       </Box>
       <Wallpaper />
       <Box className="title">
-        <Typography>추천 노래리스트</Typography>
+        <Typography color="white" sx={{ fontSize: '1.6rem' }}>
+          추천 노래리스트
+        </Typography>
         <Divider />
       </Box>
       <AnimatePresence>{id && <ListModal id={id} />}</AnimatePresence>
@@ -40,7 +44,7 @@ const HomeRoot = styled(Container)({
   width: '100%',
   padding: '20px',
   rowGap: '30px',
-  overflowY: 'scroll',
+  overflowY: 'auto',
   maxWidth: '900px',
   '.title': {
     fontSize: '2rem',

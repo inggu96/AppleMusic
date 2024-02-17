@@ -10,7 +10,9 @@ const Wallpaper = () => {
           <br />
           위플리에서 감상하세요.
         </Typography>
-        <LoginButton variant="contained">로그인하기</LoginButton>
+        <LoginButton variant="contained">
+          <Typography color="common.white">로그인하기</Typography>
+        </LoginButton>
       </Overlay>
       <WallpaperImage src="/Images/Wallpaper.jpg" alt="Wallpaper" />
     </HomeWrapper>
@@ -29,6 +31,7 @@ const HomeWrapper = styled(Box)({
   borderRadius: '25px',
   position: 'relative',
   overflow: 'hidden',
+  backgroundColor: '#fff',
 });
 
 const Overlay = styled('div')({

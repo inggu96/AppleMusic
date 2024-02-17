@@ -1,4 +1,4 @@
-import { IconButton, styled } from '@mui/material';
+import { IconButton, styled, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getList } from '../../api/hooks/getList';
@@ -40,8 +40,8 @@ const ImageItem = ({ id, title, category, image }: ImageItemProps) => {
             <PlayArrowRoundedIcon className="playIcon" />
           </IconButton>
           <TextContainer>
-            <CategoryText>{category}</CategoryText>
             <TitleText>{title}</TitleText>
+            <CategoryText>{category}</CategoryText>
           </TextContainer>
         </Link>
       </motion.div>
@@ -102,15 +102,14 @@ const TextContainer = styled('div')({
   flexDirection: 'column',
   alignItems: 'flex-start',
 });
-
-const CategoryText = styled('span')(({ theme }) => ({
-  fontSize: '1rem',
+const TitleText = styled(Typography)(({ theme }) => ({
+  fontSize: '1.5rem',
   fontWeight: 'bold',
-  color: theme.palette.text.primary,
+  color: '#fff',
 }));
 
-const TitleText = styled('span')(({ theme }) => ({
-  fontSize: '1.5rem',
+const CategoryText = styled(Typography)(({ theme }) => ({
+  fontSize: '1rem',
   fontWeight: 'normal',
-  color: theme.palette.text.secondary,
+  color: '#848484',
 }));

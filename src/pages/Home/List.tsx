@@ -1,6 +1,6 @@
 import { Box, IconButton, styled } from '@mui/material';
 import { data } from './Data';
-import Item from './Item';
+import ImageItem from './ImageItem';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -52,7 +52,7 @@ const List = ({ selectedId }: any) => {
     <ListContainer className="listWrap">
       <Slider {...settings}>
         {data.map((item) => (
-          <Item key={item.id} {...item} />
+          <ImageItem key={item.id} {...item} />
         ))}
       </Slider>
     </ListContainer>
