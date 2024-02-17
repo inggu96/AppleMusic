@@ -1,4 +1,7 @@
 import Layout from '@/components/Layout';
+import Home from '@/pages/Home';
+import Music from '@/pages/Music';
+import Search from '@/pages/Search';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -6,26 +9,23 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import { Home, Music, Search } from '../pages';
-
 const Routers = createBrowserRouter([
   {
     path: '/',
-    element: <Home />, // '/' 경로에 대해 TestPage 컴포넌트를 렌더링합니다.
+    element: <Home />,
   },
   {
     path: '/:id',
-    element: <Home />, // '/' 경로에 대해 TestPage 컴포넌트를 렌더링합니다.
+    element: <Home />,
   },
   {
     path: '/music',
-    element: <Music />, // '/' 경로에 대해 TestPage 컴포넌트를 렌더링합니다.
+    element: <Music />,
   },
   {
     path: '/search',
-    element: <Search />, // '/' 경로에 대해 TestPage 컴포넌트를 렌더링합니다.
+    element: <Search />,
   },
-  // 필요에 따라 추가 라우트 설정
 ]);
 
 const Router = () => {

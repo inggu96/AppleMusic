@@ -80,14 +80,14 @@ const ItemContainer = styled('li')(({ theme }) => ({
     },
     '.playIcon': {
       opacity: 0.75,
-      display: 'none', // 초기에는 보이지 않음
+      display: 'none',
       position: 'absolute',
       bottom: 30,
       left: 10,
-      color: 'red', // 아이콘 색상 설정
-      backgroundColor: 'white', // 아이콘 배경색 투명으로 설정
-      fontSize: '3rem', // 아이콘 크기
-      borderRadius: '50%', // 원형 디자인
+      color: 'red',
+      backgroundColor: 'white',
+      fontSize: '3rem',
+      borderRadius: '50%',
       transition: '0.2s',
       '&:hover': {
         transform: 'scale(1.1)',
