@@ -1,31 +1,41 @@
-import { Box, styled } from '@mui/material';
+import { Box, IconButton, styled } from '@mui/material';
 import { data } from './Data';
 import Item from './Item';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const List = ({ selectedId }: any) => {
+  const NextArrow = ({ onClick }: any) => (
+    <NextArrowStyled onClick={onClick}>
+      <ArrowForwardIosIcon />
+    </NextArrowStyled>
+  );
+
+  // PrevArrow 컴포넌트
+  const PrevArrow = ({ onClick }: any) => (
+    <PrevArrowStyled onClick={onClick}>
+      <ArrowBackIosNewIcon />
+    </PrevArrowStyled>
+  );
+
   const settings = {
     infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    initialSlide: 0,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
+          initialSlide: 0,
         },
       },
       {
@@ -52,16 +62,26 @@ const List = ({ selectedId }: any) => {
 export default List;
 
 const ListContainer = styled(Box)(({ theme }) => ({
-  '.listWrap': {
-    display: 'flex',
-    justifyContents: 'center',
-    alignItem: 'center',
-    width: '100%',
+  position: 'relative',
+  width: '100%',
+  '.slick-list': {
+    marginBottom: '50px',
   },
-  '.list ': {
-    display: 'flex',
-    justifyContents: 'center',
-    alignItem: 'center',
-    flexDirection: 'row',
+  '.slick-prev:before, .slick-next:before': {
+    color: theme.palette.common.black,
   },
+}));
+
+const NextArrowStyled = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  right: '30px',
+  bottom: '-40px',
+  zIndex: 1,
+}));
+
+const PrevArrowStyled = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  right: '80px',
+  bottom: '-40px',
+  zIndex: 1,
 }));

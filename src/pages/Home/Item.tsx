@@ -1,12 +1,20 @@
-import { styled } from '@mui/material';
+import { IconButton, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getList } from '../../api/hooks/getList';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
 interface Images {
   [key: string]: string;
 }
-const Item = ({ id, title, category, image, isSelected }: any) => {
+interface ImageItemProps {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+}
+
+const ImageItem = ({ id, title, category, image }: ImageItemProps) => {
   const handleItemClick = async () => {
     const videoDetails = await getList(id);
     console.log(videoDetails);
@@ -20,81 +28,89 @@ const Item = ({ id, title, category, image, isSelected }: any) => {
   };
 
   return (
-    <ItemContainer onClick={handleItemClick} className="item">
-      <motion.div layoutId={`item-motion-${id}`}>
-        <Link to={`/${id}`} className="link">
-          <div className="content">
-            <motion.div className="titleMotion" layoutId={`title-motion-${id}`}>
-              <span className="category">{category}</span>
-              <h2 className="title">{title}</h2>
-            </motion.div>
-            <motion.div
-              className="imageMotion"
-              aria-hidden="true"
-              layoutId={`image-motion-${id}`}
-            >
-              <img className="image" src={images[id]} alt="" />
-            </motion.div>
-          </div>
+    <ItemContainer>
+      <motion.div
+        className="imageBox"
+        onClick={handleItemClick}
+        layoutId={`item-motion-${id}`}
+      >
+        <Link to={`/${id}`}>
+          <img className="image" src={images[id]} alt="" />
+          <IconButton>
+            <PlayArrowRoundedIcon className="playIcon" />
+          </IconButton>
+          <TextContainer>
+            <CategoryText>{category}</CategoryText>
+            <TitleText>{title}</TitleText>
+          </TextContainer>
         </Link>
       </motion.div>
     </ItemContainer>
   );
 };
 
-export default Item;
+export default ImageItem;
 
 const ItemContainer = styled('li')(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
   gap: '20px',
   width: '300px',
-  height: '300px',
-  fontSize: '3vmin',
+  padding: '10px',
   overflow: 'hidden',
-  transition: '0.5s',
-  '& .content': {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: '100%',
-    padding: '5vmin',
-  },
-  '& .imageMotion': {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    '&:after': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      content: '""',
-      backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    },
+  position: 'relative',
+  '.imageBox': {
     '&:hover .image': {
-      filter: 'grayscale(0) !important',
-      transition: 'filter 0.5s',
+      filter: 'brightness(50%)',
+
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    '&:hover .playIcon': {
+      display: 'flex',
+    },
+    '.image': {
+      transition: 'filter 0.5s ease',
+      width: '100%',
+      height: '300px',
+      objectFit: 'cover',
+      '&:hover': {
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      },
+    },
+    '.playIcon': {
+      opacity: 0.75,
+      display: 'none', // 초기에는 보이지 않음
+      position: 'absolute',
+      bottom: 30,
+      left: 10,
+      color: 'red', // 아이콘 색상 설정
+      backgroundColor: 'white', // 아이콘 배경색 투명으로 설정
+      fontSize: '3rem', // 아이콘 크기
+      borderRadius: '50%', // 원형 디자인
+      transition: '0.2s',
+      '&:hover': {
+        transform: 'scale(1.1)',
+      },
+      zIndex: 2,
     },
   },
-  '& .image': {
-    position: 'relative',
-    display: 'block',
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    filter: 'grayscale(1)',
-  },
-  '& .titleMotion': {
-    zIndex: 1,
-    position: 'relative',
-    width: '100%',
-    color: '#fff',
-  },
+}));
+
+const TextContainer = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+});
+
+const CategoryText = styled('span')(({ theme }) => ({
+  fontSize: '1rem',
+  fontWeight: 'bold',
+  color: theme.palette.text.primary,
+}));
+
+const TitleText = styled('span')(({ theme }) => ({
+  fontSize: '1.5rem',
+  fontWeight: 'normal',
+  color: theme.palette.text.secondary,
 }));

@@ -1,4 +1,4 @@
-import { Modal, styled } from '@mui/material';
+import { Box, Modal, styled, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -14,6 +14,9 @@ interface Video {
   thumbnails: string;
 }
 
+interface Images {
+  [key: string]: string;
+}
 const ListModal = ({ id }: any) => {
   const {
     data: searchResults,
@@ -35,9 +38,14 @@ const ListModal = ({ id }: any) => {
 
   const { category, title }: any = data.find((data) => data.id === id);
 
-  useEffect(() => {
-    console.log('videos22', videos);
-  });
+  const images: Images = {
+    Jazz: '/Images/Jazz.jpg',
+    Jannabi: '/Images/Jannabi.jpg',
+    Beo: '/Images/Beo.jpg',
+    Iu: '/Images/Iu.jpg',
+  };
+  const selectedImage = images[id] || '';
+
   return (
     <MotionModal
       open={true}
@@ -45,18 +53,32 @@ const ListModal = ({ id }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.15 } }}
     >
-      <motion.div className="coco" layoutId={`item-motion-${id}`}>
+      <Box>
         <Content className="content">
           <Link to="/">닫기</Link>
-          <motion.div className="titleMotion" layoutId={`title-motion-${id}`}>
-            <span className="category">{category}</span>
-            <h2 className="title">{title}</h2>
-          </motion.div>
+          <Box className="header">
+            <Box>
+              {selectedImage && (
+                <img src={selectedImage} alt={title} width="150px" />
+              )}
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontSize: '25px',
+                  fontWeight: 'bold',
+                  paddingBottom: '25px',
+                }}
+              >
+                {title}
+              </Typography>
+            </Box>
+          </Box>
           <YoutubeList>
             <ListTable videos={videos} />
           </YoutubeList>
         </Content>
-      </motion.div>
+      </Box>
     </MotionModal>
   );
 };
@@ -74,6 +96,8 @@ const MotionModal = motion(Modal);
 });
 
 const Content = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
   backgroundColor: '#fff',
   width: '70%',
   height: '50%',
@@ -82,6 +106,14 @@ const Content = styled('div')({
   overflowY: 'auto',
   maxHeight: 'calc(100vh - 96px)',
   transform: 'translate(0%, 5%)',
+  '.header': {
+    padding: '30px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: '30px',
+  },
 });
 
 const YoutubeList = styled('div')(({ theme }) => ({

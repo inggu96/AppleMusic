@@ -2,9 +2,10 @@ import { Box, Container, Divider, styled, Typography } from '@mui/material';
 import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Wallpaper } from '../../components/Common';
+
 import ListModal from './ListModal';
 import List from './List';
+import Wallpaper from './Wallpaper';
 
 const Home = () => {
   const loading = useSelector((state: any) => state.videos.loading);

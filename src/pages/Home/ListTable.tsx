@@ -112,6 +112,7 @@ const ListTable = ({ videos }: VideoProps) => {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     selected={isItemSelected}
+                    sx={{ cursor: 'pointer' }}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox checked={isItemSelected} />
