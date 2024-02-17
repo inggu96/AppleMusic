@@ -4,17 +4,27 @@ import { Box, Button, styled, Typography } from '@mui/material';
 const Wallpaper = () => {
   return (
     <HomeWrapper>
-      <Overlay>
-        <Typography variant="h5" component="p" color="common.white">
-          유튜브에서 듣고싶은 노래를
-          <br />
-          위플리에서 감상하세요.
+      <Box className="Wallpaper-text">
+        <Typography
+          color="white"
+          sx={{ fontSize: '1.6rem', textAlign: 'left' }}
+        >
+          둘러보기
         </Typography>
-        <LoginButton variant="contained">
-          <Typography color="common.white">로그인하기</Typography>
-        </LoginButton>
-      </Overlay>
-      <WallpaperImage src="/Images/Wallpaper.jpg" alt="Wallpaper" />
+      </Box>
+      <Box className="Wallpaper-box">
+        <Overlay>
+          <Typography variant="h5" component="p" color="common.white">
+            유튜브에서 듣고싶은 노래를
+            <br />
+            위플리에서 감상하세요.
+          </Typography>
+          <LoginButton variant="contained">
+            <Typography color="common.white">로그인하기</Typography>
+          </LoginButton>
+        </Overlay>
+        <WallpaperImage src="/Images/Wallpaper.jpg" alt="Wallpaper" />
+      </Box>
     </HomeWrapper>
   );
 };
@@ -26,12 +36,23 @@ const HomeWrapper = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
+  gap: '30px',
   width: '100%',
-  height: '300px',
-  borderRadius: '25px',
-  position: 'relative',
-  overflow: 'hidden',
-  backgroundColor: '#fff',
+  '.Wallpaper-text': {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+  },
+
+  '.Wallpaper-box': {
+    width: '100%',
+    position: 'relative',
+    height: '300px',
+    borderRadius: '25px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    border: '2px solid rgba(0, 0, 0, 0.2)',
+    backgroundColor: '#424242',
+  },
 });
 
 const Overlay = styled('div')({
@@ -39,7 +60,7 @@ const Overlay = styled('div')({
   top: 0,
   left: 0,
   width: '100%',
-  height: '100%',
+  height: '300px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -57,8 +78,9 @@ const LoginButton = styled(Button)({
 
 const WallpaperImage = styled('img')({
   width: '100%',
-  height: '100%',
+  height: '295px',
   objectFit: 'cover',
   position: 'absolute',
   zIndex: 1,
+  borderRadius: '25px',
 });

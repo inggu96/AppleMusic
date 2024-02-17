@@ -3,8 +3,9 @@ import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import ListModal from './ListModal';
+import Layout from '@/components/Layout';
 import List from './List';
+import ListModal from './ListModal';
 import Wallpaper from './Wallpaper';
 
 const Home = () => {
@@ -17,13 +18,7 @@ const Home = () => {
   }
 
   return (
-    <HomeRoot id="page">
-      <Box className="title">
-        <Typography color="white" sx={{ fontSize: '1.6rem' }}>
-          둘러보기
-        </Typography>
-        <Divider />
-      </Box>
+    <Layout id="page">
       <Wallpaper />
       <Box className="title">
         <Typography color="white" sx={{ fontSize: '1.6rem' }}>
@@ -33,7 +28,7 @@ const Home = () => {
       </Box>
       <AnimatePresence>{id && <ListModal id={id} />}</AnimatePresence>
       <List selectedId={id !== undefined ? id : ''} />
-    </HomeRoot>
+    </Layout>
   );
 };
 export default Home;
@@ -46,10 +41,4 @@ const HomeRoot = styled(Container)({
   rowGap: '30px',
   overflowY: 'auto',
   maxWidth: '900px',
-  '.title': {
-    fontSize: '2rem',
-    fontWeight: 300,
-    textAlign: 'left',
-    color: '#302f2f',
-  },
 });

@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getList } from '../../api/hooks/getList';
 import { data } from './Data';
 import ListTable from './ListTable';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useEffect } from 'react';
 
 interface Video {
@@ -55,7 +56,9 @@ const ListModal = ({ id }: any) => {
     >
       <Box>
         <Content className="content">
-          <Link to="/">닫기</Link>
+          <Link to="/">
+            <CloseOutlinedIcon className="cancel" />
+          </Link>
           <Box className="header">
             <Box>
               {selectedImage && (
@@ -106,6 +109,12 @@ const Content = styled('div')({
   overflowY: 'auto',
   maxHeight: 'calc(100vh - 96px)',
   transform: 'translate(0%, 5%)',
+  position: 'relative',
+  '&>a': {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+  },
   '.header': {
     padding: '30px',
     display: 'flex',

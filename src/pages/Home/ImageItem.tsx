@@ -56,7 +56,8 @@ const ItemContainer = styled('li')(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'flex-start',
   gap: '20px',
-  width: '300px',
+  width: '45vw',
+  maxWidth: '270px',
   padding: '10px',
   overflow: 'hidden',
   position: 'relative',
@@ -72,7 +73,8 @@ const ItemContainer = styled('li')(({ theme }) => ({
     '.image': {
       transition: 'filter 0.5s ease',
       width: '100%',
-      height: '300px',
+      height: '45vw',
+      maxHeight: '270px',
       objectFit: 'cover',
       '&:hover': {
         backgroundColor: 'rgba(0,0,0,0.5)',

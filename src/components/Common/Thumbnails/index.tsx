@@ -88,18 +88,3 @@ const Wrap = styled('div')({
     },
   },
 });
-
-const Overlay = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  visibility: 'hidden',
-  transition: '0.2s background-color ease-in-out, 0.2s visibility ease-in-out',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)', // 기존 .overlay 스타일
-});

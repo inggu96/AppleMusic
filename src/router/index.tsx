@@ -1,13 +1,7 @@
-import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import Music from '@/pages/Music';
 import Search from '@/pages/Search';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Routers = createBrowserRouter([
   {

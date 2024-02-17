@@ -39,6 +39,14 @@ const List = ({ selectedId }: any) => {
         },
       },
       {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 0,
+        },
+      },
+      {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
@@ -64,9 +72,12 @@ export default List;
 const ListContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '100%',
-  '.slick-list': {
-    marginBottom: '50px',
+  '.slick-track': {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+
   '.slick-prev:before, .slick-next:before': {
     color: theme.palette.common.black,
   },
@@ -75,13 +86,15 @@ const ListContainer = styled(Box)(({ theme }) => ({
 const NextArrowStyled = styled(IconButton)(({ theme }) => ({
   position: 'absolute',
   right: '30px',
-  bottom: '-40px',
+  top: '-40px',
   zIndex: 1,
+  color: theme.palette.common.white,
 }));
 
 const PrevArrowStyled = styled(IconButton)(({ theme }) => ({
   position: 'absolute',
   right: '80px',
-  bottom: '-40px',
+  top: '-40px',
   zIndex: 1,
+  color: theme.palette.common.white,
 }));
