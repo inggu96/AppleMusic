@@ -1,7 +1,7 @@
 import { getPlayList } from '@/api/hooks/getPlayList';
 import { getPlaylistItems } from '@/api/hooks/getPlaylistItems';
 import Layout from '@/components/Layout';
-import { Box, Button, Chip, styled } from '@mui/material';
+import { Box, Button, Chip, styled, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
@@ -33,7 +33,9 @@ const PlayList = () => {
   return (
     <Layout>
       <PlayRoot>
-        <h1>플레이리스트</h1>
+        <Typography color="common.white" variant="h5">
+          유튜브 플레이리스트
+        </Typography>
         {playlists && playlists.length > 0 ? (
           <Box className="list-box">
             {playlists.map((playlist: any, index: any) => (
@@ -61,7 +63,6 @@ const PlayList = () => {
           <p>플레이리스트가 없습니다.</p>
         )}
         <div>
-          정<h2>영상 목록</h2>
           {videos.length > 0 ? (
             <ul>
               {videos.map((video, index) => (
@@ -80,6 +81,9 @@ const PlayList = () => {
 export default PlayList;
 
 const PlayRoot = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '20px',
   '.list-box': {
     display: 'flex',
     flexDirection: 'row',

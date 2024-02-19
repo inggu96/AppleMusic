@@ -1,13 +1,34 @@
-import { Box, styled, Typography } from '@mui/material';
+import useAuth from '@/api/hooks/useAuth';
+import { logoutAction } from '@/state/authSlice';
+import { RootState } from '@/state/store';
+import { Box, Button, styled, Typography } from '@mui/material';
+import { googleLogout } from '@react-oauth/google';
+import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 const NavBar = () => {
   const location = useLocation();
-
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const logout = () => {
+    googleLogout();
+    Cookies.remove('weply_access');
+    dispatch(logoutAction());
+  };
   return (
     <NavRoot>
       <Box className="nav-box">
-        <Typography variant="h5">나의 웹사이트</Typography>
+        <Box className="nav-logo">
+          <Typography color="white" variant="h5">
+            나의 웹사이트
+          </Typography>
+          {isLoggedIn && (
+            <Button onClick={() => logout()} variant="contained" sx={{ mt: 2 }}>
+              <Typography color="white"> 로그아웃</Typography>
+            </Button>
+          )}
+        </Box>
         <Box className="button-box">
           <Typography
             component={Link}
@@ -48,6 +69,10 @@ const NavRoot = styled(Box)({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     gap: 10,
+  },
+  '.nav-logo': {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   '.button-box': {
     width: '100%',

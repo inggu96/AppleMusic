@@ -5,9 +5,9 @@ import './globals.css';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import Router from './router';
-import store from './state/Store/configureStore';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { store } from './state/store';
 
 const theme = createTheme({
   palette: {

@@ -7,15 +7,10 @@ import Layout from '@/components/Layout';
 import List from './List';
 import ListModal from './ListModal';
 import Wallpaper from './Wallpaper';
+import useAuth from '@/api/hooks/useAuth';
 
 const Home = () => {
-  const loading = useSelector((state: any) => state.videos.loading);
-  const error = useSelector((state: any) => state.videos.error);
   const { id } = useParams();
-
-  if (error) {
-    return <div>error</div>;
-  }
 
   return (
     <Layout id="page">

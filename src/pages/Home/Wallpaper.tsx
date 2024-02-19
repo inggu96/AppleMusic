@@ -1,15 +1,20 @@
+import useAuth from '@/api/hooks/useAuth';
+import { loginAction } from '@/state/authSlice';
+import { RootState } from '@/state/store';
 import { Box, Button, styled, Typography } from '@mui/material';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Wallpaper = () => {
-  const logout = () => {
-    googleLogout();
-  };
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log(tokenResponse);
-      Cookies.set('weply_access', tokenResponse.access_token, { expires: 1 }); // 1일 동안 유효
+      Cookies.set('weply_access', tokenResponse.access_token, { expires: 1 });
+      dispatch(loginAction());
     },
     scope: 'profile email https://www.googleapis.com/auth/youtube.readonly',
   });
@@ -31,12 +36,11 @@ const Wallpaper = () => {
             <br />
             위플리에서 감상하세요.
           </Typography>
-          <LoginButton onClick={() => login()} variant="contained">
-            <Typography color="common.white">로그인하기</Typography>
-          </LoginButton>
-          <Button onClick={() => logout()} variant="contained" sx={{ mt: 2 }}>
-            로그아웃
-          </Button>
+          {!isLoggedIn && (
+            <LoginButton onClick={() => login()} variant="contained">
+              <Typography color="common.white">로그인하기</Typography>
+            </LoginButton>
+          )}
         </Overlay>
         <WallpaperImage src="/Images/Wallpaper.jpg" alt="Wallpaper" />
       </Box>
