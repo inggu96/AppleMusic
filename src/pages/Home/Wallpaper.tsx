@@ -1,7 +1,19 @@
-import React from 'react';
 import { Box, Button, styled, Typography } from '@mui/material';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import Cookies from 'js-cookie';
 
 const Wallpaper = () => {
+  const logout = () => {
+    googleLogout();
+  };
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log(tokenResponse);
+      Cookies.set('weply_access', tokenResponse.access_token, { expires: 1 }); // 1일 동안 유효
+    },
+    scope: 'profile email https://www.googleapis.com/auth/youtube.readonly',
+  });
+
   return (
     <HomeWrapper>
       <Box className="Wallpaper-text">
@@ -19,9 +31,12 @@ const Wallpaper = () => {
             <br />
             위플리에서 감상하세요.
           </Typography>
-          <LoginButton variant="contained">
+          <LoginButton onClick={() => login()} variant="contained">
             <Typography color="common.white">로그인하기</Typography>
           </LoginButton>
+          <Button onClick={() => logout()} variant="contained" sx={{ mt: 2 }}>
+            로그아웃
+          </Button>
         </Overlay>
         <WallpaperImage src="/Images/Wallpaper.jpg" alt="Wallpaper" />
       </Box>

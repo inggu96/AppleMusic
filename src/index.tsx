@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import Router from './router';
 import store from './state/Store/configureStore';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const theme = createTheme({
   palette: {
@@ -18,7 +19,7 @@ const theme = createTheme({
     },
   },
 });
-
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID as string;
 const queryClient = new QueryClient();
 
 const rootElement = document.getElementById('root');
@@ -30,9 +31,11 @@ if (rootElement) {
     <React.StrictMode>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <QueryClientProvider client={queryClient}>
-            <Router />
-          </QueryClientProvider>
+          <GoogleOAuthProvider clientId={clientId}>
+            <QueryClientProvider client={queryClient}>
+              <Router />
+            </QueryClientProvider>
+          </GoogleOAuthProvider>
         </ThemeProvider>
       </Provider>
     </React.StrictMode>,

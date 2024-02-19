@@ -64,7 +64,6 @@ const ItemContainer = styled('li')(({ theme }) => ({
   '.imageBox': {
     '&:hover .image': {
       filter: 'brightness(50%)',
-
       backgroundColor: 'rgba(0,0,0,0.5)',
     },
     '&:hover .playIcon': {

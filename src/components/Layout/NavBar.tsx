@@ -1,8 +1,9 @@
-import { Box, Button, Container, styled, Typography } from '@mui/material';
+import { Box, styled, Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 
 const NavBar = () => {
   const location = useLocation();
+
   return (
     <NavRoot>
       <Box className="nav-box">
@@ -22,7 +23,7 @@ const NavBar = () => {
           <Typography
             component={Link}
             variant="h6"
-            color="white"
+            color={location.pathname === '/playlists' ? 'primary' : 'white'}
             to="/playlists"
           >
             플레이리스트

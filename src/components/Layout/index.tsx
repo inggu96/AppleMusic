@@ -4,7 +4,7 @@ import Music from './Music';
 import NavBar from './NavBar';
 
 interface Props {
-  id: string;
+  id?: string;
   children: React.ReactNode;
 }
 
