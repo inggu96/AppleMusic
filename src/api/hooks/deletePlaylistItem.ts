@@ -3,26 +3,24 @@ import { authedAxios } from '../base/axisoInstance';
 
 const youtubeURL = process.env.REACT_APP_API_URL;
 
-export const getPlaylistItems = async (playlistId: any) => {
+export const deletePlaylistItem = async (playlistItemId: string) => {
   const accessToken = Cookies.get('weply_access');
   if (!accessToken) {
     console.log('Access token is not found');
-    return [];
+    return;
   }
 
   try {
-    const response = await authedAxios.get('/playlistItems', {
+    const response = await authedAxios.delete('/playlistItems', {
       baseURL: youtubeURL,
       params: {
-        part: 'snippet',
-        playlistId: playlistId,
-        maxResults: 50,
+        id: playlistItemId,
       },
     });
 
-    return response.data.items ?? [];
+    console.log('Playlist item deleted successfully');
+    return response.data;
   } catch (error) {
-    console.error('Error fetching playlist items:', error);
-    return [];
+    console.error('Error deleting playlist item:', error);
   }
 };

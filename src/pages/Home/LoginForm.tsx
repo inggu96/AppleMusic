@@ -1,12 +1,11 @@
-import useAuth from '@/api/hooks/useAuth';
 import { loginAction } from '@/state/authSlice';
 import { RootState } from '@/state/store';
 import { Box, Button, styled, Typography } from '@mui/material';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Wallpaper = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
@@ -16,7 +15,7 @@ const Wallpaper = () => {
       Cookies.set('weply_access', tokenResponse.access_token, { expires: 1 });
       dispatch(loginAction());
     },
-    scope: 'profile email https://www.googleapis.com/auth/youtube.readonly',
+    scope: 'profile email https://www.googleapis.com/auth/youtube',
   });
 
   return (
@@ -48,7 +47,7 @@ const Wallpaper = () => {
   );
 };
 
-export default Wallpaper;
+export default LoginForm;
 
 const HomeWrapper = styled(Box)({
   display: 'flex',

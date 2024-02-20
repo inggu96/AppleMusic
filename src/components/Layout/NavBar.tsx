@@ -1,4 +1,3 @@
-import useAuth from '@/api/hooks/useAuth';
 import { logoutAction } from '@/state/authSlice';
 import { RootState } from '@/state/store';
 import { Box, Button, styled, Typography } from '@mui/material';

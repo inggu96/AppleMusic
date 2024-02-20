@@ -1,20 +1,18 @@
 import { Box, Container, Divider, styled, Typography } from '@mui/material';
 import { AnimatePresence } from 'framer-motion';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import Layout from '@/components/Layout';
 import List from './List';
 import ListModal from './ListModal';
-import Wallpaper from './Wallpaper';
-import useAuth from '@/api/hooks/useAuth';
+import LoginForm from './LoginForm';
 
 const Home = () => {
   const { id } = useParams();
 
   return (
     <Layout id="page">
-      <Wallpaper />
+      <LoginForm />
       <Box className="title">
         <Typography color="white" sx={{ fontSize: '1.6rem' }}>
           추천 노래리스트

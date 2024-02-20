@@ -1,5 +1,5 @@
-import axios from 'axios';
 import Cookies from 'js-cookie';
+import { authedAxios } from '../base/axisoInstance';
 
 const youtubeURL = process.env.REACT_APP_API_URL;
 const youtubeKey = process.env.REACT_APP_API_KEY;
@@ -12,14 +12,11 @@ export const getPlayList = async () => {
   }
 
   try {
-    const response = await axios.get('/playlists', {
+    const response = await authedAxios.get('/playlists', {
       baseURL: youtubeURL,
       params: {
         part: 'snippet,contentDetails',
         mine: true,
-      },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
       },
     });
     console.log(response.data);
