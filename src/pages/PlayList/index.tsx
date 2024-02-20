@@ -18,13 +18,16 @@ import {
   TableRow,
   Typography,
   Button,
+  Avatar,
 } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { createPlaylist } from '@/api/hooks/createPlaylist';
 import useModal from '@/utils/useModal';
 import { AddModal } from './AddModal';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { deletePlaylist } from '@/api/hooks/deletePlayList';
 interface VideoItem {
   etag: string;
   id: string;
@@ -49,6 +52,7 @@ const PlayList = () => {
     isError,
     isLoading,
     error,
+    refetch,
   } = useQuery(['playlists'], getPlayList);
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
@@ -57,14 +61,9 @@ const PlayList = () => {
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  if (isLoading) return <Layout>Loading...</Layout>;
-  if (isError) return <Layout>Error: {isError}</Layout>;
-
   const handlePlaylistClick = async (playlistId: string) => {
     const items = await getPlaylistItems(playlistId);
     setVideos(items);
-    console.log('items', items);
-    console.log('videos', videos);
   };
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -104,12 +103,25 @@ const PlayList = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const handleDelete = async (playlistItemId: string) => {
+
+  const isSelected = (id: string) => selected.indexOf(id) !== -1;
+
+  const { mutate } = useMutation(deletePlaylist, {
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const handleListDelete = (playlistId: string) => () => {
+    mutate(playlistId);
+  };
+  const handleItemDelete = async (playlistItemId: string) => {
     await deletePlaylistItem(playlistItemId);
     setVideos(videos.filter((video) => video.id !== playlistItemId));
   };
 
-  const isSelected = (id: string) => selected.indexOf(id) !== -1;
+  if (isLoading) return <Layout>Loading...</Layout>;
+  if (isError) return <Layout>Error: {isError}</Layout>;
 
   return (
     <Layout>
@@ -123,6 +135,11 @@ const PlayList = () => {
           <>
             <Box className="list-box">
               <Chip
+                avatar={
+                  <Avatar color="#161617">
+                    <AddRoundedIcon fontSize="small" />
+                  </Avatar>
+                }
                 label="추가하기"
                 onClick={openModal}
                 className="list-chip"
@@ -131,6 +148,7 @@ const PlayList = () => {
                 <Box key={index}>
                   <Chip
                     className="list-chip"
+                    onDelete={handleListDelete(playlist.id)}
                     avatar={
                       <img
                         className="list-img"
@@ -140,6 +158,7 @@ const PlayList = () => {
                     }
                     label={playlist.snippet.title}
                     onClick={() => handlePlaylistClick(playlist.id)}
+                    deleteIcon={<CloseRoundedIcon style={{ color: 'white' }} />}
                   />
                 </Box>
               ))}
@@ -200,8 +219,10 @@ const PlayList = () => {
                         </TableCell>
                         <ActionTableCell>{video.snippet.title}</ActionTableCell>
                         <TableCell>
-                          <IconButton onClick={() => handleDelete(video.id)}>
-                            <DeleteIcon />
+                          <IconButton
+                            onClick={() => handleItemDelete(video.id)}
+                          >
+                            <DeleteIcon style={{ color: 'white' }} />
                           </IconButton>
                         </TableCell>
                       </TableRow>
