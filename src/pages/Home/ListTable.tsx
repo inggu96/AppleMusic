@@ -10,7 +10,17 @@ import {
   Checkbox,
   Paper,
   styled,
+  Typography,
+  Box,
+  IconButton,
+  MenuList,
+  MenuItem,
+  Menu,
 } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { addVideo } from '@/api/hooks/addVideo';
+import { getPlayList } from '@/api/hooks/getPlayList';
+import { useQuery } from '@tanstack/react-query';
 
 interface Video {
   videoId: string;
@@ -27,6 +37,14 @@ const ListTable = ({ videos }: VideoProps) => {
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const {
+    data: playlists,
+    isError,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery(['playlists'], getPlayList);
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -71,13 +89,32 @@ const ListTable = ({ videos }: VideoProps) => {
   const isSelected = (videoId: string) => selected.indexOf(videoId) !== -1;
   const rowSelected = (videoId: string) => selected.includes(videoId);
 
-  useEffect(() => {
-    console.log('videos', videos);
-  });
+  const handleAddToPlaylist = (videoId: string) => {
+    addVideo(videoId, videoId);
+  };
+
+  const handleMenuOpen = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handlePlaylistItemClick = (videoId: string, playlistId: string) => {
+    addVideo(videoId, playlistId)
+      .then(() => {
+        console.log(`비디오가 플레이리스트에 추가되었습니다: ${playlistId}`);
+        handleMenuClose(); // 메뉴 닫기
+      })
+      .catch((error) => {
+        console.error('비디오 추가 중 오류 발생', error);
+      });
+  };
 
   return (
     <Paper>
-      <TableContainer>
+      <TableRoot>
         <Table>
           <TableHead>
             <TableRow>
@@ -95,7 +132,7 @@ const ListTable = ({ videos }: VideoProps) => {
               </TableCell>
               <TableCell>썸네일</TableCell>
               <TableCell>제목</TableCell>
-              <TableCell>채널 이름</TableCell>
+              <TableCell>추가</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -125,16 +162,50 @@ const ListTable = ({ videos }: VideoProps) => {
                       />
                     </TableCell>
                     <ActionTableCell>
-                      {' '}
-                      <span>{video.title}</span>
+                      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                        <Typography>{video.title}</Typography>
+                        <Typography variant="body2" style={{ color: 'gray' }}>
+                          {video.channelTitle}
+                        </Typography>
+                      </Box>
                     </ActionTableCell>
-                    <TableCell>{video.channelTitle}</TableCell>
+                    <IconButton
+                      onClick={(event) => {
+                        handleMenuOpen(event);
+                      }}
+                    >
+                      <AddCircleOutlineIcon sx={{ color: 'white' }} />
+                    </IconButton>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={handleMenuClose}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                    >
+                      {playlists.map((playlist: any, idx: any) => (
+                        <MenuItem
+                          key={idx}
+                          onClick={() =>
+                            handlePlaylistItemClick(video.videoId, playlist.id)
+                          }
+                        >
+                          {playlist.snippet.title}
+                        </MenuItem>
+                      ))}
+                    </Menu>
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableRoot>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
@@ -143,6 +214,22 @@ const ListTable = ({ videos }: VideoProps) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to, count }) =>
+          `${from}-${to} of ${count}`
+        }
+        sx={{
+          '.MuiToolbar-root': {
+            backgroundColor: 'black',
+            color: 'white',
+            justifyContent: 'flex-start',
+          },
+          '.MuiTablePagination-selectLabel, .MuiTablePagination-select': {
+            display: 'none',
+          },
+          '.MuiTablePagination-displayedRows': {
+            margin: 0,
+          },
+        }}
       />
     </Paper>
   );
@@ -172,3 +259,14 @@ const ActionTableCell = styled(TableCell)(({ theme }) => ({
     },
   },
 }));
+
+const TableRoot = styled(TableContainer)({
+  backgroundColor: 'black',
+  '& .MuiTableCell-root': {
+    borderColor: 'black',
+    color: 'white',
+  },
+  '& .MuiCheckbox-root': {
+    color: '#161617',
+  },
+});

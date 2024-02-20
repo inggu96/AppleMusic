@@ -28,7 +28,7 @@ export const AddModal = ({ open, onClose }: { open: any; onClose: any }) => {
         <Typography color="white" variant="h6" component="h2">
           새 플레이리스트 만들기
         </Typography>
-        <TextField
+        <TextFieldRoot
           autoFocus
           margin="dense"
           id="title"
@@ -39,7 +39,7 @@ export const AddModal = ({ open, onClose }: { open: any; onClose: any }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <TextField
+        <TextFieldRoot
           margin="dense"
           id="description"
           label="설명"
@@ -49,7 +49,9 @@ export const AddModal = ({ open, onClose }: { open: any; onClose: any }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <Button onClick={handleSubmit}>제출</Button>
+        <Box className="button-box">
+          <Button onClick={handleSubmit}>제출</Button>
+        </Box>
       </Box>
     </ModalRoot>
   );
@@ -66,5 +68,37 @@ const ModalRoot = styled(Modal)({
     bgcolor: 'background.paper',
     boxShadow: 28,
     p: 4,
+    '.button-box': {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      marginTop: '20px',
+    },
+  },
+});
+
+const TextFieldRoot = styled(TextField)({
+  '& label.Mui-focused': {
+    color: 'white',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white',
+    },
+    '&:hover fieldset': {
+      borderColor: 'white',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'white',
+    },
+    '& input': {
+      color: 'white',
+      '&::placeholder': {
+        color: 'white',
+        opacity: 1,
+      },
+    },
+    '& label': {
+      color: 'white',
+    },
   },
 });

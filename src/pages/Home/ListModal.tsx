@@ -67,6 +67,7 @@ const ListModal = ({ id }: any) => {
             </Box>
             <Box>
               <Typography
+                color="white"
                 sx={{
                   fontSize: '25px',
                   fontWeight: 'bold',
@@ -101,7 +102,7 @@ const MotionModal = motion(Modal);
 const Content = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: '#fff',
+  backgroundColor: '#000',
   width: '70%',
   height: '50%',
   maxWidth: '900px',
