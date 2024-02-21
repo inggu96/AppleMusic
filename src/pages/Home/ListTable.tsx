@@ -21,6 +21,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { addVideo } from '@/api/hooks/addVideo';
 import { getPlayList } from '@/api/hooks/getPlayList';
 import { useQuery } from '@tanstack/react-query';
+import { setSelectedVideoId } from '@/state/videoIdSlice';
+import { useDispatch } from 'react-redux';
 
 interface Video {
   videoId: string;
@@ -38,6 +40,8 @@ const ListTable = ({ videos }: VideoProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
   const {
     data: playlists,
     isError,
@@ -89,10 +93,6 @@ const ListTable = ({ videos }: VideoProps) => {
   const isSelected = (videoId: string) => selected.indexOf(videoId) !== -1;
   const rowSelected = (videoId: string) => selected.includes(videoId);
 
-  const handleAddToPlaylist = (videoId: string) => {
-    addVideo(videoId, videoId);
-  };
-
   const handleMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -110,6 +110,10 @@ const ListTable = ({ videos }: VideoProps) => {
       .catch((error) => {
         console.error('비디오 추가 중 오류 발생', error);
       });
+  };
+  const handleVideoSelect = (videoId: string) => {
+    dispatch(setSelectedVideoId(videoId));
+    setExpanded(true);
   };
 
   return (
@@ -145,7 +149,10 @@ const ListTable = ({ videos }: VideoProps) => {
                   <TableRow
                     key={video.videoId}
                     hover
-                    onClick={(event) => handleClick(event, video.videoId)}
+                    onClick={(event) => {
+                      handleVideoSelect(video.videoId);
+                      handleClick(event, video.videoId);
+                    }}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     selected={isItemSelected}

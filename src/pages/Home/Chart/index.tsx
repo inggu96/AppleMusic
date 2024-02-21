@@ -3,9 +3,16 @@ import { deletePlaylistItem } from '@/api/hooks/deletePlaylistItem';
 import { getPlayList } from '@/api/hooks/getPlayList';
 import { getPopular } from '@/api/hooks/getPopular';
 import Layout from '@/components/Layout';
+import { RootState } from '@/state/store';
+import { setSelectedVideoId } from '@/state/videoIdSlice';
 import { VideoItem } from '@/types/Video';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Checkbox,
   IconButton,
@@ -24,6 +31,9 @@ import {
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
+import PlayerAccordion from './PlayerAccordion';
 
 const Chart = () => {
   const [videos, setVideos] = useState<VideoItem[]>([]);
@@ -31,6 +41,8 @@ const Chart = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     data: popular,
@@ -102,9 +114,10 @@ const Chart = () => {
       });
   };
 
-  useEffect(() => {
-    console.log('popular', popular);
-  });
+  const handleVideoSelect = (videoId: string) => {
+    dispatch(setSelectedVideoId(videoId));
+    setExpanded(true);
+  };
 
   if (isLoading) return <Layout>Loading...</Layout>;
   if (isError) return <Layout>Error: {isError}</Layout>;
@@ -143,7 +156,10 @@ const Chart = () => {
                     <TableRow
                       key={video.id}
                       hover
-                      onClick={(event) => handleClick(event, video.id)}
+                      onClick={(event) => {
+                        handleVideoSelect(video.id);
+                        handleClick(event, video.id);
+                      }}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       selected={isItemSelected}

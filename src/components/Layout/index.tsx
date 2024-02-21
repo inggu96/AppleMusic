@@ -1,3 +1,4 @@
+import PlayerAccordion from '@/pages/Home/Chart/PlayerAccordion';
 import { Box, Container, styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import Music from './Music';
@@ -13,6 +14,7 @@ const Layout = ({ id, children }: Props) => {
     <Root maxWidth="lg">
       <NavBar />
       {children}
+      <PlayerAccordion />
     </Root>
   );
 };
