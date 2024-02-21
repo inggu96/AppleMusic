@@ -1,3 +1,4 @@
+import { SearchResult } from '@/types/Video';
 import axios from 'axios';
 
 const youtubeURL = process.env.REACT_APP_API_URL;

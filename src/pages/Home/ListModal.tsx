@@ -7,6 +7,7 @@ import { data } from './Data';
 import ListTable from './ListTable';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useEffect } from 'react';
+import { SearchResult } from '@/types/Video';
 
 interface Video {
   videoId: string;

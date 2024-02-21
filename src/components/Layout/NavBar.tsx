@@ -37,7 +37,12 @@ const NavBar = () => {
           >
             홈
           </Typography>
-          <Typography component={Link} variant="h6" color="white" to="/charts">
+          <Typography
+            component={Link}
+            variant="h6"
+            color={location.pathname === '/charts' ? 'primary' : 'white'}
+            to="/charts"
+          >
             인기차트
           </Typography>
           <Typography

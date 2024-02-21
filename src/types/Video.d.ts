@@ -32,3 +32,21 @@ interface SearchResult {
   kind: string;
   snippet: VideoSnippet;
 }
+
+export interface VideoItem {
+  etag: string;
+  id: string;
+  kind: string;
+  snippet: {
+    channelId: string;
+    channelTitle: string;
+    description: string;
+    playlistId: string;
+    thumbnails: {
+      default: {
+        url: string;
+      };
+    };
+    title: string;
+  };
+}

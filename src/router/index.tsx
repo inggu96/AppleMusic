@@ -1,4 +1,5 @@
 import Home from '@/pages/Home';
+import Chart from '@/pages/Home/Chart';
 import Music from '@/pages/Music';
 import PlayList from '@/pages/PlayList';
 import Search from '@/pages/Search';
@@ -14,8 +15,8 @@ const Routers = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: '/music',
-    element: <Music />,
+    path: '/charts',
+    element: <Chart />,
   },
   {
     path: '/search',
