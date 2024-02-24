@@ -19,9 +19,7 @@ const NavBar = () => {
     <NavRoot>
       <Box className="nav-box">
         <Box className="nav-logo">
-          <Typography color="white" variant="h5">
-            나의 웹사이트
-          </Typography>
+          <img src="/images/logo.png" alt="logo" width={150} />
           {isLoggedIn && (
             <Button onClick={() => logout()} variant="contained" sx={{ mt: 2 }}>
               <Typography color="white"> 로그아웃</Typography>
