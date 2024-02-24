@@ -1,8 +1,12 @@
 import { IconButton, styled, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { getList } from '../../api/hooks/getList';
+import { getList } from '@/api/hooks/getList';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/state/store';
+import { setSelectedTitle, setVideoList } from '@/state/playbackSlice';
+import { useEffect, useState } from 'react';
 
 interface Images {
   [key: string]: string;
@@ -15,9 +19,14 @@ interface ImageItemProps {
 }
 
 const ImageItem = ({ id, title, category, image }: ImageItemProps) => {
+  const dispatch = useDispatch();
+
   const handleItemClick = async () => {
+    dispatch(setSelectedTitle(title));
     const videoDetails = await getList(id);
     console.log(videoDetails);
+    console.log('title', title);
+    dispatch(setVideoList(videoDetails));
   };
 
   const images: Images = {
@@ -41,6 +50,7 @@ const ImageItem = ({ id, title, category, image }: ImageItemProps) => {
           </IconButton>
           <TextContainer>
             <TitleText>{title}</TitleText>
+
             <CategoryText>{category}</CategoryText>
           </TextContainer>
         </Link>

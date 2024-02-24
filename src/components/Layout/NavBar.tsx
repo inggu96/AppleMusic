@@ -1,10 +1,10 @@
-import { logoutAction } from '@/state/authSlice';
-import { RootState } from '@/state/store';
 import { Box, Button, styled, Typography } from '@mui/material';
 import { googleLogout } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { logoutAction } from '@/state/authSlice';
+import { RootState } from '@/state/store';
 
 const NavBar = () => {
   const location = useLocation();

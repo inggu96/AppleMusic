@@ -1,9 +1,9 @@
-import { loginAction } from '@/state/authSlice';
-import { RootState } from '@/state/store';
 import { Box, Button, styled, Typography } from '@mui/material';
 import { useGoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '@/state/authSlice';
+import { RootState } from '@/state/store';
 
 const LoginForm = () => {
   const dispatch = useDispatch();

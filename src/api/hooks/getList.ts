@@ -1,5 +1,5 @@
-import { SearchResult } from '@/types/Video';
 import axios from 'axios';
+import { SearchResult } from '@/types/Video';
 
 const youtubeURL = process.env.REACT_APP_API_URL;
 const youtubeKey = process.env.REACT_APP_API_KEY;

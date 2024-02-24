@@ -1,8 +1,6 @@
 import Home from '@/pages/Home';
 import Chart from '@/pages/Home/Chart';
-import Music from '@/pages/Music';
 import PlayList from '@/pages/PlayList';
-import Search from '@/pages/Search';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Routers = createBrowserRouter([
@@ -17,10 +15,6 @@ const Routers = createBrowserRouter([
   {
     path: '/charts',
     element: <Chart />,
-  },
-  {
-    path: '/search',
-    element: <Search />,
   },
   {
     path: '/playlists',

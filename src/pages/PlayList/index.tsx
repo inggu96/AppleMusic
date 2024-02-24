@@ -1,7 +1,3 @@
-import { deletePlaylistItem } from '@/api/hooks/deletePlaylistItem';
-import { getPlayList } from '@/api/hooks/getPlayList';
-import { getPlaylistItems } from '@/api/hooks/getPlaylistItems';
-import Layout from '@/components/Layout';
 import {
   Box,
   Checkbox,
@@ -23,11 +19,17 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import useModal from '@/utils/useModal';
+
 import { AddModal } from './AddModal';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { getPlayList } from '@/api/hooks/getPlayList';
+import useModal from '@/utils/useModal';
+import { getPlaylistItems } from '@/api/hooks/getPlaylistItems';
 import { deletePlaylist } from '@/api/hooks/deletePlayList';
+import { deletePlaylistItem } from '@/api/hooks/deletePlaylistItem';
+import Layout from '@/components/Layout';
+
 interface VideoItem {
   etag: string;
   id: string;

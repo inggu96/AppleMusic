@@ -18,7 +18,6 @@ export const videoIdSlice = createSlice({
       state.selectedVideoId = action.payload;
     },
     setCurrentPlaybackTime: (state, action: PayloadAction<number>) => {
-      // 액션 추가
       state.currentPlaybackTime = action.payload;
     },
   },

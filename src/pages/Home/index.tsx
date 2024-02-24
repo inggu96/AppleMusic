@@ -1,8 +1,8 @@
 import { Box, Container, Divider, styled, Typography } from '@mui/material';
+import Layout from '@/components/Layout';
 import { AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router-dom';
 
-import Layout from '@/components/Layout';
 import List from './List';
 import ListModal from './ListModal';
 import LoginForm from './LoginForm';

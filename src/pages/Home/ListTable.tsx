@@ -18,11 +18,17 @@ import {
   Menu,
 } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { useDispatch } from 'react-redux';
+import { setSelectedVideoId } from '@/state/videoIdSlice';
 import { addVideo } from '@/api/hooks/addVideo';
 import { getPlayList } from '@/api/hooks/getPlayList';
-import { useQuery } from '@tanstack/react-query';
-import { setSelectedVideoId } from '@/state/videoIdSlice';
-import { useDispatch } from 'react-redux';
+import {
+  setSelectedChannelTitle,
+  setSelectedTitle,
+} from '@/state/playbackSlice';
 
 interface Video {
   videoId: string;
@@ -42,6 +48,7 @@ const ListTable = ({ videos }: VideoProps) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const dispatch = useDispatch();
+
   const {
     data: playlists,
     isError,
@@ -59,8 +66,15 @@ const ListTable = ({ videos }: VideoProps) => {
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, videoId: string) => {
+  const handleClick = (
+    event: React.MouseEvent<unknown>,
+    videoId: string,
+    title: string,
+    channelTitle: string,
+  ) => {
     const selectedIndex = selected.indexOf(videoId);
+    dispatch(setSelectedTitle(title));
+    dispatch(setSelectedChannelTitle(title));
     let newSelected: string[] = [];
 
     if (selectedIndex === -1) {
@@ -122,18 +136,6 @@ const ListTable = ({ videos }: VideoProps) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  indeterminate={
-                    selected.length > 0 && selected.length < videos.length
-                  }
-                  checked={
-                    videos.length > 0 && selected.length === videos.length
-                  }
-                  onChange={handleSelectAllClick}
-                  inputProps={{ 'aria-label': '모든 항목 선택' }}
-                />
-              </TableCell>
               <TableCell>썸네일</TableCell>
               <TableCell>제목</TableCell>
               <TableCell>추가</TableCell>
@@ -151,16 +153,18 @@ const ListTable = ({ videos }: VideoProps) => {
                     hover
                     onClick={(event) => {
                       handleVideoSelect(video.videoId);
-                      handleClick(event, video.videoId);
+                      handleClick(
+                        event,
+                        video.videoId,
+                        video.title,
+                        video.channelTitle,
+                      );
                     }}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox checked={isItemSelected} />
-                    </TableCell>
                     <TableCell component="th" scope="row">
                       <img
                         src={video.thumbnails}

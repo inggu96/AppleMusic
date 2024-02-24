@@ -74,28 +74,6 @@ export const setSelectedChannelTitle = (channelTitle) => {
   };
 };
 
-export const fetchVideos = () => {
-  return async (dispatch) => {
-    try {
-      dispatch(fetchVideosRequest());
-
-      const response = await axios.get('/videos', {
-        baseURL: youtubeURL,
-        params: {
-          part: 'snippet',
-          chart: 'mostPopular',
-          maxResults: 20,
-          order: 'relevance',
-          key: youtubeKey,
-        },
-      });
-      dispatch(fetchVideosSuccess(response.data.items));
-      console.log(response.data.items);
-    } catch (error) {
-      dispatch(fetchVideosFailure(error));
-    }
-  };
-};
 
 export const searchVideos = (data) => {
   return async (dispatch) => {
@@ -119,24 +97,3 @@ export const searchVideos = (data) => {
   };
 };
 
-export const searchList = (data) => {
-  return async (dispatch) => {
-    try {
-      dispatch(fetchVideosRequest());
-      const response = await axios.get('/search?', {
-        baseURL: youtubeURL,
-        params: {
-          part: 'snippet',
-          q: data,
-          maxResults: 10,
-          order: 'relevance',
-          key: youtubeKey,
-        },
-      });
-      dispatch(fetchVideosSuccess(response.data.items));
-      console.log(response.data.items);
-    } catch (error) {
-      dispatch(fetchVideosFailure(error));
-    }
-  };
-};

@@ -1,4 +1,4 @@
-import { Box, Modal, styled, Typography } from '@mui/material';
+import { Box, Button, Modal, styled, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -8,7 +8,7 @@ import ListTable from './ListTable';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useEffect } from 'react';
 import { SearchResult } from '@/types/Video';
-
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 interface Video {
   videoId: string;
   title: string;
@@ -77,6 +77,10 @@ const ListModal = ({ id }: any) => {
               >
                 {title}
               </Typography>
+              <PlayButton variant="contained">
+                <PlayArrowRoundedIcon sx={{ color: 'white' }} />
+                <Typography color="white">전체 재생</Typography>
+              </PlayButton>
             </Box>
           </Box>
           <YoutubeList>
@@ -144,3 +148,10 @@ const YoutubeList = styled('div')(({ theme }) => ({
     overflowY: 'scroll',
   },
 }));
+
+const PlayButton = styled(Button)({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+});

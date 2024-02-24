@@ -1,18 +1,12 @@
 import { addVideo } from '@/api/hooks/addVideo';
-import { deletePlaylistItem } from '@/api/hooks/deletePlaylistItem';
 import { getPlayList } from '@/api/hooks/getPlayList';
 import { getPopular } from '@/api/hooks/getPopular';
 import Layout from '@/components/Layout';
-import { RootState } from '@/state/store';
 import { setSelectedVideoId } from '@/state/videoIdSlice';
-import { VideoItem } from '@/types/Video';
+
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
   Checkbox,
   IconButton,
@@ -30,10 +24,9 @@ import {
   Typography,
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import ReactPlayer from 'react-player';
-import { useDispatch, useSelector } from 'react-redux';
-import PlayerAccordion from './PlayerAccordion';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { VideoItem } from '@/types/Video';
 
 const Chart = () => {
   const [videos, setVideos] = useState<VideoItem[]>([]);

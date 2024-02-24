@@ -1,8 +1,8 @@
-import PlayerAccordion from '@/pages/Home/Chart/PlayerAccordion';
 import { Box, Container, styled } from '@mui/material';
+
 import { Outlet } from 'react-router-dom';
-import Music from './Music';
 import NavBar from './NavBar';
+import PlayerAccordion from './PlayerAccordion';
 
 interface Props {
   id?: string;
