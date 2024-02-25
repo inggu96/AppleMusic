@@ -11,27 +11,28 @@
 <br/>
 
 ## 핵심 기능
+- **`플레이리스트 추가` :** 구글 로그인 후 유튜브 재생목록 추가 구현
+- **`소셜로그인 구현` :** Oauth 구글 로그인 구현
+- **`영상 플레이리스트 추가` :** 모달 및 차트에서 영상 플레이리스트 추가 가능
 - **`인기리스트` :** 실제 유튜브사이트 내 Top10 영상 확인기능
-- **`뮤직플레이어 기능` :** 메인페이지 우측 뮤직 플레이어 기능으로 영상 시간 조절 기능 구현
-- **`영상 검색 기능` :** 좌측 사이드바를 통한 검색 기능 구현
+- **`영상재생 기능` :** 메인페이지 하단 유튜브 플레이어 기능으로 영상 구현
+
 
 ### Front-End
 
-|                                                 React                                                 |                                                Scss                                                |                                               JavaScript                                               |                                                  esLint                                                  | Prettier |
-| :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :------: |
+| React                                                                                                 | TypeScript                                                                                         | esLint                                                                                                 | playList                                                                                                 |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /> |
-
-
+                                                     
 <br/>
 
+| 페이지     | 시연 사진                                 |
+| ---------- | ----------------------------------------- |
+| Main Page  | ![Main Page](/public/Images/home.png)     |
+| Modal      | ![Play Page](/public/Images/addList.png)  |
+| Chart Page | ![Play Page](/public/Images/chart.png)    |
+| playList   | ![Play Page](/public/Images/playList.png) |
 
-
-
-|       | 페이지/기능 배치 구조 |
-| :---: | :-------------------: |: |
-| Main Page | ![Main Page](https://user-images.githubusercontent.com/122377401/277596418-9d064b50-c99f-41fb-99a3-db6d671b7c5b.png) |
-| Play Page(refactor) | ![Play Page](https://user-images.githubusercontent.com/122377401/277596436-c367f3ee-ca9d-4e95-80ca-593106ea965d.png) |
-| Play Page | ![Play Page](https://user-images.githubusercontent.com/122377401/277596436-c367f3ee-ca9d-4e95-80ca-593106ea965d.png) |
 
 ## Git Branch
 
