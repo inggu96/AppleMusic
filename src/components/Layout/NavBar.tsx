@@ -15,11 +15,14 @@ const NavBar = () => {
     Cookies.remove('weply_access');
     dispatch(logoutAction());
   };
+
   return (
     <NavRoot>
       <Box className="nav-box">
         <Box className="nav-logo">
-          <img src="/images/logo.png" alt="logo" width={150} />
+          <Link to="/">
+            <img src="/images/logo.png" alt="logo" width={150} />
+          </Link>
           {isLoggedIn && (
             <Button onClick={() => logout()} variant="contained" sx={{ mt: 2 }}>
               <Typography color="white"> 로그아웃</Typography>

@@ -1,7 +1,8 @@
 # 위플리
 유튜브 Api를 사용한 뮤직플레이어<br />
 - **`Project duration` :** 2023.05.20 ~ 07.31
-- **`Link` :** [위플리 방문하기👀](http://weply.s3-website.ap-northeast-2.amazonaws.com/search)
+- **`Refactor duration` :** 2024.02.16 ~ 02.21
+- **`Link` :** [위플리 방문하기👀](https://weply-2rj8ev4h3-inguks-projects.vercel.app/)
 
 <br/>
 
@@ -16,25 +17,20 @@
 
 ### Front-End
 
-|                                                 React                                                 |                                                 Scss                                                 |                                             JavaScript                                             |                                                 esLint                                                 |                                                 Prettier                                                 |
-| :---------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
-| <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/sass-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/js-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /> |
+|                                                 React                                                 |                                                Scss                                                |                                               JavaScript                                               |                                                  esLint                                                  | Prettier |
+| :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :------: |
+| <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65" /> | <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /> |
 
-
-### Other
-
-|                                                 AWS                                                 |
-| :-------------------------------------------------------------------------------------------------: |
-| <img src="https://techstack-generator.vercel.app/aws-icon.svg" alt="icon" width="65" height="65" /> |
 
 <br/>
 
 
 
 
-|           |                                                페이지/기능 배치 구조                                                 |
-| :-------: | :------------------------------------------------------------------------------------------------------------------: |
+|       | 페이지/기능 배치 구조 |
+| :---: | :-------------------: |: |
 | Main Page | ![Main Page](https://user-images.githubusercontent.com/122377401/277596418-9d064b50-c99f-41fb-99a3-db6d671b7c5b.png) |
+| Play Page(refactor) | ![Play Page](https://user-images.githubusercontent.com/122377401/277596436-c367f3ee-ca9d-4e95-80ca-593106ea965d.png) |
 | Play Page | ![Play Page](https://user-images.githubusercontent.com/122377401/277596436-c367f3ee-ca9d-4e95-80ca-593106ea965d.png) |
 
 ## Git Branch
