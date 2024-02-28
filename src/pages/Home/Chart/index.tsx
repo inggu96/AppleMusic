@@ -24,7 +24,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { VideoItem } from '@/types/Video';
 import { RootState } from '@/state/store';
@@ -114,6 +114,10 @@ const Chart = () => {
     setExpanded(true);
   };
 
+  useEffect(() => {
+    console.log('playlists', playlists);
+  });
+
   if (isLoading) return <Layout>Loading...</Layout>;
   if (isError) return <Layout>Error: {isError}</Layout>;
 
@@ -181,7 +185,7 @@ const Chart = () => {
                           }}
                         >
                           {isLoggedIn &&
-                            playlists.map((playlist: any, idx: any) => (
+                            playlists?.map((playlist: any, idx: any) => (
                               <MenuItem
                                 key={idx}
                                 onClick={() =>
