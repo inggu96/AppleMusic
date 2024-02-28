@@ -25,10 +25,12 @@ import {
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { VideoItem } from '@/types/Video';
+import { RootState } from '@/state/store';
 
 const Chart = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [videos, setVideos] = useState<VideoItem[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
@@ -122,21 +124,9 @@ const Chart = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    indeterminate={
-                      selected.length > 0 && selected.length < popular.length
-                    }
-                    checked={
-                      popular.length > 0 && selected.length === popular.length
-                    }
-                    onChange={handleSelectAllClick}
-                    inputProps={{ 'aria-label': '모든 항목 선택' }}
-                  />
-                </TableCell>
+                <TableCell padding="checkbox"></TableCell>
                 <StyledTableCell sx={{ width: '40px' }}>순위</StyledTableCell>
                 <StyledTableCell>썸네일</StyledTableCell>
-                <StyledTableCell>제목</StyledTableCell>
                 <StyledTableCell>추가</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -158,12 +148,6 @@ const Chart = () => {
                       selected={isItemSelected}
                       sx={{ cursor: 'pointer' }}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                          color={isItemSelected ? 'primary' : 'default'}
-                        />
-                      </TableCell>
                       <StyledTableCell padding="checkbox">
                         <Typography>{idx + 1}</Typography>
                       </StyledTableCell>
@@ -196,19 +180,20 @@ const Chart = () => {
                             horizontal: 'right',
                           }}
                         >
-                          {playlists.map((playlist: any, idx: any) => (
-                            <MenuItem
-                              key={idx}
-                              onClick={() =>
-                                handlePlaylistItemClick(
-                                  video.videoId,
-                                  playlist.id,
-                                )
-                              }
-                            >
-                              {playlist.snippet.title}
-                            </MenuItem>
-                          ))}
+                          {isLoggedIn &&
+                            playlists.map((playlist: any, idx: any) => (
+                              <MenuItem
+                                key={idx}
+                                onClick={() =>
+                                  handlePlaylistItemClick(
+                                    video.videoId,
+                                    playlist.id,
+                                  )
+                                }
+                              >
+                                {playlist.snippet.title}
+                              </MenuItem>
+                            ))}
                         </Menu>
                       </StyledTableCell>
                     </TableRow>
@@ -220,7 +205,7 @@ const Chart = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={playlists.length}
+          count={popular.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

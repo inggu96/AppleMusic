@@ -21,7 +21,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedVideoId } from '@/state/videoIdSlice';
 import { addVideo } from '@/api/hooks/addVideo';
 import { getPlayList } from '@/api/hooks/getPlayList';
@@ -29,6 +29,7 @@ import {
   setSelectedChannelTitle,
   setSelectedTitle,
 } from '@/state/playbackSlice';
+import { RootState } from '@/state/store';
 
 interface Video {
   videoId: string;
@@ -42,6 +43,8 @@ interface VideoProps {
 }
 
 const ListTable = ({ videos }: VideoProps) => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const [internalVideos, setInternalVideos] = useState<Video[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -56,15 +59,6 @@ const ListTable = ({ videos }: VideoProps) => {
     error,
     refetch,
   } = useQuery(['playlists'], getPlayList);
-
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelecteds = videos.map((n) => n.videoId);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
 
   const handleClick = (
     event: React.MouseEvent<unknown>,
@@ -129,6 +123,10 @@ const ListTable = ({ videos }: VideoProps) => {
     dispatch(setSelectedVideoId(videoId));
     setExpanded(true);
   };
+  useEffect(() => {
+    setInternalVideos(videos);
+    console.log('internalVideos', internalVideos);
+  }, [videos]);
 
   return (
     <Paper>
@@ -142,7 +140,7 @@ const ListTable = ({ videos }: VideoProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {videos
+            {internalVideos
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((video) => {
                 const isItemSelected = isSelected(video.videoId);
@@ -200,16 +198,20 @@ const ListTable = ({ videos }: VideoProps) => {
                         horizontal: 'right',
                       }}
                     >
-                      {playlists.map((playlist: any, idx: any) => (
-                        <MenuItem
-                          key={idx}
-                          onClick={() =>
-                            handlePlaylistItemClick(video.videoId, playlist.id)
-                          }
-                        >
-                          {playlist.snippet.title}
-                        </MenuItem>
-                      ))}
+                      {isLoggedIn &&
+                        playlists.map((playlist: any, idx: any) => (
+                          <MenuItem
+                            key={idx}
+                            onClick={() =>
+                              handlePlaylistItemClick(
+                                video.videoId,
+                                playlist.id,
+                              )
+                            }
+                          >
+                            {playlist.snippet.title}
+                          </MenuItem>
+                        ))}
                     </Menu>
                   </TableRow>
                 );
@@ -220,7 +222,7 @@ const ListTable = ({ videos }: VideoProps) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={videos.length}
+        count={internalVideos.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

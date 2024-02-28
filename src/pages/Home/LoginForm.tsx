@@ -14,6 +14,7 @@ const LoginForm = () => {
       console.log(tokenResponse);
       Cookies.set('weply_access', tokenResponse.access_token, { expires: 1 });
       dispatch(loginAction());
+      window.location.reload();
     },
     scope: 'profile email https://www.googleapis.com/auth/youtube',
   });

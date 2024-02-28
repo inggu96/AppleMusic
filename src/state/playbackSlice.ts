@@ -3,6 +3,15 @@ interface VideoDetail {
   id: {
     videoId: string;
   };
+  snippet: {
+    thumbnails: {
+      high: {
+        url: string;
+      };
+    };
+    channelTitle: string;
+    title: string;
+  };
 }
 
 interface PlayState {

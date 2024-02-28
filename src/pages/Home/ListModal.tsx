@@ -6,9 +6,11 @@ import { getList } from '../../api/hooks/getList';
 import { data } from './Data';
 import ListTable from './ListTable';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchResult } from '@/types/Video';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/state/store';
 interface Video {
   videoId: string;
   title: string;
@@ -20,16 +22,10 @@ interface Images {
   [key: string]: string;
 }
 const ListModal = ({ id }: any) => {
-  const {
-    data: searchResults,
-    isLoading,
-    error,
-  } = useQuery<SearchResult[]>(['videos', id], () => getList(id), {
-    staleTime: 1000 * 60 * 5,
-  });
+  const videoList = useSelector((state: RootState) => state.playback.videoList);
 
   const videos: Video[] =
-    searchResults?.map(
+    videoList?.map(
       (result): Video => ({
         videoId: result.id.videoId,
         title: result.snippet.title,
@@ -37,6 +33,11 @@ const ListModal = ({ id }: any) => {
         thumbnails: result.snippet.thumbnails.high.url,
       }),
     ) || [];
+
+  useEffect(() => {
+    console.log('videoList', videoList);
+    console.log('videos', videos);
+  });
 
   const { category, title }: any = data.find((data) => data.id === id);
 

@@ -14,6 +14,7 @@ const NavBar = () => {
     googleLogout();
     Cookies.remove('weply_access');
     dispatch(logoutAction());
+    window.location.reload();
   };
 
   return (
@@ -21,7 +22,7 @@ const NavBar = () => {
       <Box className="nav-box">
         <Box className="nav-logo">
           <Link to="/">
-            <img src="/images/logo.png" alt="logo" width={150} />
+            <img src="/images/logo.png" alt="logo" width={160} height={60} />
           </Link>
           {isLoggedIn && (
             <Button onClick={() => logout()} variant="contained" sx={{ mt: 2 }}>
